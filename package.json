@@ -1,0 +1,15 @@
+{
+  "name": "swome-scraper",
+  "version": "1.0.0",
+  "main": "geocode_all.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.99.1"
+  }
+}
