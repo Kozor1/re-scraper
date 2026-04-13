@@ -1,9 +1,9 @@
-name: Daily Property Scrape
+name: Hourly Property Update
 
 on:
   schedule:
-    # Run daily at 6:00 AM UTC (adjust as needed)
-    - cron: '0 6 * * *'
+    # Run every hour at the start of the hour
+    - cron: '0 * * * *'
   workflow_dispatch:  # Allow manual trigger from GitHub UI
 
 jobs:
@@ -33,18 +33,18 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run daily sync
+      - name: Run property update
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GOOGLE_GEOCODING_API_KEY: ${{ secrets.GOOGLE_GEOCODING_API_KEY }}
         run: |
-          python3 daily_sync.py
+          python3 property_update.py
 
       - name: Upload logs as artifact
         if: always()  # Upload logs even if the job fails
         uses: actions/upload-artifact@v4
         with:
-          name: scrape-logs-${{ github.run_id }}
+          name: hourly-scrape-logs-${{ github.run_id }}
           path: logs/*.log
-          retention-days: 7
+          retention-days: 2
