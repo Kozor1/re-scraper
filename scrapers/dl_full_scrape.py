@@ -7,7 +7,7 @@ import random
 import os
 import shutil
 import sys
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, parse_qs
 import json
 import logging
 from datetime import datetime
@@ -30,21 +30,21 @@ headers = {
 }
 
 # Base URL for the property listings
-base_url_template = 'https://www.propertypeopleni.com/property-for-sale/page{page_num}/'
-OUTPUT_DIR = 'properties/pp'
+base_url = 'https://www.dallasre.co.uk/homes-for-sale.php'
+OUTPUT_DIR = 'properties/dl'
 
 # Create directories for downloads
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs('logs', exist_ok=True)
 
 # Setup logging
-log_filename = f"logs/pp_scraper_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+log_filename = f"logs/dl_scraper_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler(log_filename, encoding='utf-8'),
-        logging.StreamHandler()  # Also print to console
+        logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
@@ -59,9 +59,8 @@ def get_with_retry(url, max_retries=3):
         except requests.exceptions.RequestException as e:
             error_msg = f"Attempt {attempt + 1} failed: {e}"
             logger.warning(f"{url} - {error_msg}")
-            
+
             if attempt < max_retries - 1:
-                # Exponential backoff: 2^attempt seconds
                 sleep_time = (2 ** attempt) * random.uniform(2, 5)
                 logger.info(f"Retrying in {sleep_time:.2f} seconds...")
                 time.sleep(sleep_time)
@@ -72,19 +71,17 @@ def get_with_retry(url, max_retries=3):
 def extract_property_links(soup, page_url):
     """Extract individual property listing links from a listing page"""
     property_links = []
-    
-    # Look for property listing links
-    # These are typically links that go to individual property pages
-    for link in soup.find_all('a', href=True):
-        href = link['href']
-        # Look for links that contain property-related patterns
-        # Individual property pages usually have URLs like /property/location/id/address/
-        if '/property/' in href and '/property-for-sale/' not in href:
-            full_url = urljoin(page_url, href)
-            # Avoid duplicates
-            if full_url not in property_links:
-                property_links.append(full_url)
-    
+
+    # Dallas uses propbox containers with links to for-sale.php
+    for prop_box in soup.find_all('div', class_='propbox'):
+        link = prop_box.find_parent('a', href=True)
+        if link:
+            href = link['href']
+            if 'for-sale.php' in href:
+                full_url = urljoin(page_url, href)
+                if full_url not in property_links:
+                    property_links.append(full_url)
+
     return property_links
 
 def download_image(img_url, property_folder, img_num):
@@ -92,16 +89,13 @@ def download_image(img_url, property_folder, img_num):
     try:
         response = get_with_retry(img_url)
         if response and response.status_code == 200:
-            # Get file extension from URL
             parsed_url = urlparse(img_url)
             ext = os.path.splitext(parsed_url.path)[1] or '.jpg'
-            
-            # Create filename
             filename = f"{property_folder}/img{img_num}{ext}"
-            
+
             with open(filename, 'wb') as f:
                 f.write(response.content)
-            
+
             logger.info(f"Downloaded: {filename}")
             return filename
     except Exception as e:
@@ -131,104 +125,92 @@ def scrape_property_page(property_url, property_id):
     }
 
     # ── Address ────────────────────────────────────────────────────────────────
-    h1 = soup.find('h1')
-    if h1:
-        property_data['title'] = h1.get_text(strip=True)
-        property_data['address'] = h1.get_text(strip=True)
-    else:
+    # Parse the property ID from URL to find the right content
+    parsed_url = urlparse(property_url)
+    query_params = parse_qs(parsed_url.query)
+    prop_id = query_params.get('selPROP', [None])[0]
+
+    # Look for address in the proptext or main content
+    proptext = soup.find('div', class_='proptext')
+    if proptext:
+        # Get the first line which is usually the address
+        text_lines = [line.strip() for line in proptext.stripped_strings]
+        if text_lines:
+            # First line often contains address like "80 Ballyrashane Road. Coleraine"
+            address_line = text_lines[0].replace('.', ',').strip()
+            property_data['address'] = address_line
+            property_data['title'] = address_line
+
+    if not property_data.get('address'):
         title_tag = soup.find('title')
         if title_tag:
             t = title_tag.get_text(strip=True)
-            for suffix in [' for sale with Property People NI', ' | Property People NI', ' - Property People NI']:
+            for suffix in [' | Dallas Real Estate', ' - Dallas']:
                 t = t.replace(suffix, '')
             property_data['address'] = t.strip()
             property_data['title'] = property_data['address']
 
-    # ── Metadata from ul.dettbl (Price, Style, Bedrooms, Receptions, Status) ──
-    for li in soup.select('ul.dettbl li'):
-        key_el = li.find(class_='dt1')
-        val_el = li.find(class_='dt2')
-        if not key_el or not val_el:
-            continue
-        key = key_el.get_text(strip=True).lower()
-        val = val_el.get_text(strip=True)
-        if 'price' in key:
-            property_data['price'] = val
-        elif 'style' in key or 'type' in key:
-            property_data['type'] = val
-        elif 'bedroom' in key:
-            property_data['bedrooms'] = val
-        elif 'reception' in key:
-            property_data['receptions'] = val
-        elif 'status' in key:
-            property_data['status'] = val
-        elif 'heating' in key:
-            property_data['heating'] = val
+    # ── Metadata (Price, Bedrooms, Receptions, Property Type) ──
+    if proptext:
+        full_text = proptext.get_text(separator=' ', strip=True)
 
-    # Fallback status from div.dtsm
-    if not property_data.get('status'):
-        dtsm = soup.select_one('div.dtsm')
-        if dtsm:
-            t = dtsm.get_text(separator=' ', strip=True).lower()
-            if 'agreed' in t:
-                property_data['status'] = 'Sale Agreed'
-            elif 'for sale' in t or 'available' in t:
-                property_data['status'] = 'For Sale'
+        # Extract price
+        price_match = re.search(r'\u00a3\s*([\d,]+)', full_text)
+        if price_match:
+            property_data['price'] = f"£{price_match.group(1)}"
 
-    # ── Key features (ul.feats li) ─────────────────────────────────────────────
-    key_features = [li.get_text(strip=True) for li in soup.select('ul.feats li') if li.get_text(strip=True)]
-    if key_features:
-        property_data['key_features'] = key_features
+        # Extract property type
+        for ptype in ['Detached', 'Semi Detached', 'Terrace', 'Bungalow', 'Townhouse', 'Apartment', 'Mid Terrace', 'End Terrace']:
+            if ptype.lower() in full_text.lower():
+                property_data['type'] = ptype
+                break
 
-    # ── Description (div.textbp — PP has no outer div.textblock wrapper) ──────
-    description_parts = []
-    for container in soup.select('div.textbp'):
-        # Preserve paragraph/line-break structure before extracting text
-        import copy as _copy
-        c = _copy.copy(container)
-        for tag in c.find_all(['p', 'br']):
-            if tag.name == 'br':
-                tag.replace_with('\n')
-            else:
-                tag.insert_before('\n\n')
-        text = c.get_text(separator='', strip=False).strip()
-        if text:
-            description_parts.append(text)
-    if description_parts:
-        import re as _re
-        raw = '\n\n'.join(description_parts)
-        raw = _re.sub(r'\n{3,}', '\n\n', raw).strip()
-        property_data['description'] = raw
+        # Extract bedrooms
+        bed_match = re.search(r'(\d+)\s*Bed', full_text, re.IGNORECASE)
+        if bed_match:
+            property_data['bedrooms'] = bed_match.group(1)
 
-    # ── Images: ul#gallery — DOM order, clones + non-image links excluded ───────
-    _img_href_re = re.compile(r'\.(jpg|jpeg|png|webp|gif)(\?.*)?$', re.IGNORECASE)
-    image_count = 0
+        # Extract receptions
+        rec_match = re.search(r'(\d+)\s*Rec', full_text, re.IGNORECASE)
+        if rec_match:
+            property_data['receptions'] = rec_match.group(1)
+
+        # Extract status
+        if 'For Sale' in full_text:
+            property_data['status'] = 'For Sale'
+        elif 'Sale Agreed' in full_text:
+            property_data['status'] = 'Sale Agreed'
+        elif 'Sold' in full_text:
+            property_data['status'] = 'Sold'
+
+    # ── Description ─────────────────────────────────────────────────────────────
+    # Look for a description section
+    desc_elem = soup.find('div', class_='description') or soup.find('div', class_='propdet')
+    if desc_elem:
+        property_data['description'] = desc_elem.get_text(separator='\n', strip=True)
+
+    # ── Images ─────────────────────────────────────────────────────────────────
     image_urls = []
-    gallery = soup.find('ul', id='gallery')
-    if gallery:
-        real_links = [
-            a for a in gallery.find_all('a', href=True)
-            if 'slick-cloned' not in (a.parent.get('class') or [])
-            and _img_href_re.search(a['href'])
-        ]
-        # Deduplicate while preserving DOM display order
-        seen: set = set()
-        for a in real_links:
-            full_url = urljoin(property_url, a['href'])
-            if full_url not in seen:
-                seen.add(full_url)
+
+    # Look for images in the property detail page
+    for img in soup.find_all('img'):
+        src = img.get('src', '')
+        # Dallas images are in rental_property folder
+        if 'rental_property' in src or '__T' in src or '__1' in src:
+            full_url = urljoin(property_url, src)
+            if full_url not in image_urls:
                 image_urls.append(full_url)
-        logger.info(f"Found {len(image_urls)} images in ul#gallery")
-    else:
-        logger.warning("ul#gallery not found — skipping images")
 
     property_data['image_urls'] = image_urls
+    logger.info(f"Found {len(image_urls)} images")
 
+    # Download images
+    image_count = 0
     for i, img_url in enumerate(image_urls, 1):
         if download_image(img_url, property_folder, i):
             image_count += 1
 
-    # Save property data to JSON file in property folder
+    # Save property data to JSON file
     data_filename = f"{property_folder}/{property_id}.json"
     with open(data_filename, 'w', encoding='utf-8') as f:
         json.dump(property_data, f, indent=2, ensure_ascii=False)
@@ -257,89 +239,64 @@ def save_property_index(index):
     logger.info(f"Property index saved to: {index_path}")
 
 def main():
-    parser = argparse.ArgumentParser(description='Property People scraper')
+    parser = argparse.ArgumentParser(description='Dallas property scraper')
     parser.add_argument('--limit', type=int, default=0, help='Max properties to scrape (0 = unlimited)')
+    parser.add_argument('--fresh', action='store_true', help='Clear output directory for a fresh scrape')
     args = parser.parse_args()
 
-    logger.info("Starting Property People scraper...")
+    logger.info("Starting Dallas scraper...")
 
     # Configuration
-    max_pages = 1000  # Adjust based on how many pages you want to scrape
+    max_pages = 100
     max_properties = args.limit if args.limit > 0 else 100000
-    test_mode = False  # Set to True to scrape only 1 property for testing
 
     # Clear output directory for a fresh full scrape
-    if not test_mode:
+    if args.fresh:
         if os.path.exists(OUTPUT_DIR):
             logger.info(f"Clearing {OUTPUT_DIR}/ for a fresh full scrape...")
             shutil.rmtree(OUTPUT_DIR)
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         os.makedirs('logs', exist_ok=True)
 
-    # In test mode, only fetch 1 page
-    pages_to_fetch = 1 if test_mode else max_pages
-
     # Load existing property index
     property_index = load_property_index()
     existing_properties = property_index.get('properties', [])
     next_property_id = len(existing_properties) + 1
-    
+
     logger.info(f"Existing properties in index: {len(existing_properties)}")
-    
-    # Collect all property links from multiple pages
-    all_property_links = []
-    
-    for page_num in range(1, pages_to_fetch + 1):
-        page_url = base_url_template.format(page_num=page_num)
-        logger.info(f"Fetching listing page {page_num}: {page_url}")
-        
-        response = get_with_retry(page_url)
-        if not response:
-            logger.warning(f"Failed to fetch page {page_num}, stopping pagination")
-            break
-        
-        soup = BeautifulSoup(response.content, 'html.parser')
-        
-        # Extract property links from this page
-        property_links = extract_property_links(soup, page_url)
-        logger.info(f"Found {len(property_links)} property links on page {page_num}")
-        
-        if not property_links:
-            logger.info(f"No more properties found on page {page_num}, stopping pagination")
-            break
-        
-        all_property_links.extend(property_links)
-        
-        # Stop if we've reached the maximum number of properties
-        if len(all_property_links) >= max_properties:
-            all_property_links = all_property_links[:max_properties]
-            logger.info(f"Reached maximum of {max_properties} properties")
-            break
-        
-        # Small delay between page requests
-        time.sleep(random.uniform(1, 2))
-    
+
+    # Dallas only has one page that lists all properties
+    logger.info(f"Fetching listing page: {base_url}")
+
+    response = get_with_retry(base_url)
+    if not response:
+        logger.error("Failed to fetch listing page")
+        return
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    # Extract all property links
+    all_property_links = extract_property_links(soup, base_url)
+
+    # Apply limit
+    if len(all_property_links) > max_properties:
+        all_property_links = all_property_links[:max_properties]
+
     logger.info(f"Total property links found: {len(all_property_links)}")
-    
+
     if not all_property_links:
         logger.warning("No property links found. The website structure may have changed.")
         return
-    
-    # For testing, only scrape the first property
-    properties_to_scrape = all_property_links[:1] if test_mode else all_property_links
-    
-    logger.info(f"Testing mode: {test_mode}")
-    logger.info(f"Scraping {len(properties_to_scrape)} property(ies)")
-    
+
     # Scrape each property
     all_properties = []
-    for idx, property_url in enumerate(properties_to_scrape, 1):
+    for idx, property_url in enumerate(all_property_links, 1):
         logger.info(f"{'='*60}")
-        logger.info(f"Processing property {idx}/{len(properties_to_scrape)}")
-        
+        logger.info(f"Processing property {idx}/{len(all_property_links)}")
+
         # Create a unique ID for this property
         property_id = f"property_{next_property_id + idx - 1}"
-        
+
         # Scrape the property page
         try:
             property_data = scrape_property_page(property_url, property_id)
@@ -350,30 +307,26 @@ def main():
             all_properties.append(property_data)
 
         # Rate limiting: wait between requests
-        if idx < len(properties_to_scrape):
-            # Random delay between 1-3 seconds to be respectful to the server
+        if idx < len(all_property_links):
             delay = random.uniform(1, 3)
             logger.info(f"Waiting {delay:.2f} seconds before next request...")
             time.sleep(delay)
-        
+
         # Progress update every 10 properties
         if idx % 10 == 0:
-            logger.info(f"Progress: {idx}/{len(properties_to_scrape)} properties processed ({idx/len(properties_to_scrape)*100:.1f}%)")
-    
+            logger.info(f"Progress: {idx}/{len(all_property_links)} properties processed ({idx/len(all_property_links)*100:.1f}%)")
+
     # Save summary
     summary = {
         'total_properties_found': len(all_property_links),
         'properties_scraped': len(all_properties),
-        'test_mode': test_mode,
-        'max_pages': max_pages,
-        'max_properties': max_properties,
         'scraped_at': datetime.now().isoformat(),
         'log_file': log_filename,
     }
-    
+
     with open(f'{OUTPUT_DIR}/summary.json', 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=2)
-    
+
     # Update property index
     for property_data in all_properties:
         property_entry = {
@@ -384,13 +337,13 @@ def main():
             'scraped_at': property_data['scraped_at']
         }
         existing_properties.append(property_entry)
-    
+
     property_index = {
         'properties': existing_properties,
         'last_updated': datetime.now().isoformat()
     }
     save_property_index(property_index)
-    
+
     logger.info(f"{'='*60}")
     logger.info("Scraping complete!")
     logger.info(f"Total properties found: {len(all_property_links)}")

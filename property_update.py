@@ -143,6 +143,344 @@ SOURCES = {
         'scrape_style': 'standard',
         'listing_page': lambda n: f'https://www.templetonrobinson.com/property-for-sale/page{n}/',
     },
+    # New agents (batch 2025-04)
+    'mc': {
+        'label':        'Michael Chandler',
+        'module':       'mc_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'mc'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.michael-chandler.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.michael-chandler.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'ft': {
+        'label':        'Fetherstons',
+        'module':       'ft_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ft'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.fetherstons.com/property-for-sale'
+            if n == 1
+            else f'https://www.fetherstons.com/property-for-sale?page={n}'
+        ),
+    },
+    'pr': {
+        'label':        'Peter Rodgers',
+        'module':       'pr_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'pr'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.peterrogersestateagents.com/property-for-sale'
+            if n == 1
+            else f'https://www.peterrogersestateagents.com/property-for-sale?page={n}'
+        ),
+    },
+    'cps': {
+        'label':        'CPS',
+        'module':       'cps_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'cps'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://cps-property.com/property-for-sale'
+            if n == 1
+            else f'https://cps-property.com/property-for-sale?page={n}'
+        ),
+    },
+    'hn': {
+        'label':        'Hannath',
+        'module':       'hn_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'hn'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.hannath.com/all-sale-properties'
+            if n == 1
+            else f'https://www.hannath.com/all-sale-properties?page={n}'
+        ),
+    },
+    'bt': {
+        'label':        'Brian Todd',
+        'module':       'bt_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'bt'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.briantodd.co.uk/sale'
+            if n == 1
+            else f'https://www.briantodd.co.uk/sale?page={n}'
+        ),
+    },
+    'rr': {
+        'label':        'Reeds Rains',
+        'module':       'rr_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'rr'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.reedsrains.co.uk/properties-for-sale/northern-ireland'
+            if n == 1
+            else f'https://www.reedsrains.co.uk/properties-for-sale/northern-ireland?page={n}'
+        ),
+    },
+    'ee': {
+        'label':        'Edmonton Estates',
+        'module':       'ee_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ee'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.edmondsonestates.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.edmondsonestates.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'ag': {
+        'label':        'Armstrong Gordon',
+        'module':       'ag_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ag'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.armstronggordon.com/property-for-sale'
+            if n == 1
+            else f'https://www.armstronggordon.com/property-for-sale?page={n}'
+        ),
+    },
+    'ta': {
+        'label':        'The Agent',
+        'module':       'ta_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ta'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.theagentni.com/property-for-sale'
+            if n == 1
+            else f'https://www.theagentni.com/property-for-sale?page={n}'
+        ),
+    },
+    'abc': {
+        'label':        'A Barton Company',
+        'module':       'abc_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'abc'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.abartoncompany.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.abartoncompany.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'hg': {
+        'label':        'Henry Graham',
+        'module':       'hg_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'hg'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.hgraham.co.uk/residential-sales'
+            if n == 1
+            else f'https://www.hgraham.co.uk/residential-sales?page={n}'
+        ),
+    },
+    'le': {
+        'label':        'Lennon Estates',
+        'module':       'le_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'le'),
+        'link_pattern': '/properties/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://lennon-estates.com/properties/for-sale/'
+            if n == 1
+            else f'https://lennon-estates.com/properties/for-sale/page/{n}/'
+        ),
+    },
+    'amd': {
+        'label':        'Agar Murdoch and Deane',
+        'module':       'amd_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'amd'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.agarmurdochdeane.com/property-for-sale'
+            if n == 1
+            else f'https://www.agarmurdochdeane.com/property-for-sale?page={n}'
+        ),
+    },
+    'tm': {
+        'label':        'Tim Martin',
+        'module':       'tm_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'tm'),
+        'link_pattern': '/properties/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.timmartin.co.uk/properties-for-sale'
+            if n == 1
+            else f'https://www.timmartin.co.uk/properties-for-sale?page={n}'
+        ),
+    },
+    'ma': {
+        'label':        'McAllister',
+        'module':       'ma_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ma'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.mc-allister.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.mc-allister.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'dl': {
+        'label':        'Dallas',
+        'module':       'dl_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'dl'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.dallasre.co.uk/homes-for-sale.php'
+            if n == 1
+            else f'https://www.dallasre.co.uk/homes-for-sale.php?p={n}'
+        ),
+    },
+    'bmc': {
+        'label':        'Bill McCann',
+        'module':       'bmc_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'bmc'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://billmccann.com/for-sale/'
+            if n == 1
+            else f'https://billmccann.com/for-sale/page/{n}/'
+        ),
+    },
+    'ag2': {
+        'label':        'Andrews & Gregg',
+        'module':       'ag2_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ag2'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.andrewsandgregg.com/properties.aspx?mode=0&showsearch=1&commercial=0&menuID=30'
+            if n == 1
+            else f'https://www.andrewsandgregg.com/properties.aspx?mode=0&showsearch=1&commercial=0&menuID=30&page={n}'
+        ),
+    },
+    'ipe': {
+        'label':        'Independent Property Estates',
+        'module':       'ipe_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ipe'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://ipestates.co.uk/property-for-sale'
+            if n == 1
+            else f'https://ipestates.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'mmc': {
+        'label':        'Montgomery & McCleary',
+        'module':       'mmc_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'mmc'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.montgomerymccleery.com/property-for-sale'
+            if n == 1
+            else f'https://www.montgomerymccleery.com/property-for-sale?page={n}'
+        ),
+    },
+    'pe': {
+        'label':        'Pauline Elliott',
+        'module':       'pe_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'pe'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.paulineelliottestateagents.com/property-for-sale'
+            if n == 1
+            else f'https://www.paulineelliottestateagents.com/property-for-sale?page={n}'
+        ),
+    },
+    # Missing agents from full_scrape.py
+    'dh': {
+        'label':        'Daniel Henry',
+        'module':       'dh_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'dh'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.danielhenry.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.danielhenry.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'mm': {
+        'label':        'McMillan McClure',
+        'module':       'mm_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'mm'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.mcmillanmccullough.com/property-for-sale'
+            if n == 1
+            else f'https://www.mcmillanmccullough.com/property-for-sale?page={n}'
+        ),
+    },
+    'ce': {
+        'label':        'Country Estates',
+        'module':       'ce_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'ce'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.countryestates.net/property-for-sale'
+            if n == 1
+            else f'https://www.countryestates.net/property-for-sale?page={n}'
+        ),
+    },
+    'gm': {
+        'label':        'Gareth Mills Est. Agents',
+        'module':       'gm_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'gm'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.garethmillesstateagents.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.garethmillesstateagents.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'pinp': {
+        'label':        'Pinpoint Property',
+        'module':       'pinp_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'pinp'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.pinpointproperty.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.pinpointproperty.co.uk/property-for-sale?page={n}'
+        ),
+    },
+    'rb': {
+        'label':        'Rodgers & Browne',
+        'module':       'rb_full_scrape',
+        'props_dir':    os.path.join(ROOT, 'properties', 'rb'),
+        'link_pattern': '/property/',
+        'scrape_style': 'standard',
+        'listing_page': lambda n: (
+            'https://www.rodgersandbrowne.co.uk/property-for-sale'
+            if n == 1
+            else f'https://www.rodgersandbrowne.co.uk/property-for-sale?page={n}'
+        ),
+    },
 }
 
 HEADERS = {

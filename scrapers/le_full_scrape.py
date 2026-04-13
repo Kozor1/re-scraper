@@ -1,12 +1,12 @@
-import argparse
 import re
+import argparse
 import requests
 from bs4 import BeautifulSoup
 import time
 import random
 import os
-import sys
 import shutil
+import sys
 from urllib.parse import urljoin, urlparse
 import json
 import logging
@@ -30,15 +30,15 @@ headers = {
 }
 
 # Base URL for the property listings
-base_url_template = 'https://www.johnminnis.co.uk/search/906207/page{page_num}/'
-OUTPUT_DIR = 'properties/jm'
+base_url = 'https://lennon-estates.com/properties/for-sale/'
+OUTPUT_DIR = 'properties/le'
 
 # Create directories for downloads
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs('logs', exist_ok=True)
 
 # Setup logging
-log_filename = f"logs/jm_scraper_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+log_filename = f"logs/le_scraper_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -74,12 +74,11 @@ def extract_property_links(soup, page_url):
     property_links = []
     
     # Look for property listing links
-    # These are typically links that go to individual property pages
+    # Lennon Estates uses different URL structure
     for link in soup.find_all('a', href=True):
         href = link['href']
         # Look for links that contain property-related patterns
-        # Individual property pages usually have URLs like /property/location/id/address/
-        if '/property/' in href and '/property-for-sale/' not in href and '/property-for-rent/' not in href:
+        if '/property/' in href or '/properties/' in href:
             full_url = urljoin(page_url, href)
             # Avoid duplicates
             if full_url not in property_links:
@@ -130,131 +129,137 @@ def scrape_property_page(property_url, property_id):
         'scraped_at': datetime.now().isoformat(),
     }
     
-    # Extract title (look for common patterns)
-    title = soup.find('h1') or soup.find('h2')
-    if title:
-        property_data['title'] = title.get_text(strip=True)
+    # ── Address ────────────────────────────────────────────────────────────────
+    h1 = soup.find('h1')
+    if h1:
+        property_data['title'] = h1.get_text(strip=True)
+        property_data['address'] = h1.get_text(strip=True)
+    else:
+        title_tag = soup.find('title')
+        if title_tag:
+            t = title_tag.get_text(strip=True)
+            for suffix in [' for sale with Lennon Estates', ' | Lennon Estates', ' - Lennon Estates']:
+                t = t.replace(suffix, '')
+            property_data['address'] = t.strip()
+            property_data['title'] = property_data['address']
+
+    # ── Metadata from property details (Price, Style, Bedrooms, Receptions, Status) ──
+    # Try multiple selectors for property details
+    detail_selectors = ['ul.dettbl li', '.property-details li', '.property-meta li', 
+                        '.property-info li', '.details-list li']
     
-    # Extract address from title or h1 tag
-    # John Minnis uses the title tag for the full address
-    title_tag = soup.find('title')
-    if title_tag:
-        title_text = title_tag.get_text(strip=True)
-        # Remove "for sale with John Minnis" suffix if present
-        if ' for sale with John Minnis' in title_text:
-            address = title_text.replace(' for sale with John Minnis', '')
-        else:
-            address = title_text
-        property_data['address'] = address
-    
-    # Extract price (John Minnis specific)
-    price_amount = soup.find('span', class_='price-amount')
-    if price_amount:
-        property_data['price'] = price_amount.get_text(strip=True)
-    
-    # Extract property info (John Minnis specific)
-    property_info = {}
-    info_rows = soup.find_all('div', class_='prop-det-info-row')
-    for row in info_rows:
-        left_span = row.find('span', class_='prop-det-info-left')
-        right_span = row.find('span', class_='prop-det-info-right')
-        if left_span and right_span:
-            label = left_span.get_text(strip=True)
-            value = right_span.get_text(strip=True)
-            # Remove icon characters
-            label = ''.join(c for c in label if not c in ['\uf015', '\uf002', '\uf3ed', '\uf236', '\uf4d8', '\uf06d', '\uf080'])
-            property_info[label] = value
-    
-    if property_info:
-        property_data['property_info'] = property_info
-    
-    # Extract key features (John Minnis specific)
-    key_features = []
-    feats_div = soup.find('div', class_='prop-det-feats')
-    if feats_div:
-        for feat in feats_div.find_all('div', class_='feat'):
-            feat_text = feat.get_text(strip=True)
-            key_features.append(feat_text)
-    if key_features:
-        property_data['key_features'] = key_features
-    
-    # Extract description (John Minnis specific)
-    desc_div = soup.find('div', class_='prop-det-text')
-    if desc_div:
-        text_div = desc_div.find('div', class_='text')
-        if text_div:
-            property_data['description'] = text_div.get_text(strip=True)
-        else:
-            property_data['description'] = desc_div.get_text(strip=True)
-    
-    # Extract rooms (John Minnis specific)
-    rooms = []
-    rooms_div = soup.find('div', class_='prop-det-rooms')
-    if rooms_div:
-        for room_row in rooms_div.find_all('div', class_='room-row'):
-            room_name = room_row.find('span', class_='room-name')
-            room_desc = room_row.find('span', class_='room-desc')
+    for selector in detail_selectors:
+        for li in soup.select(selector):
+            # Try to extract key-value pairs
+            text = li.get_text(strip=True).lower()
             
-            room_data = {'name': '', 'dimensions': '', 'description': ''}
+            # Check for price
+            if 'price' in text or '£' in text:
+                price_match = re.search(r'£[\d,]+', li.get_text())
+                if price_match:
+                    property_data['price'] = price_match.group(0)
             
-            if room_name:
-                # Extract name and dimensions
-                name_text = room_name.get_text(strip=True)
-                # Dimensions are in a span within room_name
-                dim_span = room_name.find('span')
-                if dim_span:
-                    room_data['dimensions'] = dim_span.get_text(strip=True)
-                    room_data['name'] = name_text.replace(dim_span.get_text(strip=True), '').strip()
+            # Check for bedrooms
+            if 'bed' in text:
+                bed_match = re.search(r'(\d+)\s*bed', text)
+                if bed_match:
+                    property_data['bedrooms'] = bed_match.group(1)
+            
+            # Check for property type
+            if any(word in text for word in ['detached', 'semi-detached', 'terraced', 'apartment', 'bungalow', 'house']):
+                property_data['type'] = li.get_text(strip=True)
+            
+            # Check for status
+            if 'status' in text or 'sale' in text or 'agreed' in text:
+                if 'agreed' in text:
+                    property_data['status'] = 'Sale Agreed'
+                elif 'for sale' in text:
+                    property_data['status'] = 'For Sale'
+
+    # Fallback status detection
+    if not property_data.get('status'):
+        for status_sel in ['div.dtsm', '.status', '.property-status', '.sale-status']:
+            status_el = soup.select_one(status_sel)
+            if status_el:
+                t = status_el.get_text(separator=' ', strip=True).lower()
+                if 'agreed' in t:
+                    property_data['status'] = 'Sale Agreed'
+                elif 'for sale' in t or 'available' in t:
+                    property_data['status'] = 'For Sale'
+                break
+
+    # ── Key features ─────────────────────────────────────────────
+    feature_selectors = ['ul.feats li', 'ul.features li', '.key-features li', 
+                         '.property-features li', '.features-list li']
+    for selector in feature_selectors:
+        key_features = [li.get_text(strip=True) for li in soup.select(selector) if li.get_text(strip=True)]
+        if key_features:
+            property_data['key_features'] = key_features
+            break
+
+    # ── Description ─────────────────────────────────────────────
+    description_selectors = ['div.textbp', '.property-description', '.description', 
+                            '.property-content', '.entry-content', '[class*="description"]']
+    
+    for selector in description_selectors:
+        desc_el = soup.select_one(selector)
+        if desc_el:
+            # Preserve paragraph/line-break structure
+            import copy as _copy
+            c = _copy.copy(desc_el)
+            for tag in c.find_all(['p', 'br']):
+                if tag.name == 'br':
+                    tag.replace_with('\n')
                 else:
-                    room_data['name'] = name_text
-            
-            if room_desc:
-                desc_span = room_desc.find('span')
-                if desc_span:
-                    room_data['description'] = desc_span.get_text(strip=True)
-                else:
-                    room_data['description'] = room_desc.get_text(strip=True)
-            
-            rooms.append(room_data)
-    if rooms:
-        property_data['rooms'] = rooms
-    
-    # Extract and download images from the property page.
-    # JM: div#gallery contains <a href="full-size-url"> links in display order.
-    # DOM order is preserved; non-image hrefs (e.g. YouTube) are filtered out.
+                    tag.insert_before('\n\n')
+            text = c.get_text(separator='', strip=False).strip()
+            if len(text) > 50:  # Only use if substantial content
+                import re as _re
+                text = _re.sub(r'\n{3,}', '\n\n', text).strip()
+                property_data['description'] = text
+                break
+
+    # ── Images ───────────────────────────────────────────────────────
     _img_href_re = re.compile(r'\.(jpg|jpeg|png|webp|gif)(\?.*)?$', re.IGNORECASE)
     image_count = 0
     image_urls = []
-
-    gallery = soup.find('div', id='gallery')
+    
+    # Try gallery selector first
+    gallery = soup.find('ul', id='gallery')
     if gallery:
-        # Collect full-size URLs from <a> hrefs (not thumbnail <img> srcs),
-        # skipping any links that don't point to an image file.
-        for a in gallery.find_all('a', href=True):
-            if not _img_href_re.search(a['href']):
-                continue
+        real_links = [
+            a for a in gallery.find_all('a', href=True)
+            if 'slick-cloned' not in (a.parent.get('class') or [])
+            and _img_href_re.search(a['href'])
+        ]
+        seen: set = set()
+        for a in real_links:
             full_url = urljoin(property_url, a['href'])
-            if full_url not in image_urls:
+            if full_url not in seen:
+                seen.add(full_url)
                 image_urls.append(full_url)
-        logger.info(f"Found {len(image_urls)} image links in gallery")
+        logger.info(f"Found {len(image_urls)} images in ul#gallery")
     else:
-        logger.warning("Gallery element not found, falling back to /images/property/ img scan")
+        # Fallback: look for any property images
         for img in soup.find_all('img'):
-            src = img.get('src') or img.get('data-src')
+            src = img.get('src') or img.get('data-src') or img.get('data-lazy-src')
             if src:
                 full_url = urljoin(property_url, src)
-                if '/images/property/' in full_url and not any(
-                    x in full_url.lower() for x in ('logo', 'office', 'icon')
-                ):
-                    if full_url not in image_urls:
+                # Filter for property images
+                if any(pattern in full_url.lower() for pattern in ['/property/', '/properties/', 'upload']):
+                    if 'logo' not in full_url.lower() and full_url not in image_urls:
                         image_urls.append(full_url)
+        if image_urls:
+            logger.info(f"Found {len(image_urls)} images via fallback")
+        else:
+            logger.warning("No gallery found — skipping images")
 
     property_data['image_urls'] = image_urls
 
     for i, img_url in enumerate(image_urls, 1):
         if download_image(img_url, property_folder, i):
             image_count += 1
-
+    
     # Save property data to JSON file in property folder
     data_filename = f"{property_folder}/{property_id}.json"
     with open(data_filename, 'w', encoding='utf-8') as f:
@@ -284,27 +289,25 @@ def save_property_index(index):
     logger.info(f"Property index saved to: {index_path}")
 
 def main():
-    parser = argparse.ArgumentParser(description='John Minnis property scraper')
+    parser = argparse.ArgumentParser(description='Lennon Estates scraper')
     parser.add_argument('--limit', type=int, default=0, help='Max properties to scrape (0 = unlimited)')
+    parser.add_argument('--fresh', action='store_true', help='Clear output directory and start fresh')
     args = parser.parse_args()
 
-    logger.info("Starting John Minnis scraper...")
+    logger.info("Starting Lennon Estates scraper...")
 
     # Configuration
     max_pages = 1000  # Adjust based on how many pages you want to scrape
     max_properties = args.limit if args.limit > 0 else 100000
     test_mode = False  # Set to True to scrape only 1 property for testing
 
-    # Clear output directory for a fresh full scrape
-    if not test_mode:
+    # Clear output directory if --fresh flag is set
+    if args.fresh:
         if os.path.exists(OUTPUT_DIR):
-            logger.info(f"Clearing {OUTPUT_DIR}/ for a fresh full scrape...")
+            logger.info(f"Clearing {OUTPUT_DIR}/ for a fresh scrape...")
             shutil.rmtree(OUTPUT_DIR)
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         os.makedirs('logs', exist_ok=True)
-
-    # In test mode, only fetch 1 page
-    pages_to_fetch = 1 if test_mode else max_pages
 
     # Load existing property index
     property_index = load_property_index()
@@ -316,8 +319,13 @@ def main():
     # Collect all property links from multiple pages
     all_property_links = []
     
-    for page_num in range(1, pages_to_fetch + 1):
-        page_url = base_url_template.format(page_num=page_num)
+    for page_num in range(1, max_pages + 1):
+        if page_num == 1:
+            page_url = base_url
+        else:
+            # Lennon Estates pagination
+            page_url = f"{base_url}page/{page_num}/"
+        
         logger.info(f"Fetching listing page {page_num}: {page_url}")
         
         response = get_with_retry(page_url)
@@ -363,10 +371,10 @@ def main():
     for idx, property_url in enumerate(properties_to_scrape, 1):
         logger.info(f"{'='*60}")
         logger.info(f"Processing property {idx}/{len(properties_to_scrape)}")
-
+        
         # Create a unique ID for this property
         property_id = f"property_{next_property_id + idx - 1}"
-
+        
         # Scrape the property page
         try:
             property_data = scrape_property_page(property_url, property_id)
@@ -375,7 +383,7 @@ def main():
             property_data = None
         if property_data:
             all_properties.append(property_data)
-        
+
         # Rate limiting: wait between requests
         if idx < len(properties_to_scrape):
             # Random delay between 1-3 seconds to be respectful to the server

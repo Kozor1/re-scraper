@@ -613,8 +613,6 @@ def delete_property(folder_name):
 
 def main():
     parser = argparse.ArgumentParser(description='McMillan McClure smart scraper')
-    parser.add_argument('--rent',     action='store_true',
-                        help='Scrape rental properties')
     parser.add_argument('--limit',    type=int, default=0,
                         help='Max new properties to scrape (0 = all)')
     parser.add_argument('--rescrape', action='store_true',
@@ -624,13 +622,6 @@ def main():
     parser.add_argument('--fresh',    action='store_true',
                         help='Clear all existing data and start from scratch')
     args = parser.parse_args()
-
-    if args.rent:
-        global LIST_URL, PROP_DIR, MAP_PATH
-        LIST_URL = 'https://www.mcmillanmcclure.com/property-to-rent'
-        PROP_DIR = os.path.join(ROOT, 'properties', 'mm_rent')
-        MAP_PATH = os.path.join(PROP_DIR, 'url_map.json')
-        os.makedirs(PROP_DIR, exist_ok=True)
 
     if args.test:
         args.limit = 1

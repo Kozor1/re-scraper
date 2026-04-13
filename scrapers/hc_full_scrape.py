@@ -274,14 +274,8 @@ def save_property_index(index):
 
 def main():
     parser = argparse.ArgumentParser(description='Hunter Campbell property scraper')
-    parser.add_argument('--rent',  action='store_true', help='Scrape rental properties')
     parser.add_argument('--limit', type=int, default=0, help='Max properties to scrape (0 = unlimited)')
     args = parser.parse_args()
-
-    if args.rent:
-        global base_url, OUTPUT_DIR
-        base_url   = 'https://www.huntercampbell.co.uk/residential-lettings'
-        OUTPUT_DIR = 'properties/hc_rent'
 
     logger.info("Starting Hunter Campbell scraper...")
 

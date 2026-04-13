@@ -439,18 +439,12 @@ def main():
     global _use_selenium
 
     parser = argparse.ArgumentParser(description='Scrape Daniel Henry properties')
-    parser.add_argument('--rent',     action='store_true',      help='Scrape rental properties')
     parser.add_argument('--limit',    type=int,   default=0,    help='Max properties to scrape')
     parser.add_argument('--delay',    type=float, default=1.2,  help='Delay between requests (s)')
     parser.add_argument('--all',      action='store_true',      help='Re-scrape even complete properties')
     parser.add_argument('--selenium', action='store_true',      help='Use Selenium from the start')
     parser.add_argument('--fresh',    action='store_true',      help='Clear all existing data and start from scratch')
     args = parser.parse_args()
-
-    if args.rent:
-        global LIST_URL, OUT_DIR
-        LIST_URL = BASE_URL + '/search?sta=toLet&sta=tenancyCurrentUnavailable&st=let&currency=GBP&pt=residential'
-        OUT_DIR  = os.path.join(SCRIPT_DIR, '..', 'properties', 'dh_rent')
 
     if args.selenium:
         _use_selenium = True

@@ -210,16 +210,12 @@ def extract_address(driver, soup):
     return h1.get_text(strip=True) if h1 else _selenium_text(driver, 'h1')
 
 
-def extract_price(soup, is_rental=False):
+def extract_price(soup):
     dpt = soup.find('span', class_='dpt')
     dpp = soup.find('span', class_='dpp')
     if dpp:
         qualifier = dpt.get_text(strip=True) if dpt else ''
         amount = dpp.get_text(strip=True)
-        # For rentals, strip "Monthly" qualifier and "pm" suffix - web app adds "/mo"
-        if is_rental:
-            qualifier = ''
-            amount = re.sub(r'\s*pm$', '', amount, flags=re.IGNORECASE).strip()
         return f"{qualifier} {amount}".strip() if qualifier else amount
     return ''
 
@@ -370,8 +366,7 @@ def scrape_property_page(property_url, property_id, driver):
         property_data['address'] = address
         property_data['title']   = address   # TR uses address as title
 
-    is_rental = '/to-let/' in property_url.lower()
-    price = extract_price(soup, is_rental)
+    price = extract_price(soup)
     if price:
         property_data['price'] = price
 
@@ -449,7 +444,6 @@ def save_property_index(index):
 
 def main():
     parser = argparse.ArgumentParser(description='Templeton Robinson full scraper')
-    parser.add_argument('--rent',  action='store_true', help='Scrape rental properties')
     parser.add_argument('--test',  action='store_true',
                         help='Scrape one property only with verbose output')
     parser.add_argument('--limit', type=int, default=0,
@@ -457,13 +451,6 @@ def main():
     parser.add_argument('--max-pages', type=int, default=1000,
                         help='Maximum listing pages to walk (default: 1000)')
     args = parser.parse_args()
-
-    if args.rent:
-        global BASE_URL, TR_DIR, INDEX_PATH, SUMMARY_PATH
-        BASE_URL      = 'https://www.templetonrobinson.com/property-for-rent/page{page}/'
-        TR_DIR        = os.path.join(SCRIPT_DIR, 'properties', 'tr_rent')
-        INDEX_PATH    = os.path.join(TR_DIR, 'property_index.json')
-        SUMMARY_PATH  = os.path.join(TR_DIR, 'summary.json')
 
     # Clear output directory for a fresh full scrape
     if not args.test:

@@ -2,8 +2,7 @@
 """
 Rodgers & Browne full scraper with smart-update logic.
 SOURCE KEY: rb
-SALE:  https://www.rodgersandbrowne.co.uk/property-for-sale
-RENT:  https://www.rodgersandbrowne.co.uk/search/618425/
+URL:  https://www.rodgersandbrowne.co.uk/property-for-sale
 
 Uses the PropertyPal/BlueCubes CMS common to JM, PP, SB, UPS, HC and Pinpoint.
 
@@ -37,10 +36,8 @@ except ImportError:
 
 SOURCE_KEY    = 'rb'
 BASE_URL      = 'https://www.rodgersandbrowne.co.uk'
-# Default: sale listings.  Pass --rent to switch to rental listings.
 LIST_URL      = 'https://www.rodgersandbrowne.co.uk/property-for-sale'
 PAGE_TEMPLATE = 'https://www.rodgersandbrowne.co.uk/property-for-sale/page{N}/'
-# Rent overrides:  LIST_URL = /search/618425/,  PAGE_TEMPLATE = /search/618425/page{N}/
 
 ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROP_DIR = os.path.join(ROOT, 'properties', SOURCE_KEY)
@@ -250,7 +247,7 @@ def extract_image_urls(soup, url):
 
     return urls
 
-def parse_detail(html, url, is_rental=False):
+def parse_detail(html, url):
     soup = BeautifulSoup(html, 'html.parser')
     data = {'url': url, 'scraped_at': datetime.now().isoformat()}
 
@@ -271,7 +268,7 @@ def parse_detail(html, url, is_rental=False):
         if title_tag:
             t = title_tag.get_text(strip=True)
             for suffix in [
-                ' for sale with Rodgers & Browne', ' for rent with Rodgers & Browne',
+                ' for sale with Rodgers & Browne',
                 ' | Rodgers & Browne', ' - Rodgers & Browne',
                 ' | Rodgers and Browne', ' - Rodgers and Browne',
             ]:
@@ -285,15 +282,13 @@ def parse_detail(html, url, is_rental=False):
     data['title'] = data['address']
 
     # Price — R&B style: span.prop-det-price-amount + span.prop-det-price-text
-    # Try multiple selectors for sales and rentals
     price_text = None
     amount_el = soup.select_one('span.prop-det-price-amount')
     if amount_el:
         price_text = str(amount_el.get_text(strip=True))
     else:
-        # Fallback for rentals: try generic price selectors
-        for sel in ['.prop-det-price', '.price', '.PropertyPrice', '[class*="price" i]',
-                    '.property-price', '.rent-price', '[class*="rent" i]']:
+        # Fallback: try generic price selectors
+        for sel in ['.prop-det-price', '.price', '.PropertyPrice', '[class*="price" i]']:
             el = soup.select_one(sel)
             if el:
                 price_text = str(el.get_text(strip=True))
@@ -305,20 +300,9 @@ def parse_detail(html, url, is_rental=False):
             price_text = str(meta_price.get('content', ''))
     if price_text:
         amount = price_text
-        # Clean up rental prices: strip "pm", "per month", "monthly" etc
-        if is_rental:
-            amount = re.sub(r'\s*(?:pm|per\s+month|monthly)$', '', amount, flags=re.IGNORECASE).strip()
-            amount = re.sub(r'^monthly\s*', '', amount, flags=re.IGNORECASE).strip()
         qualifier_el = soup.select_one('span.prop-det-price-text')
         qualifier = (str(qualifier_el.get_text(strip=True)) + ' ') if qualifier_el else ''
-        # For rentals, strip "Monthly" qualifier
-        if is_rental and 'monthly' in qualifier.lower():
-            qualifier = ''
         data['price_str'] = (qualifier + amount).strip()
-        # Final cleanup for rental prices - ensure proper format
-        if is_rental and data['price_str']:
-            # Remove any remaining pm/per month text
-            data['price_str'] = re.sub(r'\s*(?:pm|per\s+month)$', '', data['price_str'], flags=re.IGNORECASE).strip()
 
     # Metadata rows — R&B style: div.prop-det-info-row
     for row in soup.select('div.prop-det-info-row'):
@@ -339,10 +323,6 @@ def parse_detail(html, url, is_rental=False):
         elif 'bathroom' in key:
             data['bathrooms'] = val
         elif 'price' in key:
-            # For rentals, strip "Monthly" prefix and "pm" suffix
-            if is_rental:
-                val = re.sub(r'^monthly\s*', '', val, flags=re.IGNORECASE).strip()
-                val = re.sub(r'\s*pm$', '', val, flags=re.IGNORECASE).strip()
             data.setdefault('price_str', val)
 
     # Status fallback
@@ -406,8 +386,7 @@ def scrape_and_save(url, folder_name, listing_data=None):
         logger.error(f"    fetch failed for {url}")
         return None
 
-    is_rental = '/search/' in url.lower()
-    data = parse_detail(r.text, url, is_rental)
+    data = parse_detail(r.text, url)
 
     # Apply listing-page fallbacks for fields the detail page failed to parse
     if listing_data:
@@ -461,8 +440,6 @@ def main():
                         help='Re-scrape all existing properties')
     parser.add_argument('--test',     action='store_true',
                         help='Scrape only the first 1 new property')
-    parser.add_argument('--rent',     action='store_true',
-                        help='Scrape rental listings (properties/rb_rent/) instead of sales')
     parser.add_argument('--quick',    action='store_true',
                         help='Quick mode: early stop on consecutive known URLs, '
                              'skip stale detection')
@@ -472,14 +449,6 @@ def main():
 
     if args.test:
         args.limit = 1
-
-    if args.rent:
-        global LIST_URL, PAGE_TEMPLATE, PROP_DIR, MAP_PATH
-        LIST_URL      = 'https://www.rodgersandbrowne.co.uk/search/618425/'
-        PAGE_TEMPLATE = 'https://www.rodgersandbrowne.co.uk/search/618425/page{N}/'
-        PROP_DIR = os.path.join(ROOT, 'properties', 'rb_rent')
-        MAP_PATH = os.path.join(PROP_DIR, 'url_map.json')
-        os.makedirs(PROP_DIR, exist_ok=True)
 
     if args.fresh:
         if os.path.exists(PROP_DIR):

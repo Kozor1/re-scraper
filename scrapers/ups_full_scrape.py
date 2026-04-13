@@ -406,14 +406,8 @@ def save_property_index(index):
 
 def main():
     parser = argparse.ArgumentParser(description='Ulster Property Sales scraper')
-    parser.add_argument('--rent',  action='store_true', help='Scrape rental properties')
     parser.add_argument('--limit', type=int, default=0, help='Max properties to scrape (0 = unlimited)')
     args = parser.parse_args()
-
-    if args.rent:
-        global base_url_template, OUTPUT_DIR
-        base_url_template = 'https://www.ulsterpropertysales.co.uk/property-for-rent/page{page_num}/'
-        OUTPUT_DIR = 'properties/ups_rent'
 
     logger.info("Starting Ulster Property Sales scraper v2...")
 

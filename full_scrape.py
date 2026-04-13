@@ -1,5 +1,5 @@
 """
-full_scrape.py  –  Run all property scrapers (sales and/or rentals), in parallel where possible,
+full_scrape.py  –  Run all property scrapers in parallel where possible,
                    then automatically migrate the fresh data to Supabase.
 
 By default this is a FRESH scrape: existing property folders are cleared before
@@ -20,9 +20,7 @@ successfully scraped source so the Supabase database stays in sync.
 Pass --no-migrate to skip this step.
 
 Usage (run from re_app/ directory):
-    python3 full_scrape.py                     # fresh scrape + migrate all (sales only)
-    python3 full_scrape.py --rent             # scrape rentals only
-    python3 full_scrape.py --all             # scrape both sales and rentals
+    python3 full_scrape.py                     # fresh scrape + migrate all
     python3 full_scrape.py sb ups jm           # specific sources only
     python3 full_scrape.py --no-fresh          # incremental update
     python3 full_scrape.py --no-migrate        # scrape only, skip DB push
@@ -61,40 +59,51 @@ MIGRATE_PYTHON = _venv_py if os.path.isfile(_venv_py) else sys.executable
 
 SOURCES = {
     # Sales
-    'sb':   {'script': 'sb_full_scrape.py',   'label': 'Simon Brien',              'fresh_flag': False, 'rent': False},
-    'ups':  {'script': 'ups_full_scrape.py',  'label': 'Ulster Property Sales',    'fresh_flag': False, 'rent': False},
-    'hc':   {'script': 'hc_full_scrape.py',   'label': 'Hunter Campbell',          'fresh_flag': False, 'rent': False},
-    'jm':   {'script': 'jm_full_scrape.py',   'label': 'John Minnis',              'fresh_flag': False, 'rent': False},
-    'pp':   {'script': 'pp_full_scrape.py',   'label': 'Property People NI',       'fresh_flag': False, 'rent': False},
+    'sb':   {'script': 'sb_full_scrape.py',   'label': 'Simon Brien',              'fresh_flag': False},
+    'ups':  {'script': 'ups_full_scrape.py',  'label': 'Ulster Property Sales',    'fresh_flag': False},
+    'hc':   {'script': 'hc_full_scrape.py',   'label': 'Hunter Campbell',          'fresh_flag': False},
+    'jm':   {'script': 'jm_full_scrape.py',   'label': 'John Minnis',              'fresh_flag': False},
+    'pp':   {'script': 'pp_full_scrape.py',   'label': 'Property People NI',       'fresh_flag': False},
     'dh':   {'script': 'dh_scrape.py',        'label': 'Daniel Henry',             'fresh_flag': True,  'rent': False},
     'pinp': {'script': 'pinp_full_scrape.py', 'label': 'Pinpoint Property',        'fresh_flag': True,  'rent': False},
     'rb':   {'script': 'rb_full_scrape.py',   'label': 'Rodgers & Browne',         'fresh_flag': True,  'rent': False},
-    'tr':   {'script': 'tr_full_scrape.py',   'label': 'Templeton Robinson',       'fresh_flag': False, 'rent': False},
+    'tr':   {'script': 'tr_full_scrape.py',   'label': 'Templeton Robinson',       'fresh_flag': False},
     'mm':   {'script': 'mm_full_scrape.py',   'label': 'McMillan McClure',         'fresh_flag': True,  'rent': False},
     'ce':   {'script': 'ce_full_scrape.py',   'label': 'Country Estates',          'fresh_flag': True,  'rent': False},
     'gm':   {'script': 'gm_full_scrape.py',   'label': 'Gareth Mills Est. Agents', 'fresh_flag': True,  'rent': False},
-}
-
-# Rental sources (same scripts with --rent flag)
-RENT_SOURCES = {
-    'sb_rent':   {'script': 'sb_full_scrape.py',   'label': 'Simon Brien (rent)',              'fresh_flag': False, 'rent': True},
-    'ups_rent':  {'script': 'ups_full_scrape.py',  'label': 'Ulster Property Sales (rent)',    'fresh_flag': False, 'rent': True},
-    'hc_rent':   {'script': 'hc_full_scrape.py',   'label': 'Hunter Campbell (rent)',          'fresh_flag': False, 'rent': True},
-    'jm_rent':   {'script': 'jm_full_scrape.py',   'label': 'John Minnis (rent)',              'fresh_flag': False, 'rent': True},
-    'pp_rent':   {'script': 'pp_full_scrape.py',   'label': 'Property People NI (rent)',       'fresh_flag': False, 'rent': True},
-    'dh_rent':   {'script': 'dh_scrape.py',        'label': 'Daniel Henry (rent)',             'fresh_flag': True,  'rent': True},
-    'rb_rent':   {'script': 'rb_full_scrape.py',   'label': 'Rodgers & Browne (rent)',         'fresh_flag': True,  'rent': True},
-    'tr_rent':   {'script': 'tr_full_scrape.py',   'label': 'Templeton Robinson (rent)',       'fresh_flag': False, 'rent': True},
-    'mm_rent':   {'script': 'mm_full_scrape.py',   'label': 'McMillan McClure (rent)',         'fresh_flag': True,  'rent': True},
-    'ce_rent':   {'script': 'ce_full_scrape.py',   'label': 'Country Estates (rent)',          'fresh_flag': True,  'rent': True},
-    'gm_rent':   {'script': 'gm_full_scrape.py',   'label': 'Gareth Mills Est. Agents (rent)', 'fresh_flag': True,  'rent': True},
+    # New agents (batch 2025-04)
+    'mc':   {'script': 'mc_full_scrape.py',   'label': 'Michael Chandler',         'fresh_flag': False},
+    'ft':   {'script': 'ft_full_scrape.py',   'label': 'Fetherstons',              'fresh_flag': False},
+    'pr':   {'script': 'pr_full_scrape.py',   'label': 'Peter Rodgers',            'fresh_flag': False},
+    'cps':  {'script': 'cps_full_scrape.py',  'label': 'CPS',                      'fresh_flag': False},
+    'hn':   {'script': 'hn_full_scrape.py',   'label': 'Hannath',                  'fresh_flag': False},
+    'bt':   {'script': 'bt_full_scrape.py',   'label': 'Brian Todd',               'fresh_flag': False},
+    'rr':   {'script': 'rr_full_scrape.py',   'label': 'Reeds Rains',              'fresh_flag': False},
+    'ee':   {'script': 'ee_full_scrape.py',   'label': 'Edmonton Estates',         'fresh_flag': False},
+    'ag':   {'script': 'ag_full_scrape.py',   'label': 'Armstrong Gordon',         'fresh_flag': False},
+    'ta':   {'script': 'ta_full_scrape.py',   'label': 'The Agent',                'fresh_flag': False},
+    'abc':  {'script': 'abc_full_scrape.py',  'label': 'A Barton Company',         'fresh_flag': False},
+    'hg':   {'script': 'hg_full_scrape.py',   'label': 'Henry Graham',             'fresh_flag': False},
+    'le':   {'script': 'le_full_scrape.py',   'label': 'Lennon Estates',           'fresh_flag': False},
+    'amd':  {'script': 'amd_full_scrape.py',  'label': 'Agar Murdoch and Deane',   'fresh_flag': False},
+    'tm':   {'script': 'tm_full_scrape.py',   'label': 'Tim Martin',               'fresh_flag': False},
+    'ma':   {'script': 'ma_full_scrape.py',   'label': 'McAllister',               'fresh_flag': False},
+    'dl':   {'script': 'dl_full_scrape.py',   'label': 'Dallas',                   'fresh_flag': False},
+    'bmc':  {'script': 'bmc_full_scrape.py',  'label': 'Bill McCann',              'fresh_flag': False},
+    'ag2':  {'script': 'ag2_full_scrape.py',  'label': 'Andrews & Gregg',          'fresh_flag': False},
+    'ipe':  {'script': 'ipe_full_scrape.py',  'label': 'Independent Property Est', 'fresh_flag': False},
+    'mmc':  {'script': 'mmc_full_scrape.py',  'label': 'Montgomery & McCleary',    'fresh_flag': False},
+    'pe':   {'script': 'pe_full_scrape.py',   'label': 'Pauline Elliott',          'fresh_flag': False},
 }
 
 # Default parallel groups:
 #   Group 1 – requests-only (light on resources, run together first)
 #   Group 2 – Selenium-based (Chrome instances, run together after group 1)
 PARALLEL_GROUPS = [
-    ['sb', 'ups', 'hc', 'jm', 'pp', 'dh', 'pinp', 'rb'],
+    ['sb', 'ups', 'hc', 'jm', 'pp', 'dh', 'pinp', 'rb',
+     'mc', 'ft', 'pr', 'cps', 'hn', 'bt', 'rr',
+     'ee', 'ag', 'ta', 'abc', 'hg', 'le', 'amd',
+     'tm', 'ma', 'dl', 'bmc', 'ag2', 'ipe', 'mmc', 'pe'],
     ['tr', 'mm', 'ce', 'gm'],
 ]
 
@@ -121,22 +130,15 @@ logger = logging.getLogger(__name__)
 # Runner
 # ──────────────────────────────────────────────
 
-def run_source(source_key, fresh=True, rent=False):
+def run_source(source_key, fresh=True):
     """Launch a scraper in a subprocess and wait for it to finish."""
-    # Check if it's a rental source
-    if source_key.endswith('_rent'):
-        rent = True
-        info = RENT_SOURCES[source_key]
-    else:
-        info = SOURCES[source_key]
+    info = SOURCES[source_key]
     script = os.path.join(SCRAPERS_DIR, info['script'])
     label  = info['label']
 
     cmd = [sys.executable, script]
     if fresh and info['fresh_flag']:
         cmd.append('--fresh')
-    if rent or info.get('rent', False):
-        cmd.append('--rent')
 
     logger.info(f"[{source_key.upper()}] Starting  →  {' '.join(cmd)}")
     start = time.time()
@@ -227,7 +229,7 @@ def run_image_sort(source_keys):
     return results
 
 
-def run_group_parallel(keys, fresh, label, rent=False):
+def run_group_parallel(keys, fresh, label):
     """Run a list of sources in parallel; return dict of {key: bool}."""
     if not keys:
         return {}
@@ -238,7 +240,7 @@ def run_group_parallel(keys, fresh, label, rent=False):
 
     results = {}
     with ThreadPoolExecutor(max_workers=len(keys)) as pool:
-        futures = {pool.submit(run_source, k, fresh, rent): k for k in keys}
+        futures = {pool.submit(run_source, k, fresh): k for k in keys}
         for future in as_completed(futures):
             key = futures[future]
             try:
@@ -281,58 +283,29 @@ def main():
         '--list', action='store_true',
         help='List available sources and exit'
     )
-    parser.add_argument(
-        '--rent', action='store_true',
-        help='Scrape rental listings only (default is sales only)'
-    )
-    parser.add_argument(
-        '--all', action='store_true',
-        help='Scrape both sales and rental listings'
-    )
     args = parser.parse_args()
 
     if args.list:
         print("Available sources:")
-        print("\nSales:")
         groups_flat = {k: g for g, group in enumerate(PARALLEL_GROUPS) for k in group}
         for k, v in SOURCES.items():
             g = groups_flat.get(k, '?')
             print(f"  {k:8s}  {v['label']:35s}  (group {g+1})")
-        print("\nRentals:")
-        for k, v in RENT_SOURCES.items():
-            base_key = k.replace('_rent', '')
-            g = groups_flat.get(base_key, '?')
-            print(f"  {k:8s}  {v['label']:35s}  (group {g+1})")
         return
 
     # Determine which sources to run
-    all_sales_sources = list(SOURCES.keys())
-    all_rent_sources = list(RENT_SOURCES.keys())
-
-    if args.all:
-        # Scrape both sales and rentals
-        sources_to_run = all_sales_sources + all_rent_sources
-        scrape_type = "sales + rentals"
-    elif args.rent:
-        # Scrape rentals only
-        sources_to_run = all_rent_sources
-        scrape_type = "rentals only"
-    else:
-        # Default: sales only
-        sources_to_run = [s for s in args.sources if s in SOURCES]
-        unknown = [s for s in args.sources if s not in SOURCES]
-        if unknown:
-            logger.warning(f"Unknown sources (ignored): {unknown}")
-        if not sources_to_run:
-            logger.error("No valid sources to run.")
-            sys.exit(1)
-        scrape_type = "sales only"
+    sources_to_run = [s for s in args.sources if s in SOURCES]
+    unknown = [s for s in args.sources if s not in SOURCES]
+    if unknown:
+        logger.warning(f"Unknown sources (ignored): {unknown}")
+    if not sources_to_run:
+        logger.error("No valid sources to run.")
+        sys.exit(1)
 
     fresh = not args.no_fresh
 
     logger.info(f"\n{'='*60}")
     logger.info(f"Full scrape starting  —  {datetime.now().isoformat()}")
-    logger.info(f"Type    : {scrape_type}")
     logger.info(f"Sources : {len(sources_to_run)}")
     logger.info(f"Fresh   : {fresh}")
     logger.info(f"Migrate : {not args.no_migrate}")
@@ -342,29 +315,18 @@ def main():
     overall_start = time.time()
     all_results = {}
 
-    # Build parallel groups for rentals too
-    RENT_PARALLEL_GROUPS = [
-        [f'{k}_rent' for k in group] for group in PARALLEL_GROUPS
-    ]
-
     if args.all_parallel:
         # Single group — everything at once
-        all_results = run_group_parallel(sources_to_run, fresh, "all sources in parallel", rent=args.rent)
+        all_results = run_group_parallel(sources_to_run, fresh, "all sources in parallel")
     else:
         # Two groups: requests-only first, then Selenium
-        for g_idx, (sales_group, rent_group) in enumerate(zip(PARALLEL_GROUPS, RENT_PARALLEL_GROUPS)):
-            # Combine sales and rental sources for this group
-            group = []
-            for k in sales_group:
-                if k in sources_to_run:
-                    group.append(k)
-            for k in rent_group:
-                if k in sources_to_run:
-                    group.append(k)
-            if not group:
+        for g_idx, group in enumerate(PARALLEL_GROUPS):
+            # Filter to only sources that need to run
+            group_keys = [k for k in group if k in sources_to_run]
+            if not group_keys:
                 continue
             group_label = f"group {g_idx+1}"
-            results = run_group_parallel(group, fresh, group_label, rent=args.rent)
+            results = run_group_parallel(group_keys, fresh, group_label)
             all_results.update(results)
 
     # ── Scrape summary ────────────────────────────────────────
@@ -373,11 +335,7 @@ def main():
     logger.info(f"Scraping complete in {total_elapsed/60:.1f} min")
     for key in sources_to_run:
         status = 'OK' if all_results.get(key) else 'FAILED'
-        # Get label from appropriate source dict
-        if key in SOURCES:
-            label = SOURCES[key]['label']
-        else:
-            label = RENT_SOURCES[key]['label']
+        label = SOURCES[key]['label']
         logger.info(f"  {key.upper():8s}  {label:35s}  {status}")
 
     scraped_ok = [k for k in sources_to_run if all_results.get(k)]
@@ -416,11 +374,7 @@ def main():
             sort_ok = 'n/a'   # MM/CE use hash filenames — no sort needed
         else:
             sort_ok = '-'     # scrape failed, sort not attempted
-        # Get label from appropriate source dict
-        if key in SOURCES:
-            label = SOURCES[key]['label']
-        else:
-            label = RENT_SOURCES[key]['label']
+        label = SOURCES[key]['label']
         logger.info(
             f"  {key.upper():8s}  {label:35s}  "
             f"scrape:{scrape_ok_flag}  migrate:{migrate_ok}  sort:{sort_ok}"

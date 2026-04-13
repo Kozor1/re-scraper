@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 """
 Gareth Mills Estate Agents full scraper with smart-update logic.
-SOURCE KEY: gm  (sale)  /  gm_rent  (rentals, via --rent flag)
-SALE:  https://www.garethmillsestateagents.com/property-for-sale
-RENT:  https://www.garethmillsestateagents.com/property-to-rent
+SOURCE KEY: gm
+URL:  https://www.garethmillsestateagents.com/property-for-sale
 
 Uses the same PropertyPal CMS selectors as McMillan McClure / Country Estates.
-Pass --rent to scrape rental listings into properties/gm_rent/ instead.
 
 Smart update behaviour:
   - New listings    → scrape full detail page and save as property_N
@@ -15,7 +13,6 @@ Smart update behaviour:
 
 Usage (run from swome-scraper/ directory):
     python3 scrapers/gm_full_scrape.py              # sale listings
-    python3 scrapers/gm_full_scrape.py --rent       # rental listings
     python3 scrapers/gm_full_scrape.py --quick      # fast scan: new only, early stop on known
     python3 scrapers/gm_full_scrape.py --limit 5    # stop after 5 new scrapes
     python3 scrapers/gm_full_scrape.py --rescrape   # re-scrape all existing too
@@ -39,7 +36,6 @@ except ImportError:
 
 SOURCE_KEY = 'gm'
 BASE_URL   = 'https://www.garethmillsestateagents.com'
-# Default: sale listings.  Pass --rent to switch to rental listings.
 LIST_URL   = 'https://www.garethmillsestateagents.com/property-for-sale'
 # Pagination: /property-for-sale/page-2, /property-for-sale/page-3, …
 
@@ -542,24 +538,13 @@ def main():
                         help='Re-scrape all existing properties')
     parser.add_argument('--test',     action='store_true',
                         help='Scrape only the first 1 new property and exit')
-    parser.add_argument('--rent',     action='store_true',
-                        help='Scrape rental listings (properties/gm_rent/) instead of sales')
     parser.add_argument('--quick',    action='store_true',
                         help='Quick mode: stop pagination early on consecutive known URLs, '
                              'skip stale detection')
-    parser.add_argument('--fresh',    action='store_true',
-                        help='Clear all existing data and start from scratch')
     args = parser.parse_args()
 
     if args.test:
         args.limit = 1
-
-    if args.rent:
-        global LIST_URL, PROP_DIR, MAP_PATH
-        LIST_URL = 'https://www.garethmillsestateagents.com/property-to-rent'
-        PROP_DIR = os.path.join(ROOT, 'properties', 'gm_rent')
-        MAP_PATH = os.path.join(PROP_DIR, 'url_map.json')
-        os.makedirs(PROP_DIR, exist_ok=True)
 
     if args.fresh:
         if os.path.exists(PROP_DIR):

@@ -326,14 +326,8 @@ def save_property_index(index):
 def main():
     """Main scraping function"""
     parser = argparse.ArgumentParser(description='Simon Brien property scraper')
-    parser.add_argument('--rent', action='store_true', help='Scrape rental properties')
     parser.add_argument('--limit', type=int, default=0, help='Max properties to scrape (0 = unlimited)')
     args = parser.parse_args()
-
-    if args.rent:
-        global BASE_URL, OUTPUT_DIR
-        BASE_URL   = 'https://www.simonbrien.com/property-for-rent'
-        OUTPUT_DIR = 'properties/sb_rent'
 
     logger.info("=" * 60)
     logger.info("Simon Brien Full Property Scraper")
