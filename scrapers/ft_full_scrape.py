@@ -255,6 +255,7 @@ def main():
     logger.info(f"Existing properties in index: {len(existing_properties)}")
 
     all_property_links = []
+    seen_urls = set()  # Track URLs to detect duplicates/end of pagination
 
     for page_num in range(1, pages_to_fetch + 1):
         page_url = base_url if page_num == 1 else f"{base_url}?page={page_num}"
@@ -266,14 +267,21 @@ def main():
             break
 
         soup = BeautifulSoup(response.content, 'html.parser')
-        property_links = extract_property_links(soup, page_url)
-        logger.info(f"Found {len(property_links)} property links on page {page_num}")
 
-        if not property_links:
-            logger.info(f"No more properties found on page {page_num}, stopping pagination")
+        # Extract property links from this page
+        property_links = extract_property_links(soup, page_url)
+
+        # Filter out URLs we've already seen (prevents infinite loops when sites repeat content)
+        new_links = [url for url in property_links if url not in seen_urls]
+
+        logger.info(f"Found {len(property_links)} property links on page {page_num} ({len(new_links)} new)")
+
+        if not new_links:
+            logger.info(f"No new properties on page {page_num}, stopping pagination")
             break
 
-        all_property_links.extend(property_links)
+        all_property_links.extend(new_links)
+        seen_urls.update(new_links)
 
         if len(all_property_links) >= max_properties:
             all_property_links = all_property_links[:max_properties]

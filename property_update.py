@@ -45,6 +45,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'scrapers'))
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+GEOCODE_SCRIPT = os.path.join(ROOT, 'geocode.py')
 
 # Load .env (needed for Supabase credentials)
 env_path = os.path.join(ROOT, '.env')
@@ -774,6 +775,39 @@ def delete_from_supabase(source, dead_urls, dry_run=False):
 
     return total_deleted
 
+# ── Geocoding ─────────────────────────────────────────────────────────────────
+
+def run_geocoding():
+    """
+    Run geocode.py to geocode any new addresses.
+    Returns bool indicating success.
+    """
+    if not os.path.isfile(GEOCODE_SCRIPT):
+        logger.error(f"Geocode script not found: {GEOCODE_SCRIPT}")
+        return False
+
+    cmd = [sys.executable, GEOCODE_SCRIPT]
+    logger.info(f"[GEOCODE] {' '.join(cmd)}")
+    start = time.time()
+    try:
+        result = subprocess.run(
+            cmd,
+            cwd=ROOT,
+            capture_output=False,
+            text=True,
+        )
+        elapsed = time.time() - start
+        if result.returncode == 0:
+            logger.info(f"[GEOCODE] ✓ Done in {elapsed:.0f}s")
+            return True
+        else:
+            logger.error(f"[GEOCODE] ✗ Exit {result.returncode} after {elapsed:.0f}s")
+            return False
+    except Exception as exc:
+        logger.error(f"[GEOCODE] ✗ Exception: {exc}")
+        return False
+
+
 # ── New property scraping ─────────────────────────────────────────────────────
 
 def scrape_new_properties(source_key, new_urls):
@@ -1084,6 +1118,8 @@ def main():
                         help='Skip text re-scrape for existing properties (faster)')
     parser.add_argument('--no-selenium', action='store_true',
                         help='Skip TR selenium backfill (use if Chrome/selenium not installed)')
+    parser.add_argument('--no-geocode', action='store_true',
+                        help='Skip the geocoding step (skip calling geocode.py)')
     parser.add_argument('--max-pages', type=int, default=200,
                         help='Max listing pages to walk per source (default: 200)')
     args = parser.parse_args()
@@ -1118,10 +1154,33 @@ def main():
         logger.info("TR selenium backfill (fills any missing descriptions)…")
         run_tr_selenium_backfill(dry_run=args.dry_run)
 
+    # ── Geocoding ────────────────────────────────────────────────────────────────
+    geocode_ok = False
+    if not args.no_geocode:
+        if not args.dry_run:
+            logger.info(f"{'='*60}")
+            logger.info("Geocoding new addresses…")
+            geocode_ok = run_geocoding()
+        else:
+            logger.info(f"{'='*60}")
+            logger.info("[dry-run] Would run geocoding")
+    else:
+        logger.info("\n--no-geocode: skipping geocoding step.")
+
     # ── Summary ───────────────────────────────────────────────────────────────
     elapsed = time.time() - overall_start
     logger.info(f"{'='*60}")
     logger.info(f"daily_sync complete in {elapsed/60:.1f} min")
+
+    # Geocode status
+    if args.no_geocode:
+        geocode_status = 'skipped'
+    elif args.dry_run:
+        geocode_status = 'dry-run'
+    else:
+        geocode_status = '✓' if geocode_ok else '✗'
+    logger.info(f"Geocode: {geocode_status}")
+
     logger.info(f"{'Source':<6}  {'Label':<30}  {'New':>4}  {'Deleted':>7}  {'Updated':>7}")
     logger.info(f"{'-'*60}")
     for source_key, stats in all_stats.items():

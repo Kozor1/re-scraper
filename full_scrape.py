@@ -41,6 +41,7 @@ from datetime import datetime
 SCRIPT_DIR    = os.path.dirname(os.path.abspath(__file__))
 SCRAPERS_DIR  = os.path.join(SCRIPT_DIR, 'scrapers')
 MIGRATE_SCRIPT = os.path.join(SCRIPT_DIR, 'supabase', 'migrate_data.py')
+GEOCODE_SCRIPT = os.path.join(SCRIPT_DIR, 'geocode.py')
 PROPERTIES_DIR = os.path.join(SCRIPT_DIR, 'properties')
 
 sys.path.insert(0, SCRAPERS_DIR)
@@ -165,6 +166,38 @@ def run_source(source_key, fresh=True):
         return False
 
 
+def run_geocoding(source_keys):
+    """
+    Run geocode.py for all successfully-scraped sources.
+    Geocoding is done once for all sources together (geocode.py handles all properties).
+    Returns bool indicating success.
+    """
+    if not os.path.isfile(GEOCODE_SCRIPT):
+        logger.error(f"Geocode script not found: {GEOCODE_SCRIPT}")
+        return False
+
+    cmd = [sys.executable, GEOCODE_SCRIPT]
+    logger.info(f"[GEOCODE] {' '.join(cmd)}")
+    start = time.time()
+    try:
+        result = subprocess.run(
+            cmd,
+            cwd=SCRIPT_DIR,
+            capture_output=False,
+            text=True,
+        )
+        elapsed = time.time() - start
+        if result.returncode == 0:
+            logger.info(f"[GEOCODE] ✓ Done in {elapsed:.0f}s")
+            return True
+        else:
+            logger.error(f"[GEOCODE] ✗ Exit {result.returncode} after {elapsed:.0f}s")
+            return False
+    except Exception as exc:
+        logger.error(f"[GEOCODE] ✗ Exception: {exc}")
+        return False
+
+
 def run_migration(source_keys):
     """
     Run migrate_data.py once per successfully-scraped source.
@@ -280,6 +313,10 @@ def main():
         help='Skip the automatic Supabase migration step after scraping'
     )
     parser.add_argument(
+        '--no-geocode', action='store_true',
+        help='Skip the geocoding step (skip calling geocode.py)'
+    )
+    parser.add_argument(
         '--list', action='store_true',
         help='List available sources and exit'
     )
@@ -341,6 +378,22 @@ def main():
     scraped_ok = [k for k in sources_to_run if all_results.get(k)]
     failed     = [k for k in sources_to_run if not all_results.get(k)]
 
+    # ── Image sort ────────────────────────────────────────────
+    sort_results = run_image_sort(scraped_ok)
+
+    # ── Geocoding ──────────────────────────────────────────────
+    geocode_ok = False
+    if not args.no_geocode:
+        if scraped_ok:
+            logger.info(f"\n{'='*60}")
+            logger.info(f"Geocoding properties from {len(scraped_ok)} source(s)")
+            logger.info(f"{'='*60}")
+            geocode_ok = run_geocoding(scraped_ok)
+        else:
+            logger.warning("No sources scraped successfully — skipping geocoding.")
+    else:
+        logger.info("\n--no-geocode: skipping geocoding step.")
+
     # ── Migration ─────────────────────────────────────────────
     migrate_results = {}
     if not args.no_migrate:
@@ -354,12 +407,17 @@ def main():
     else:
         logger.info("\n--no-migrate: skipping Supabase migration.")
 
-    # ── Image sort ────────────────────────────────────────────
-    sort_results = run_image_sort(scraped_ok)
-
     # ── Final summary ─────────────────────────────────────────
     logger.info(f"\n{'='*60}")
     logger.info("Done.")
+
+    # Geocode status (runs once for all sources)
+    if args.no_geocode:
+        geocode_status = 'skipped'
+    else:
+        geocode_status = '✓' if geocode_ok else '✗'
+    logger.info(f"Geocode: {geocode_status}")
+
     for key in sources_to_run:
         scrape_ok_flag  = '✓' if all_results.get(key) else '✗'
         if args.no_migrate:
@@ -384,15 +442,17 @@ def main():
     sort_failed    = [k for k, ok in sort_results.items()   if not ok]
     if failed:
         logger.error(f"Scrape failed: {failed}")
+    if not args.no_geocode and not geocode_ok:
+        logger.error(f"Geocoding failed")
     if migrate_failed:
         logger.error(f"Migration failed: {migrate_failed}")
     if sort_failed:
         logger.error(f"Image sort failed: {sort_failed}")
 
-    if failed or migrate_failed or sort_failed:
+    if failed or (not args.no_geocode and not geocode_ok) or migrate_failed or sort_failed:
         sys.exit(1)
     else:
-        logger.info("All sources scraped, migrated, and sorted successfully.")
+        logger.info("All sources scraped, geocoded, migrated, and sorted successfully.")
 
 
 if __name__ == '__main__':
