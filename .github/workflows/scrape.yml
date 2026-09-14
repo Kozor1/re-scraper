@@ -33,6 +33,15 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Restore scraped data (properties/ + geocache)
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            properties/
+            geocache.json
+          key: scraper-data-${{ github.run_id }}
+          restore-keys: scraper-data-
+
       - name: Run property update
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -40,6 +49,14 @@ jobs:
           GOOGLE_GEOCODING_API_KEY: ${{ secrets.GOOGLE_GEOCODING_API_KEY }}
         run: |
           python3 property_update.py
+
+      - name: Save scraped data cache
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            properties/
+            geocache.json
+          key: scraper-data-${{ github.run_id }}
 
       - name: Upload logs as artifact
         if: always()  # Upload logs even if the job fails

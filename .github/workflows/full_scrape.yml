@@ -33,6 +33,16 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Restore previous scrape state (keeps geocache warm; properties/ is wiped by the fresh run anyway)
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            properties/
+            geocache.json
+          key: scraper-data-${{ github.run_id }}
+          restore-keys: scraper-data-
+          fail-on-cache-miss: false
+
       - name: Run full scrape (fresh) + geocode + migrate
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -40,6 +50,14 @@ jobs:
           GOOGLE_GEOCODING_API_KEY: ${{ secrets.GOOGLE_GEOCODING_API_KEY }}
         run: |
           python3 full_scrape.py
+
+      - name: Save caches for the hourly job
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            properties/
+            geocache.json
+          key: scraper-data-${{ github.run_id }}
 
       - name: Upload logs as artifact
         if: always()  # Upload logs even if the job fails
