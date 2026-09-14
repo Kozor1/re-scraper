@@ -45,57 +45,17 @@ from urllib.error import URLError
 # ── Config ─────────────────────────────────────────────────────────────────────
 
 ROOT          = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, ROOT)
+
+from config import GEOCODE_SOURCES as SOURCES
+from config.supabase_utils import _load_env
+
 GEOCACHE_PATH = os.path.join(ROOT, 'geocache.json')
 NOMINATIM_DELAY = 1.1   # seconds between Nominatim requests (policy: max 1/sec)
 GOOGLE_DELAY    = 0.05  # 50 ms between Google requests (well within free-tier limits)
 
-SOURCES = {
-    'sb':       'properties/sb',
-    'ups':      'properties/ups',
-    'hc':       'properties/hc',
-    'jm':       'properties/jm',
-    'pp':       'properties/pp',
-    'tr':       'properties/tr',
-    'dh':       'properties/dh',
-    'mm':       'properties/mm',
-    'ce':       'properties/ce',
-    'gm':       'properties/gm',
-    'pinp':     'properties/pinp',
-    'rb':       'properties/rb',
-    # Rental feeds — same geocache is shared so addresses already found for
-    # sale properties are free; only genuinely new rental addresses need a lookup.
-    'sb_rent':  'properties/sb_rent',
-    'ups_rent': 'properties/ups_rent',
-    'hc_rent':  'properties/hc_rent',
-    'jm_rent':  'properties/jm_rent',
-    'pp_rent':  'properties/pp_rent',
-    'tr_rent':  'properties/tr_rent',
-    'dh_rent':  'properties/dh_rent',
-    'mm_rent':  'properties/mm_rent',
-    'ce_rent':  'properties/ce_rent',
-    'gm_rent':  'properties/gm_rent',
-    'rb_rent':  'properties/rb_rent',
-}
-
 # User-Agent required by Nominatim's usage policy
 NOMINATIM_UA = 'PropertySwipe/1.0 (Northern Ireland property app; r.m.lavery@hotmail.co.uk)'
-
-
-def _load_env():
-    """Load key=value pairs from .env file into os.environ (if not already set)."""
-    env_path = os.path.join(ROOT, '.env')
-    if not os.path.exists(env_path):
-        return
-    with open(env_path, encoding='utf-8') as fh:
-        for line in fh:
-            line = line.strip()
-            if not line or line.startswith('#') or '=' not in line:
-                continue
-            key, _, val = line.partition('=')
-            key = key.strip()
-            val = val.strip().strip('"').strip("'")
-            if key and key not in os.environ:
-                os.environ[key] = val
 
 
 _load_env()

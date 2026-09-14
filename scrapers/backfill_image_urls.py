@@ -268,13 +268,12 @@ def extract_image_urls(soup, page_url, style):
 
 def backfill_source_tr_selenium(force=False, limit=0):
     """
-    Use headless Chrome (via tr_full_scrape.py's helpers) to extract image URLs
+    Use headless Chrome (via SeleniumScraper) to extract image URLs
     for existing TR property JSON files that are missing them.
     """
     try:
-        sys.path.insert(0, SCRIPT_DIR)
-        from tr_full_scrape import make_driver, load_page
-        from tr_full_scrape import extract_image_urls as tr_extract_image_urls
+        sys.path.insert(0, os.path.dirname(SCRIPT_DIR))
+        from scrapers.tr_full_scrape import TempletonRobinsonScraper
     except ImportError as e:
         logger.error(f"Cannot import TR selenium helpers: {e}")
         logger.error("Install dependencies: pip install selenium webdriver-manager")
@@ -327,27 +326,30 @@ def backfill_source_tr_selenium(force=False, limit=0):
     if not to_process:
         return total, 0, 0
 
-    driver = make_driver()
+    scraper = TempletonRobinsonScraper("tr")
+    driver = scraper.make_driver()
     try:
         for idx, (prop_dir_name, json_path, data, url) in enumerate(to_process, 1):
             logger.info(f"  [{idx}/{len(to_process)}] {prop_dir_name}: {url}")
 
-            # Restart driver every 50 properties to free memory
             if idx > 1 and (idx - 1) % 50 == 0:
                 logger.info("  Restarting Chrome to free memory…")
                 try:
                     driver.quit()
                 except Exception:
                     pass
-                driver = make_driver()
+                driver = scraper.make_driver()
 
-            ok = load_page(driver, url)
-            if not ok:
-                logger.error(f"  Failed to load page for {prop_dir_name}")
+            try:
+                driver.get(url)
+            except Exception as e:
+                logger.error(f"  Failed to load page for {prop_dir_name}: {e}")
                 errors += 1
                 continue
 
-            img_urls = tr_extract_image_urls(driver, url)
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(driver.page_source, "html.parser")
+            img_urls = scraper.extract_image_urls(soup, url)
             if img_urls:
                 data['image_urls'] = img_urls
                 try:
@@ -360,7 +362,7 @@ def backfill_source_tr_selenium(force=False, limit=0):
                     errors += 1
             else:
                 logger.warning(f"    No image URLs found for {prop_dir_name}")
-                updated += 1  # Count as processed even if no images found
+                updated += 1
 
             time.sleep(random.uniform(1.5, 2.5))
     finally:

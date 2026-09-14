@@ -17,41 +17,32 @@ Usage:
     python3 tr_selenium_scrape.py --all          # re-scrape even properties that already have data
 """
 
+from __future__ import annotations
+
 import argparse
 import json
-import logging
 import os
 import random
+import sys
 import time
 from datetime import datetime
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+sys.path.insert(0, ROOT)
+
+from scrapers.base import SeleniumScraper
+from config import setup_logging
 
 # ── Config ───────────────────────────────────────────────────────────────────
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-TR_DIR     = os.path.join(SCRIPT_DIR, 'properties', 'tr')
+TR_DIR = os.path.join(SCRIPT_DIR, "properties", "tr")
 
-os.makedirs(os.path.join(SCRIPT_DIR, 'logs'), exist_ok=True)
-log_filename = os.path.join(
-    SCRIPT_DIR, 'logs',
-    f"tr_selenium_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-)
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s  %(levelname)s  %(message)s',
-    handlers=[
-        logging.FileHandler(log_filename, encoding='utf-8'),
-        logging.StreamHandler(),
-    ]
-)
-logger = logging.getLogger(__name__)
+logger = setup_logging("tr_selenium")
 
 # ── Selector config ───────────────────────────────────────────────────────────
 # Description: try in order, first match with >100 chars wins.
@@ -87,28 +78,6 @@ FEATURES_SELECTORS = [
     ('div.pdp-features li',         False),
     ('ul.pdp-features li',          False),
 ]
-
-# ── Driver setup ─────────────────────────────────────────────────────────────
-
-def make_driver():
-    opts = Options()
-    opts.add_argument('--headless=new')
-    opts.add_argument('--no-sandbox')
-    opts.add_argument('--disable-dev-shm-usage')
-    opts.add_argument('--disable-gpu')
-    opts.add_argument('--window-size=1280,900')
-    opts.add_argument(
-        '--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-        'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    )
-    # Suppress "DevTools listening …" noise
-    opts.add_experimental_option('excludeSwitches', ['enable-logging'])
-
-    service = Service(ChromeDriverManager().install())
-    driver  = webdriver.Chrome(service=service, options=opts)
-    driver.set_page_load_timeout(30)
-    return driver
-
 
 # ── Extraction helpers ────────────────────────────────────────────────────────
 
@@ -290,7 +259,8 @@ def run(args):
         todo = todo[:1]
         logger.info('--- TEST MODE: processing first property only ---')
 
-    driver = make_driver()
+    scraper = SeleniumScraper("tr")
+    driver = scraper.make_driver()
     updated = skipped = errors = 0
 
     try:
@@ -299,14 +269,13 @@ def run(args):
             prop_id = data.get('id', os.path.basename(os.path.dirname(jf)))
             logger.info(f'[{i}/{len(todo)}] {prop_id}  {url}')
 
-            # Periodic restart to prevent Chrome memory build-up
             if not args.test and i > 1 and (i - 1) % RESTART_EVERY == 0:
                 logger.info(f'  ↻ Restarting Chrome to free memory (every {RESTART_EVERY} properties)…')
                 try:
                     driver.quit()
                 except Exception:
                     pass
-                driver = make_driver()
+                driver = scraper.make_driver()
 
             ok = load_page(driver, url, test_mode=args.test)
 
@@ -318,7 +287,7 @@ def run(args):
                 except Exception:
                     pass
                 try:
-                    driver = make_driver()
+                    driver = scraper.make_driver()
                     ok = load_page(driver, url, test_mode=args.test)
                 except Exception as e:
                     logger.error(f'  Could not restart driver: {e}')

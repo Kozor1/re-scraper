@@ -1,4 +1,4 @@
-"""
+r"""
 image_sort_utils.py
 -------------------
 Shared utility for sorting and deduplicating property image URL lists.
@@ -8,7 +8,7 @@ images at the wrong position in the gallery HTML for seamless infinite looping.
 Sorting by the trailing numeric suffix restores the intended display order.
 
 URL patterns handled:
-  Simon Brien  : …/NBF260058_01.webp      →  _(\d+)\.(ext)
+  Simon Brien  : …/NBF260058_01.webp      →  r"_(\d+)\.(ext)"
   Hunter Campbell: …/hclc2_…_img_00.jpg  →  _(\d+)\.(ext)
   John Minnis  : …/19055535-1.jpg         →  -(\d+)\.(ext)
   Templeton R. : …/trltrl102720-1.jpg     →  -(\d+)\.(ext)

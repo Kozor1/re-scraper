@@ -1,8 +1,16 @@
 """
-text_update.py  –  Daily text-only update for all 6 NI estate agent sources.
+text_update.py  –  Daily text-only update for all estate agent sources.
 
 Re-fetches property pages to detect price drops, status changes, and description
 updates. No images are downloaded. Intended to run once per day.
+
+Extraction strategy (in order):
+  1. Delegate to the source's own full scraper
+     (scrapers/<site>_full_scrape.py → scrape_detail_page + cleanup_data),
+     which guarantees formats match the stored JSONs byte-for-byte.
+  2. Dedicated extractors for bespoke themes (PropertyHive/Nest, Bill McCann).
+  3. Generic PropertyPal-style selectors (legacy fallback for selenium-only
+     sources like tr/ce/gm, whose pages need a real browser).
 
 Usage:
     python3 text_update.py                  # update all sources
@@ -22,9 +30,12 @@ Images are NEVER downloaded – this script is text-only.
 
 import requests
 from bs4 import BeautifulSoup
+import importlib
+import re
 import time
 import random
 import os
+import sys
 import json
 import logging
 import argparse
@@ -35,28 +46,108 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Config
 # ──────────────────────────────────────────────
 
-SOURCES = {
-    'sb':  'properties/sb',
-    'ups': 'properties/ups',
-    'hc':  'properties/hc',
-    'jm':  'properties/jm',
-    'pp':  'properties/pp',
-    'tr':  'properties/tr',
-}
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
 
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                  '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'Accept-Language': 'en-GB,en;q=0.9',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Connection': 'keep-alive',
-    'Upgrade-Insecure-Requests': '1',
-    'Cache-Control': 'max-age=0',
-}
+from config import SOURCES, HEADERS, ScrapeStrategy
 
 # Fields that count as "meaningful changes" to report
-TRACKED_FIELDS = ['price', 'status', 'title', 'address', 'description']
+# 'price_str' is the key used by the newer scrapers (sb, rr, bmc, nest);
+# 'price' is kept for the original PropertyPal-style scrapers.
+TRACKED_FIELDS = ['price', 'price_str', 'status', 'title', 'address', 'description']
+
+
+def normalise_price_key(existing: dict, new_data: dict) -> dict:
+    """
+    Older scrapers store the price under 'price', newer ones under 'price_str'.
+    If the stored JSON uses 'price_str', move a generically-extracted 'price'
+    onto that key so change detection compares like-for-like instead of
+    adding a spurious duplicate 'price' field every run.
+    """
+    if (
+        isinstance(new_data, dict)
+        and 'price' in new_data
+        and 'price' not in existing
+        and 'price_str' in existing
+    ):
+        new_data['price_str'] = new_data.pop('price')
+    return new_data
+
+# ──────────────────────────────────────────────
+# Source-scraper delegation
+#
+# The generic extractors below (prop-det-* etc.) only ever matched the
+# original PropertyPal-style sites.  For every other CMS family they drifted
+# formatting (truncated addresses, mangled prices, space-joined descriptions)
+# → phantom "changes" on every run.  The robust fix is to re-parse each detail
+# page with the source's own full scraper, which formats every text field
+# exactly like the stored JSONs.
+# ──────────────────────────────────────────────
+
+_SCRAPER_CACHE: dict = {}
+
+
+def _load_source_scraper(site):
+    """
+    Import scrapers/<site>_full_scrape.py, find the concrete BaseScraper
+    subclass defined there, and return a cached instance.  None if unavailable.
+    """
+    if site in _SCRAPER_CACHE:
+        return _SCRAPER_CACHE[site]
+
+    instance = None
+    try:
+        from scrapers.base import BaseScraper
+
+        module = importlib.import_module(f"scrapers.{site}_full_scrape")
+        for obj in vars(module).values():
+            if (
+                isinstance(obj, type)
+                and issubclass(obj, BaseScraper)
+                and obj.__module__ == module.__name__
+                and not getattr(obj, "__abstractmethods__", None)
+            ):
+                try:
+                    instance = obj(site)
+                except TypeError:
+                    instance = obj()  # some scrapers have a no-arg __init__
+                break
+        if instance is not None:
+            try:
+                instance.logger = logger  # keep all output in one log
+            except Exception:
+                pass
+    except Exception as e:
+        logger.warning(f"Could not load {site}_full_scrape for delegation: {e}")
+
+    _SCRAPER_CACHE[site] = instance
+    return instance
+
+
+def scrape_via_source_scraper(html, url, site):
+    """
+    Parse a detail page with the source's own full scraper.  Returns a dict in
+    the exact format of the stored JSONs, or None to signal "fall back to the
+    generic extractors" (unparseable page, selenium-only markup, etc.).
+    """
+    scraper = _load_source_scraper(site)
+    if scraper is None:
+        return None
+    try:
+        data = scraper.scrape_detail_page(html, url)
+    except Exception as e:
+        logger.warning(f"Delegated parse failed for {site} ({url}): {e}")
+        return None
+    if not data or not data.get("address"):
+        return None
+    try:
+        data = scraper.cleanup_data(dict(data))
+    except Exception:
+        pass
+    data.pop("id", None)
+    data.pop("scraped_at", None)
+    return data or None
+
 
 # ──────────────────────────────────────────────
 # Logging
@@ -333,6 +424,150 @@ def extract_rooms(soup, site):
 
 
 # ──────────────────────────────────────────────
+# WordPress + PropertyHive extractor (e.g. Nest)
+# ──────────────────────────────────────────────
+
+def _looks_like_propertyhive(soup):
+    return bool(soup.select_one('div.property_meta')) and bool(
+        soup.find('h1', class_='property_title')
+    )
+
+
+def extract_propertyhive(soup, url):
+    """
+    Parse a PropertyHive single-property page.
+
+    Keys and string formats must match scrapers/nest_full_scrape.py exactly,
+    otherwise every run reports phantom changes. Nest stores the price under
+    'price_str' (not 'price').
+    """
+    data = {'url': url}
+
+    address = _text(soup.find('h1', class_='property_title'))
+    if address:
+        data['address'] = address
+        data['title'] = address
+
+    price_div = soup.find('div', class_='price')
+    if price_div:
+        qual_el = price_div.find('span', class_='price-qualifier')
+        qualifier = _text(qual_el) if qual_el else ''
+        m = re.search(r'£([\d,]+)', price_div.get_text())
+        if m:
+            amount = f"£{int(m.group(1).replace(',', '')):,}"
+            data['price_str'] = f"{qualifier} {amount}".strip()
+        else:
+            raw = ' '.join(price_div.get_text().split())
+            if raw:
+                data['price_str'] = raw  # e.g. "POA"
+
+    meta = {}
+    for row in soup.select('div.property_meta tr'):
+        th = row.find('th')
+        td = row.find('td')
+        if th and td:
+            key = _text(th).rstrip(':').strip().lower()
+            meta[key] = _text(td)
+    if meta.get('bedrooms'):
+        data['bedrooms'] = meta['bedrooms']
+    if meta.get('bathrooms'):
+        data['bathrooms'] = meta['bathrooms']
+    if meta.get('reception rooms'):
+        data['receptions'] = meta['reception rooms']
+    if meta.get('type'):
+        data['property_type'] = meta['type']
+    if meta.get('tenure'):
+        data['tenure'] = meta['tenure']
+    if meta.get('ref'):
+        data['reference'] = meta['ref']
+    if meta.get('availability'):
+        data['status'] = meta['availability']
+
+    container = soup.find('div', class_='description-contents')
+    if container is None:
+        container = soup.find('div', class_='description')
+    room_paras = container.find_all('p', class_='room') if container else []
+
+    description_parts = []
+    rooms = []
+    for p in room_paras:
+        name_el = p.find('strong', class_='name')
+        if not name_el:
+            # Main marketing description — <br> tags separate paragraphs.
+            for br in p.find_all('br'):
+                br.replace_with('\n')
+            for seg in p.get_text().split('\n'):
+                seg = ' '.join(seg.split())
+                if seg:
+                    description_parts.append(seg)
+            continue
+        name = _text(name_el).rstrip(':').strip()
+        dim_el = p.find('span', class_='dimension')
+        dimensions = _text(dim_el) if dim_el else ''
+        name_el.extract()
+        if dim_el:
+            dim_el.extract()
+        for br in p.find_all('br'):
+            br.replace_with('\n')
+        room_desc = ' '.join(p.get_text().split())
+        if name:
+            rooms.append({'name': name, 'dimensions': dimensions, 'description': room_desc})
+
+    if description_parts:
+        data['description'] = '\n\n'.join(description_parts)
+    if rooms:
+        data['rooms'] = rooms
+
+    return {k: v for k, v in data.items() if v not in ('', [], {}, None)}
+
+
+def extract_bmc(soup, url):
+    """
+    Bill McCann (bespoke WordPress theme). Mirrors bmc_full_scrape.py so
+    change detection compares like-for-like; bmc stores 'price_str'.
+    """
+    data = {'url': url}
+
+    addr = ''
+    addr_h1 = soup.find('h1', class_=lambda x: x and 'font-gilroybold' in x)
+    if addr_h1:
+        t = addr_h1.get_text(strip=True)
+        if len(t) > 10 and 'find the home' not in t.lower():
+            addr = t
+    if not addr:
+        for h in soup.find_all('h1'):
+            t = h.get_text(strip=True)
+            if len(t) > 10 and 'find the home' not in t.lower():
+                addr = t
+                break
+    if addr:
+        data['address'] = addr
+        data['title'] = addr
+
+    p_el = soup.find('p', class_='price')
+    if p_el:
+        m = re.search(r'£[\d,]+', p_el.get_text(strip=True))
+        if m:
+            data['price_str'] = m.group(0)
+
+    desc_div = soup.find('div', {'data-content': 'description'})
+    if desc_div:
+        paragraphs = [
+            p.get_text(strip=True)
+            for p in desc_div.find_all('p')
+            if p.get_text(strip=True)
+        ]
+        if paragraphs:
+            data['description'] = '\n\n'.join(paragraphs)
+    else:
+        prop_details = soup.find('div', {'id': 'property-details'})
+        if prop_details:
+            data['description'] = prop_details.get_text(separator='\n', strip=True)
+
+    return {k: v for k, v in data.items() if v not in ('', [], {}, None)}
+
+
+# ──────────────────────────────────────────────
 # Main scrape function for a single property
 # ──────────────────────────────────────────────
 
@@ -345,7 +580,35 @@ def scrape_property_text(url, site):
     if not r:
         return None
 
+    # Preferred path: the source's own full scraper — guaranteed to produce
+    # the same field names/formats as the stored JSONs.  Skipped for
+    # selenium-only sources (plain requests HTML won't match what their
+    # parser expects).
+    delegated = None
+    try:
+        if SOURCES[site].get('strategy') is not ScrapeStrategy.SELENIUM:
+            delegated = scrape_via_source_scraper(r.text, url, site)
+    except Exception as e:
+        logger.warning(f"Delegation error for {site} ({url}): {e}")
+    if delegated:
+        delegated['rescraped_at'] = datetime.now().isoformat()
+        return {k: v for k, v in delegated.items() if v not in ('', [], {}, None)}
+
     soup = BeautifulSoup(r.content, 'html.parser')
+
+    # WordPress + PropertyHive pages (e.g. Nest): their markup doesn't match
+    # the PropertyPal selectors below and the generic fallbacks produce
+    # different formats than the full scraper → use the dedicated extractor.
+    if _looks_like_propertyhive(soup):
+        data = extract_propertyhive(soup, url)
+        data['rescraped_at'] = datetime.now().isoformat()
+        return {k: v for k, v in data.items() if v not in ('', [], {}, None)}
+
+    # Bill McCann: bespoke WordPress theme, same reasoning as above.
+    if site == 'bmc':
+        data = extract_bmc(soup, url)
+        data['rescraped_at'] = datetime.now().isoformat()
+        return {k: v for k, v in data.items() if v not in ('', [], {}, None)}
 
     address = extract_address(soup, site)
     price   = extract_price(soup, site)
@@ -404,7 +667,7 @@ def load_property_jsons(source_key):
     Read all existing property JSON files for a source.
     Returns list of (json_path, data_dict).
     """
-    folder = SOURCES[source_key]
+    folder = SOURCES[source_key]['props_dir']
     if not os.path.isdir(folder):
         logger.warning(f"Folder not found: {folder}")
         return []
@@ -448,6 +711,7 @@ def rescrape_one(args):
     if not new_data:
         return (json_path, None, f'Failed to fetch {url}')
 
+    new_data = normalise_price_key(existing, new_data)
     changes = detect_changes(existing, new_data)
 
     # Build the updated JSON:
@@ -585,7 +849,7 @@ def main():
                         logger.info(f"  [{completed}/{total}] No changes: {existing.get('id')}")
 
         # Save per-source changes report
-        changes_path = os.path.join(SOURCES[source_key], f"{source_key}_changes.json")
+        changes_path = os.path.join(SOURCES[source_key]['props_dir'], f"{source_key}_changes.json")
         try:
             # Merge with any existing changes log
             existing_changes = []

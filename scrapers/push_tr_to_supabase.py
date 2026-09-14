@@ -15,19 +15,13 @@ import requests
 
 ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TR_DIR     = os.path.join(ROOT, 'scrapers', 'properties', 'tr')
-ENV_PATH   = os.path.join(ROOT, '.env')
+sys.path.insert(0, ROOT)
 
-# Load .env
-env = {}
-if os.path.exists(ENV_PATH):
-    for line in open(ENV_PATH):
-        line = line.strip()
-        if line and not line.startswith('#') and '=' in line:
-            k, v = line.split('=', 1)
-            env[k.strip()] = v.strip()
+from config.supabase_utils import _load_env
 
-SUPABASE_URL = env.get('SUPABASE_URL') or os.environ.get('SUPABASE_URL', '')
-SUPABASE_KEY = env.get('SUPABASE_SERVICE_KEY') or os.environ.get('SUPABASE_SERVICE_KEY', '')
+_load_env()
+SUPABASE_URL = os.environ.get('SUPABASE_URL', '')
+SUPABASE_KEY = os.environ.get('SUPABASE_SERVICE_KEY', '')
 
 if not SUPABASE_URL or not SUPABASE_KEY:
     print("ERROR: Missing SUPABASE_URL or SUPABASE_SERVICE_KEY in .env")

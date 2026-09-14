@@ -14,7 +14,7 @@ const https = require('https');
 
 const ROOT          = __dirname;
 const GEOCACHE_PATH = path.join(ROOT, 'geocache.json');
-const SOURCES       = ['sb', 'ups', 'hc', 'jm', 'pp', 'tr', 'dh'];
+const SOURCES       = ['sb', 'ups', 'hc', 'jm', 'pp', 'tr', 'dh', 'nest'];
 
 // ── Load geocache ────────────────────────────────────────────────────────────
 let geocache = {};

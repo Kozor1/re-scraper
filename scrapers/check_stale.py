@@ -27,7 +27,7 @@ Sources handled: sb, ups, hc, jm, pp, tr, dh
 Requires: pip3 install requests
 """
 
-import os, sys, json, re, time, shutil, argparse, logging
+import os, sys, json, re, time, shutil, argparse
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -37,19 +37,20 @@ except ImportError:
     print("Run: pip3 install requests")
     sys.exit(1)
 
-# ── Config ─────────────────────────────────────────────────────────────────────
-
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
 
-# Legacy sources only — mm/ce handle their own stale detection
+from config import setup_logging, SOURCES as ALL_SOURCES
+
+# Legacy sources only — smart-scraper sources manage their own stale detection
+LEGACY_KEYS = ["sb", "ups", "hc", "jm", "pp", "tr", "dh"]
 SOURCES = {
-    'sb':  os.path.join(ROOT, 'properties', 'sb'),
-    'ups': os.path.join(ROOT, 'properties', 'ups'),
-    'hc':  os.path.join(ROOT, 'properties', 'hc'),
-    'jm':  os.path.join(ROOT, 'properties', 'jm'),
-    'pp':  os.path.join(ROOT, 'properties', 'pp'),
-    'tr':  os.path.join(ROOT, 'properties', 'tr'),
-    'dh':  os.path.join(ROOT, 'properties', 'dh'),
+    k: {
+        "props_dir": ALL_SOURCES[k]["props_dir"],
+        "link_pattern": ALL_SOURCES[k].get("link_pattern", "/property/"),
+    }
+    for k in LEGACY_KEYS
+    if k in ALL_SOURCES
 }
 
 TIMEOUT  = 12    # seconds per HTTP request
@@ -77,26 +78,11 @@ HEADERS = {
     'Accept-Language': 'en-GB,en;q=0.9',
 }
 
-# ── Logging ────────────────────────────────────────────────────────────────────
-
-os.makedirs(os.path.join(ROOT, 'logs'), exist_ok=True)
-log_file = os.path.join(
-    ROOT, 'logs',
-    f"check_stale_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-)
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s %(levelname)s %(message)s',
-    handlers=[
-        logging.FileHandler(log_file, encoding='utf-8'),
-        logging.StreamHandler(),
-    ]
-)
-logger = logging.getLogger(__name__)
+logger = setup_logging("check_stale")
 
 # ── Liveness check ────────────────────────────────────────────────────────────
 
-def is_live(url):
+def is_live(url, link_pattern="/property/"):
     """
     Returns (live: bool, reason: str).
     'live' = True means the listing is still active on the website.
@@ -121,8 +107,8 @@ def is_live(url):
     if r.status_code >= 400:
         return False, f'HTTP {r.status_code}'
 
-    # Followed a redirect away from a /property/ path
-    if '/property/' not in r.url:
+    # Followed a redirect away from the expected property path
+    if link_pattern not in r.url:
         return False, f'redirected to {r.url[:80]}'
 
     # Page content analysis (only check the first 8 KB — fast, avoids big HTML)
@@ -163,7 +149,7 @@ def collect_entries(source_key, props_dir):
 
 # ── Check one source ───────────────────────────────────────────────────────────
 
-def check_source(source_key, props_dir, dry_run=False, workers=15):
+def check_source(source_key, props_dir, link_pattern="/property/", dry_run=False, workers=15):
     logger.info(f"\n{'─'*55}")
     logger.info(f"Source: {source_key.upper()}  ({props_dir})")
 
@@ -179,7 +165,7 @@ def check_source(source_key, props_dir, dry_run=False, workers=15):
     def check(entry):
         folder, json_path, url = entry
         time.sleep(DELAY)
-        live, reason = is_live(url)
+        live, reason = is_live(url, link_pattern)
         return folder, url, live, reason
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
@@ -246,13 +232,17 @@ def main():
     logger.info(f"check_stale.py — {datetime.now().isoformat()}")
     logger.info(f"Sources: {', '.join(sources_to_run)}")
     logger.info(f"dry_run={args.dry_run}  workers={args.workers}")
-    logger.info(f"Log: {log_file}")
+    log_path = getattr(logger, "log_file", None)
+    if log_path:
+        logger.info(f"Log: {log_path}")
 
     t0      = time.monotonic()
     totals  = {'total': 0, 'live': 0, 'stale': 0, 'deleted': 0}
 
     for key in sources_to_run:
-        stats = check_source(key, SOURCES[key], dry_run=args.dry_run, workers=args.workers)
+        cfg = SOURCES[key]
+        stats = check_source(key, cfg["props_dir"], link_pattern=cfg["link_pattern"],
+                            dry_run=args.dry_run, workers=args.workers)
         for k in totals:
             totals[k] += stats.get(k, 0)
 

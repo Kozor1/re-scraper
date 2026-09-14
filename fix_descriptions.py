@@ -32,19 +32,13 @@ import argparse
 import os
 import re
 import sys
-from dotenv import load_dotenv
 
-load_dotenv()
+ROOT = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, ROOT)
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+from config import get_supabase
 
-if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
-    sys.exit("ERROR: SUPABASE_URL and SUPABASE_SERVICE_KEY must be set in .env")
-
-from supabase import create_client, Client  # noqa: E402  (import after env check)
-
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+supabase = get_supabase()
 
 
 # ─────────────────────────────────────────────────────────────────────────────

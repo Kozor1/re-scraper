@@ -15,31 +15,12 @@ import os
 import sys
 import argparse
 
-try:
-    from supabase import create_client
-except ImportError:
-    print("ERROR: Run: pip install supabase")
-    sys.exit(1)
-
-# ── Supabase setup ────────────────────────────────────────────────────────────
-
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
 
-env_path = os.path.join(ROOT, '.env')
-if os.path.exists(env_path):
-    for line in open(env_path):
-        line = line.strip()
-        if line and not line.startswith('#') and '=' in line:
-            k, v = line.split('=', 1)
-            os.environ.setdefault(k.strip(), v.strip())
+from config.supabase_utils import get_supabase
 
-url = os.environ.get('SUPABASE_URL')
-key = os.environ.get('SUPABASE_SERVICE_KEY')
-if not url or not key:
-    print("ERROR: Set SUPABASE_URL and SUPABASE_SERVICE_KEY in .env or environment")
-    sys.exit(1)
-
-sb     = create_client(url, key)
+sb = get_supabase()
 BUCKET = 'property-images'
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
