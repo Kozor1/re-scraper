@@ -200,7 +200,7 @@ SOURCES: dict[str, dict] = {
         "download_images": False,
         "link_pattern": "/property/",
         "fresh_flag": True,
-        "rent_only": False,
+        "sale_only": False,
         "parallel_group": 1,
         "quick_type": "legacy",
         "quick_list_urls": [
@@ -225,7 +225,7 @@ SOURCES: dict[str, dict] = {
         "download_images": True,
         "link_pattern": "/property/",
         "fresh_flag": True,
-        "rent_only": False,
+        "sale_only": False,
         "parallel_group": 1,
         "quick_type": "smart",
         "quick_script": os.path.join(ROOT, "scrapers", "pinp_full_scrape.py"),
@@ -247,7 +247,7 @@ SOURCES: dict[str, dict] = {
         "download_images": True,
         "link_pattern": "/property/",
         "fresh_flag": True,
-        "rent_only": False,
+        "sale_only": False,
         "parallel_group": 1,
         "quick_type": "smart",
         "quick_script": os.path.join(ROOT, "scrapers", "rb_full_scrape.py"),
@@ -292,7 +292,7 @@ SOURCES: dict[str, dict] = {
         "link_pattern": r"^/[a-z0-9-]+/\d{6,}/?$",
         "link_pattern_is_regex": True,
         "fresh_flag": True,
-        "rent_only": False,
+        "sale_only": False,
         "parallel_group": 1,
         "quick_type": "smart",
         "quick_script": os.path.join(ROOT, "scrapers", "mm_full_scrape.py"),
@@ -319,7 +319,7 @@ SOURCES: dict[str, dict] = {
         "download_images": False,
         "link_pattern": "/property/",
         "fresh_flag": True,
-        "rent_only": False,
+        "sale_only": False,
         "parallel_group": 2,
         "quick_type": "smart",
         "quick_script": os.path.join(ROOT, "scrapers", "ce_full_scrape.py"),
@@ -341,7 +341,7 @@ SOURCES: dict[str, dict] = {
         "download_images": False,
         "link_pattern": "/property/",
         "fresh_flag": True,
-        "rent_only": False,
+        "sale_only": False,
         "parallel_group": 2,
         "quick_type": "smart",
         "quick_script": os.path.join(ROOT, "scrapers", "gm_full_scrape.py"),
@@ -812,9 +812,9 @@ NUMBERED_IMAGE_SOURCES = ["hc", "jm", "tr", "ups", "pp", "dh"]
 
 # ── Sale-only sources (for rental filtering) ──────────────────────────────────
 
-# Sources that only have sale listings (no rental counterpart on the site).
-# Sources that DO have rental listings set the flag to False so they get
-# filtered more carefully (rental URLs are excluded during listing walks).
+# Each source has a "sale_only" flag (True by default).  Sale-only sources
+# keep the default; sources that also list rentals (mm, ce, gm, pinp, rb, dh)
+# set it to False so their listing walks filter rental URLs out more carefully.
 def sale_only_sources() -> list[str]:
     """Return source keys that are sale-only (no rental listings on site).
 
@@ -822,7 +822,7 @@ def sale_only_sources() -> list[str]:
     also list rentals (mm, ce, gm, pinp, rb, dh) have the flag set to False
     so rental URLs can be filtered out.
     """
-    return [k for k, v in SOURCES.items() if v.get("rent_only", True)]
+    return [k for k, v in SOURCES.items() if v.get("sale_only", True)]
 
 
 def all_sale_keys() -> list[str]:

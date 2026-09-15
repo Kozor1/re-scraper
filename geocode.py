@@ -12,7 +12,7 @@ Fallback: OpenStreetMap Nominatim  (free, used if Google returns no result or
 
 Google API key setup:
   1. Go to https://console.cloud.google.com/ → Geocoding API → Create credentials
-  2. Add to re_app/.env:   GOOGLE_GEOCODING_API_KEY=AIza...
+  2. Add to .env (repo root): GOOGLE_GEOCODING_API_KEY=AIza...
   Free tier: 40,000 requests/month (far more than needed).
 
 Strategy (tried in order for each address):
@@ -32,7 +32,7 @@ Usage:
     python3 geocode.py --retry-failed     # retry addresses previously marked as not-found
     python3 geocode.py --no-nominatim     # skip Nominatim fallback (Google-only)
 
-Run from the re_app/ directory.
+Run from the repo root.
 After running:
     python3 supabase/migrate_data.py      # push lat/lng to Supabase
 """

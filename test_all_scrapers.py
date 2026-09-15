@@ -78,7 +78,11 @@ def test_scraper(
                 if d.startswith("property_")
                 and os.path.isdir(os.path.join(props_dir, d))
             ],
-            key=lambda x: int(x.replace("property_", "")),
+            key=lambda x: (
+                int(x.replace("property_", ""))
+                if x.replace("property_", "").isdigit()
+                else 0
+            ),
         )
         if not prop_dirs:
             print("  Status: FAILED - No property directory created")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-property_update.py  –  Daily property sync for all NI estate agent sources.
+property_update.py  –  Incremental (hourly) property sync for all NI estate agent sources.
 
 For each source this script:
   1. Walks ALL listing pages to get the complete set of currently live property URLs
@@ -10,8 +10,9 @@ For each source this script:
      and pushes any changes to Supabase
   5. Runs the TR selenium backfill for any TR properties still missing descriptions
 
-Intended to run once per day, e.g. via cron:
-    0 3 * * *  cd ~/Desktop/re_app && source venv/bin/activate && python3 property_update.py
+Runs hourly via GitHub Actions (.github/workflows/scrape.yml); can also be
+run manually from the repo root:
+    python3 property_update.py
 
 Usage:
     python3 property_update.py                     # sync all sources

@@ -32,7 +32,8 @@ so adding an agent to `SOURCES` wires it into every pipeline automatically.
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate          # macOS / Linux
+# Windows: venv\Scripts\activate  (PowerShell: .\venv\Scripts\Activate.ps1)
 pip install -r requirements.txt
 ```
 

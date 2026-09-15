@@ -56,9 +56,14 @@ MIGRATE_SCRIPT = os.path.join(SCRIPT_DIR, "supabase", "migrate_data.py")
 GEOCODE_SCRIPT = os.path.join(SCRIPT_DIR, "geocode.py")
 PROPERTIES_DIR = os.path.join(SCRIPT_DIR, "properties")
 
-# Prefer the venv interpreter for migration
-_venv_py = os.path.join(SCRIPT_DIR, "venv", "bin", "python3")
-MIGRATE_PYTHON = _venv_py if os.path.isfile(_venv_py) else sys.executable
+# Prefer the venv interpreter for migration (macOS/Linux and Windows layouts)
+_VENVPY_CANDIDATES = (
+    os.path.join(SCRIPT_DIR, "venv", "bin", "python3"),        # macOS / Linux
+    os.path.join(SCRIPT_DIR, "venv", "Scripts", "python.exe"),  # Windows
+)
+MIGRATE_PYTHON = next(
+    (p for p in _VENVPY_CANDIDATES if os.path.isfile(p)), sys.executable
+)
 
 logger = setup_logging("full_scrape")
 

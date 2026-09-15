@@ -3,7 +3,8 @@
 Migrate property metadata from JSON files → Supabase.
 
 Includes image_urls (sourced from data['image_urls'] or data['images']).
-Safe to re-run — uses upsert on (source, source_id).
+Safe to re-run — upserts on (source, url), the stable identity of a listing
+across scrapes (see config/supabase_utils.py: upsert_batch).
 
 Usage:
     python3 supabase/migrate_data.py                          # migrate all + prune (default)

@@ -2,7 +2,8 @@
 text_update.py  –  Daily text-only update for all estate agent sources.
 
 Re-fetches property pages to detect price drops, status changes, and description
-updates. No images are downloaded. Intended to run once per day.
+updates. No images are downloaded. Runs as part of the hourly
+property_update.py sync, or standalone.
 
 Extraction strategy (in order):
   1. Delegate to the source's own full scraper

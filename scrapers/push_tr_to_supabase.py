@@ -2,7 +2,7 @@
 push_tr_to_supabase.py  –  Push all TR property data to Supabase using raw HTTP.
 
 Uses only the `requests` library (no supabase package needed).
-Safe to re-run — upserts on (source, source_id).
+Safe to re-run — upserts rows (PostgREST merge-duplicates).
 
 Usage:
     python3 scrapers/push_tr_to_supabase.py
@@ -14,7 +14,7 @@ import requests
 # ── Config ────────────────────────────────────────────────────────────────────
 
 ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TR_DIR     = os.path.join(ROOT, 'scrapers', 'properties', 'tr')
+TR_DIR     = os.path.join(ROOT, 'properties', 'tr')
 sys.path.insert(0, ROOT)
 
 from config.supabase_utils import _load_env
