@@ -40,6 +40,28 @@ Both repos are committed and pushed. Pipeline is fully automated now:
 3. If UI edits are needed: `git pull` first, then work in:
    - web: `swome-web/` (Next.js), mobile: `swome-app/` (Expo)
 
+## Supabase RLS warning (rls_disabled_in_public)
+
+Supabase emailed that a public table lacks Row-Level Security. All **known**
+schema tables (properties, folders, folder_properties, swipes, pairs,
+pair_members, pair_invites, profiles) have RLS enabled in migrations, so the
+alert is probably one of:
+
+- `public.spatial_ref_sys` — created automatically by PostGIS, never needs RLS;
+  Supabase's linter flags it anyway. Safe to dismiss, or silence:
+  `alter table public.spatial_ref_sys enable row level security;`
+- A table created manually in the dashboard at some point — check the alert
+  email for the table name, or run the linter: Supabase dashboard →
+  Database → Linter → "rls_disabled_in_public".
+
+If it IS a real app table, enable RLS and add policies, e.g.:
+
+```sql
+alter table public.<table> enable row level security;
+-- read-only for everyone is usually right for property data:
+create policy "public read" on public.<table> for select using (true);
+```
+
 ## Useful commands (re-scraper)
 
 ```
