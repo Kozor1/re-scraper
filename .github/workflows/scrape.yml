@@ -2,8 +2,10 @@ name: Hourly Property Update
 
 on:
   schedule:
-    # Run every hour at the start of every hour (UTC)
-    - cron: '0 * * * *'
+    # Every hour at :17 past. Top-of-hour (:00) is the most congested minute
+    # on GitHub Actions and scheduled runs silently get dropped — off-peak
+    # minutes are far more reliable.
+    - cron: '17 * * * *'
   workflow_dispatch:  # Allow manual trigger from GitHub UI
 
 jobs:
