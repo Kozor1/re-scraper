@@ -2,16 +2,23 @@ name: Hourly Property Update
 
 on:
   schedule:
-    # Every hour at :17 past. Top-of-hour (:00) is the most congested minute
-    # on GitHub Actions and scheduled runs silently get dropped — off-peak
-    # minutes are far more reliable.
+    # GitHub scheduled runs are best-effort with no SLA — top-of-hour works
+    # worst, and single shots get randomly dropped. Fire twice per hour at
+    # off-peak minutes; the concurrency group below makes the second a no-op
+    # if the first is running or just succeeded.
     - cron: '17 * * * *'
+    - cron: '47 * * * *'
   workflow_dispatch:  # Allow manual trigger from GitHub UI
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
     timeout-minutes: 120  # 2 hour timeout for long scrapes
+    # Prevent overlapping/concurrent updater processes; a queued duplicate
+    # simply waits for the first to finish and then re-checks the state.
+    concurrency:
+      group: hourly-scrape
+      cancel-in-progress: false
 
     steps:
       - name: Checkout code
