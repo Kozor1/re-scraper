@@ -590,7 +590,9 @@ SOURCES: dict[str, dict] = {
         "strategy": ScrapeStrategy.REQUESTS,
         "index_type": IndexType.PROPERTY_INDEX,
         "download_images": False,
-        "link_pattern": "/properties/",
+        # Detail pages are /property/<slug>/ (not /properties/... archives) —
+        # note "/property/" is NOT a substring of "/properties/" so this is safe.
+        "link_pattern": "/property/",
         "fresh_flag": True,
         "parallel_group": 1,
         "listing_page": lambda n: (

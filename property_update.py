@@ -158,6 +158,46 @@ def get_all_live_urls(source_key: str, max_pages: int = 200) -> set[str]:
     return live_urls
 
 
+def _classify_dead_urls(
+    source_key: str, urls: set[str], workers: int = 6
+) -> tuple[list[str], list[str]]:
+    """
+    Split "delisted" URLs (dead in the listing index) into:
+      salvageable — detail page still returns 200 with property markup
+                    (status flip to Sale Agreed/Sold etc. — keep, re-scrape);
+      gone        — detail page truly 4xx/redirects-to-home (delete the row).
+    """
+    if not urls:
+        return [], []
+
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    salvageable: list[str] = []
+    gone: list[str] = []
+
+    def _probe(url: str) -> tuple[str, bool]:
+        r = fetch(url)  # cheap GET with retry & homepage-redirect guard
+        # Standing-in for "page still exists" — if we got HTML at all we can
+        # text-update it; 4xx/redirect-to-home returns None.
+        return url, r is not None
+
+    url_list = sorted(urls)
+    total = len(url_list)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futs = {pool.submit(_probe, u): u for u in url_list}
+        for i, f in enumerate(as_completed(futs), 1):
+            url, ok = f.result()
+            (salvageable if ok else gone).append(url)
+            if i % 50 == 0:
+                logger.info(f"  dead-url probe {i}/{total}")
+
+    logger.info(
+        f"  delisted classification: {len(salvageable)} still-live, "
+        f"{len(gone)} truly-gone"
+    )
+    return salvageable, gone
+
+
 # ── Local index helpers ───────────────────────────────────────────────────────
 
 
@@ -611,6 +651,7 @@ def sync_source(
         "updated": 0,
         "errors": 0,
     }
+    salvageable: list[str] = []  # populated in Step 4 when a "dead" URL is actually live
 
     # ── 3. Scrape and upload new properties ─────────────────────────
     if new_urls:
@@ -659,38 +700,55 @@ def sync_source(
     # ── 4. Remove delisted properties ───────────────────────────────
     if dead_urls:
         logger.info(
-            f"Step 4: Removing {len(dead_urls)} delisted properties…"
+            f"Step 4: Handling {len(dead_urls)} delisted properties…"
         )
+
+        # Some agents (e.g. Lennon Estates) *remove* sold/agreed listings from
+        # the index pages without deleting the detail page. Don't nuke those —
+        # probe the URL once and only drop it if the detail page is really
+        # gone. The still-live ones are fed through the normal Step-5 refresh
+        # so their status actually changes to Sale Agreed / Sold.
+        salvageable, gone = [], []
+        if not args.dry_run and dead_urls:
+            salvageable, gone = _classify_dead_urls(source_key, dead_urls)
+            if salvageable:
+                logger.info(
+                    f"  {len(salvageable)} still has live detail pages — "
+                    "refreshing status instead of deleting"
+                )
+
         if args.dry_run:
             for url in sorted(dead_urls):
                 source_id = known_url_map.get(url, "?")
                 logger.info(f"  [dry-run] Would delete {source_id}: {url}")
         else:
-            delete_batch(source_key, dead_urls)
-            index["properties"] = [
-                e
-                for e in index["properties"]
-                if e.get("url", "").rstrip("/") not in dead_urls
-            ]
-            save_index(source_key, index)
-            delisted_dir = os.path.join(cfg["props_dir"], "delisted")
-            os.makedirs(delisted_dir, exist_ok=True)
-            for url in dead_urls:
-                source_id = known_url_map.get(url)
-                if source_id:
-                    src = os.path.join(cfg["props_dir"], source_id)
-                    dst = os.path.join(delisted_dir, source_id)
-                    if os.path.isdir(src) and not os.path.exists(dst):
-                        shutil.move(src, dst)
-                        logger.info(f"  Archived {source_id} → delisted/")
+            if gone:
+                delete_batch(source_key, gone)
+                index["properties"] = [
+                    e
+                    for e in index["properties"]
+                    if e.get("url", "").rstrip("/") not in gone
+                ]
+                save_index(source_key, index)
+                delisted_dir = os.path.join(cfg["props_dir"], "delisted")
+                os.makedirs(delisted_dir, exist_ok=True)
+                for url in gone:
+                    source_id = known_url_map.get(url)
+                    if source_id:
+                        src = os.path.join(cfg["props_dir"], source_id)
+                        dst = os.path.join(delisted_dir, source_id)
+                        if os.path.isdir(src) and not os.path.exists(dst):
+                            shutil.move(src, dst)
+                            logger.info(f"  Archived {source_id} → delisted/")
 
-    # ── 5. Text update for existing properties ──────────────────────
-    if not args.no_text_update and extant_urls:
+    # ── 5. Text update for existing + still-live "delisted" listings ──────
+    refresh_urls = set(extant_urls) | set(salvageable)
+    if not args.no_text_update and refresh_urls:
         logger.info(
-            f"Step 5: Text re-scrape for {len(extant_urls)} existing properties…"
+            f"Step 5: Text re-scrape for {len(refresh_urls)} existing properties…"
         )
         extant_map = {
-            u: known_url_map[u] for u in extant_urls if u in known_url_map
+            u: known_url_map[u] for u in refresh_urls if u in known_url_map
         }
         if not args.dry_run:
             updated = text_update_source(
@@ -708,7 +766,7 @@ def sync_source(
                 logger.info(f"  Pushed {len(rows)} text updates to Supabase")
         else:
             logger.info(
-                f"  [dry-run] Would text-update {len(extant_urls)} existing properties"
+                f"  [dry-run] Would text-update {len(refresh_urls)} existing properties"
             )
 
     return stats

@@ -57,9 +57,25 @@ class LeScraper(BaseScraper):
             return None
         data["title"] = data["address"]
 
-        # Price: span with the big bold figure ('£ 300,000')
+        # Price: big bold figure on for-sale pages (span.text-2xl…),
+        # shrunk to a small chip once the status flips (Sale Agreed/Sold).
         price_el = soup.select_one("span.text-2xl.font-bold.text-primary")
-        if price_el:
+        if price_el is None:
+            # On Sale-Agreed/Sold pages the price shrinks to a small chip —
+            # take the largest £ amount among them (rent/PCM chips can share
+            # the same classes, so first-hit is unreliable).
+            chips = [
+                sp.get_text(strip=True)
+                for sp in soup.select("span.text-base.font-bold.text-primary")
+            ]
+            amounts = []
+            for t in chips:
+                m = re.search(r"£\s*([\d,]+)", t)
+                if m:
+                    amounts.append(int(m.group(1).replace(",", "")))
+            if amounts:
+                data["price_str"] = f"£{max(amounts):,}"
+        if price_el is not None:
             data["price_str"] = re.sub(r"\s+", " ", price_el.get_text()).strip()
 
         # Facilities: small chips like <div class=\"text-black text-xs\">4
@@ -78,6 +94,16 @@ class LeScraper(BaseScraper):
                      "End of Terrace", "Apartment", "Bungalow", "Townhouse",
                      "Cottage", "Duplex"):
                 data["property_type"] = t
+
+        # Status: corner ribbon badge (For Sale / Sale Agreed / Sold) — the
+        # listing's status ribbon is an absolutely-positioned span overlay.
+        for sp in soup.select("span"):
+            txt = " ".join(sp.get_text().split())
+            if txt in ("For Sale", "Sale Agreed", "Sold", "Under Offer"):
+                cls = " ".join(sp.get("class") or [])
+                if "absolute" in cls:
+                    data["status"] = txt
+                    break
 
         # Description: text of the div directly wrapping the "Property
         # Overview" h2 (that container holds the heading + the marketing copy,
