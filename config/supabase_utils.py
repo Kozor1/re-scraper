@@ -237,7 +237,9 @@ def build_property_row(
     row: dict[str, Any] = {
         "source": source,
         "source_id": source_id,
-        "url": data.get("url") or "",
+        # Normalise: strip trailing slash so the same listing can't exist
+        # twice with /url and /url/ variants.
+        "url": (data.get("url") or "").rstrip("/"),
         "address": address,
         "title": data.get("title") or address,
         "price": str(price_str) if price_str else None,
