@@ -82513,5 +82513,155 @@
   "22 Foxton Place": {
     "lat": 54.6886017,
     "lng": -5.9713025
+  },
+  "21 Cairnshill Green, Cairnshill Road,": {
+    "lat": 54.5523087,
+    "lng": -5.8937787
+  },
+  "106 Erinvale Avenue,": {
+    "lat": 54.5542266,
+    "lng": -5.9834637
+  },
+  "22 The Meadows": {
+    "lat": 54.6458604,
+    "lng": -5.5510207
+  },
+  "11 Drumkeen Manor,   Belfast,  BT8 7AZ": {
+    "lat": 54.5662916,
+    "lng": -5.9124641
+  },
+  "Edmondson Estates": null,
+  "11 Rectory Gardens,": {
+    "lat": 54.8903,
+    "lng": -6.2141631
+  },
+  "5 Oaklands, Loughbrickland, Banbridge, BT32 3WN": {
+    "lat": 54.3192158,
+    "lng": -6.305166
+  },
+  "2 Kiltariff Drive, Rathfriland, BT34 5PW": {
+    "lat": 54.2371045,
+    "lng": -6.1705614
+  },
+  "4 Bannview Terrace, Seapatrick, Banbridge, BT32 4NJ": {
+    "lat": 54.5950468,
+    "lng": -5.9342418
+  },
+  "8 Laurel Heights, Banbridge, BT32 4RJ": {
+    "lat": 54.3564297,
+    "lng": -6.2528904
+  },
+  "21 Hallsmill Green, Lawrencetown, Banbridge, BT63 6EL": {
+    "lat": 54.5950468,
+    "lng": -5.9342418
+  },
+  "75 Iveagh Drive, Banbridge, BT32 3YE": {
+    "lat": 54.352586,
+    "lng": -6.2768399
+  },
+  "19 Riverview Court, Banbridge, BT32 3GL": {
+    "lat": 54.3523859,
+    "lng": -6.2739243
+  },
+  "32 Summerhill Brae, Banbridge , BT32 3LS": {
+    "lat": 54.3408531,
+    "lng": -6.2638043
+  },
+  "31 Riverview Court, Banbridge, BT32 3GL": {
+    "lat": 54.3523859,
+    "lng": -6.2739243
+  },
+  "21 Linen Fields, Lurgan, BT66 8HU": {
+    "lat": 54.4549043,
+    "lng": -6.3418506
+  },
+  "7 Summerhill Green, Banbridge, BT32 3GY": {
+    "lat": 54.3428688,
+    "lng": -6.2650848
+  },
+  "Approx  3.47 Acres of land to the rear of 44 Barrack Hill Road, Banbridge, BT32 4HE": {
+    "lat": 54.5950468,
+    "lng": -5.9342418
+  },
+  "59 Kensington Avenue, Banbridge, BT32 4JH": {
+    "lat": 54.3475019,
+    "lng": -6.2597568
+  },
+  "Apt 4, 147 Edenbrook Manor, Banbridge, BT32 3ZN": {
+    "lat": 54.5950468,
+    "lng": -5.9342418
+  },
+  "6a Moneygore Road, Rathriland, BT34 5PN": {
+    "lat": 54.5950468,
+    "lng": -5.9342418
+  },
+  "3 Lagan Villas, Dromore, BT25 1LN": {
+    "lat": 54.4128824,
+    "lng": -6.1560496
+  },
+  "13 Iveagh Drive, Banbridge, BT32 3YE": {
+    "lat": 54.352586,
+    "lng": -6.2768399
+  },
+  "New Build 5 Bedroom Detached, Lisnagade Road": null,
+  "49 Huntly Bungalows, Banbridge, BT32 3BL": {
+    "lat": 54.3544807,
+    "lng": -6.2759655
+  },
+  "7 Maryville Drive, Banbridge, BT32 3LZ": {
+    "lat": 54.3446754,
+    "lng": -6.2691885
+  },
+  "3 5&7 Church Square, Banbridge,  BT32 4AS": {
+    "lat": 54.3512509,
+    "lng": -6.2678654
+  },
+  "74 Ballyward Road, Castlewellan, BT31 9PS": {
+    "lat": 54.2766532,
+    "lng": -6.0400779
+  },
+  "17 Scarvagh Heights, Scarva, BT63 6LY": {
+    "lat": 54.333223,
+    "lng": -6.3611993
+  },
+  "20 Glascar Road, Banbridge, BT32 5DT": {
+    "lat": 54.2661862,
+    "lng": -6.2462053
+  },
+  "41 Larchwood Avenue, Banbridge, BT32 3XH": {
+    "lat": 54.3456888,
+    "lng": -6.2866598
+  },
+  "23 Kensington Avenue, Banbridge, BT32 4JH": {
+    "lat": 54.3475019,
+    "lng": -6.2597568
+  },
+  "5a Castlewellan Road, Rathriland, BT34 5LY": {
+    "lat": 54.5950468,
+    "lng": -5.9342418
+  },
+  "4 Commons Way, Newry, BT34 2RL": {
+    "lat": 54.1634928,
+    "lng": -6.3267613
+  },
+  "20 Knollwood, Banbridge, BT32 4PE": {
+    "lat": 54.3644229,
+    "lng": -6.2752643
+  },
+  "40 Harberton Park, Banbridge, BT32 3TU": {
+    "lat": 54.3388028,
+    "lng": -6.2890024
+  },
+  "1 Larchwood Banbridge BT32 3UT": {
+    "lat": 54.3454738,
+    "lng": -6.2845616
+  },
+  "53 Chinauley Park": {
+    "lat": 54.3449442,
+    "lng": -6.2536975
+  },
+  "83 Halfway Road, Banbridge, BT32 4HB": {
+    "lat": 54.3650372,
+    "lng": -6.2224359
   }
 }

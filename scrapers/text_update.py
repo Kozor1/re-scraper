@@ -171,11 +171,21 @@ logger = logging.getLogger(__name__)
 # ──────────────────────────────────────────────
 
 def fetch(url, max_retries=3):
-    """GET with retry and exponential back-off."""
+    """GET with retry and exponential back-off.
+
+    Redirect guard: if the site bounced us to its homepage (e.g. delisted
+    listings on michael-chandler.co.uk 302 to "/"), the HTML is not a property
+    page — parsing it would poison the stored record with homepage content.
+    Return None in that case so callers treat the page as gone.
+    """
     for attempt in range(max_retries):
         try:
             r = requests.get(url, headers=HEADERS, timeout=30)
             r.raise_for_status()
+            from urllib.parse import urlparse
+            if r.url != url and urlparse(r.url).path.rstrip("/") == "":
+                logger.warning(f"{url} redirected to homepage — delisted?")
+                return None
             return r
         except requests.exceptions.RequestException as e:
             logger.warning(f"[attempt {attempt+1}] {url} – {e}")

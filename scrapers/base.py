@@ -830,6 +830,36 @@ def parse_pp_classic_detail(html: str, url: str) -> dict[str, Any]:
                     data["price_str"] = (q + t).strip()
                     break
 
+    # Fallback: Bluecubes-style blocks (e.g. Edmonton Estates detail pages) —
+    # qualifier text in span.prop-det-price-text, amount in
+    # span.prop-det-price-amount.
+    if not data.get("price_str"):
+        amount_el = soup.select_one(".prop-det-price-amount")
+        if amount_el:
+            amount = amount_el.get_text(strip=True)
+            if amount:
+                qual_el = soup.select_one(".prop-det-price-text")
+                q = (qual_el.get_text(strip=True) + " ") if qual_el else ""
+                data["price_str"] = (q + amount).strip()
+
+    # Fallback: PropertyPal listing-card style price block — a span.dpp amount
+    # with an optional span.dpt qualifier beside it, inside a price-ish wrapper
+    # (Michael Chandler uses div.price, Pinpoint uses div.dcell.dprice).
+    if not data.get("price_str"):
+        dpp = soup.select_one("span.dpp")
+        if dpp:
+            amount = dpp.get_text(strip=True)
+            if amount:
+                dpt = dpp.find_previous_sibling("span", class_="dpt")
+                # Only prepend a label that qualifies the price (e.g. "Price
+                # Reduced From" is decoration, "Asking Price" adds nothing).
+                q = ""
+                if dpt:
+                    label = dpt.get_text(strip=True)
+                    if label.lower() not in ("asking price", "price"):
+                        q = label + " "
+                data["price_str"] = (q + amount).strip()
+
     # Status fallback — `.SingleListingPage-topEle` contains the full summary
     # blob ("Sale Agreed 3 bedrooms 2 receptions semi-detached"), so we
     # match status substrings inside the blob instead of asking
@@ -1029,6 +1059,21 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
             # HTML entity &pound; = £; html.unescape is idempotent on plain text
             import html as _html
             data["price_str"] = _html.unescape(price_el.get_text(strip=True))
+
+    # Fallback price (Pinpoint): listing-card block with span.dpp amount and an
+    # optional span.dpt qualifier (e.g. "Offers Over").
+    if not data.get("price_str"):
+        dpp = soup.select_one("span.dpp")
+        if dpp:
+            amount = dpp.get_text(strip=True)
+            if amount:
+                dpt = dpp.find_previous_sibling("span", class_="dpt")
+                q = ""
+                if dpt:
+                    label = dpt.get_text(strip=True)
+                    if label.lower() not in ("asking price", "price"):
+                        q = label + " "
+                data["price_str"] = (q + amount).strip()
 
     # Status fallback 1: overlay badge. Bluecubes sale-agreed/sold pages display
     # an overlay div inside `.prop-det-status-outer` with classes like `sale-agr`
