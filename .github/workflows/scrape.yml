@@ -10,8 +10,38 @@ on:
     - cron: '47 * * * *'
   workflow_dispatch:  # Allow manual trigger from GitHub UI
 
+permissions:
+  actions: read   # needed to list our own recent runs for the dedupe check
+
 jobs:
+  check-recent:
+    # With two cron firings per hour, the second (47-past) is a backup for
+    # when the first (17-past) gets dropped by GitHub's best-effort scheduler.
+    # If the first succeeded, skip the whole heavy scrape.
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.decide.outputs.should_run }}
+    steps:
+      - name: Skip if a successful run completed <50 min ago
+        id: decide
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Look at this workflow's last completed runs and their conclusions
+          RESULT=$(gh api \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/scrape.yml/runs?per_page=5&branch=main&created=>$(date -u -d '50 minutes ago' +%Y-%m-%dT%H:%M:%SZ)" \
+            --jq '[.workflow_runs[] | select(.event != "workflow_dispatch" and .conclusion == "success")] | length')
+          if [ "$RESULT" -gt 0 ]; then
+            echo "Recent successful run exists — skipping"
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
+
   scrape:
+    needs: check-recent
+    # Manual triggers always run; scheduled backups skip when a sibling just ran.
+    if: github.event_name == 'workflow_dispatch' || needs.check-recent.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120  # 2 hour timeout for long scrapes
     # Prevent overlapping/concurrent updater processes; a queued duplicate
