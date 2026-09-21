@@ -41,6 +41,7 @@ from config.supabase_utils import (
     normalise_status,
     upsert_batch,
 )
+from config import redirected_off_page
 
 # ── Image URL sort/dedup ──────────────────────────────────────────────────────
 
@@ -151,6 +152,11 @@ class BaseScraper(ABC):
             try:
                 r = requests.get(url, headers=HEADERS, timeout=30)
                 r.raise_for_status()
+                if redirected_off_page(url, r):
+                    self.logger.warning(
+                        f"[redirect] {url} bounced to {r.url} — treating as gone"
+                    )
+                    return None
                 return r
             except requests.exceptions.HTTPError as e:
                 # Retry on 5xx (server error); fail fast on 4xx (client error).

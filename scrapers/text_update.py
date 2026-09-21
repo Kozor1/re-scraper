@@ -50,7 +50,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
-from config import SOURCES, HEADERS, ScrapeStrategy
+from config import SOURCES, HEADERS, ScrapeStrategy, redirected_off_page
 
 # Fields that count as "meaningful changes" to report
 # 'price_str' is the key used by the newer scrapers (sb, rr, bmc, nest);
@@ -182,9 +182,8 @@ def fetch(url, max_retries=3):
         try:
             r = requests.get(url, headers=HEADERS, timeout=30)
             r.raise_for_status()
-            from urllib.parse import urlparse
-            if r.url != url and urlparse(r.url).path.rstrip("/") == "":
-                logger.warning(f"{url} redirected to homepage — delisted?")
+            if redirected_off_page(url, r):
+                logger.warning(f"{url} redirected off-page → {r.url} — delisted?")
                 return None
             return r
         except requests.exceptions.RequestException as e:

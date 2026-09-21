@@ -57,6 +57,7 @@ from config import (
     upsert_batch,
     delete_batch,
     get_supabase,
+    redirected_off_page,
     HEADERS,
 )
 
@@ -82,15 +83,12 @@ def fetch(url: str, retries: int = 3) -> requests.Response | None:
             if attempt < retries - 1:
                 time.sleep((2 ** attempt) * random.uniform(1, 2.5))
             continue
-        # Delisted-listing guard: some agent sites 302 a removed listing to the
-        # homepage instead of 404ing. Without this check, the probe would report
-        # the property as live forever.
-        from urllib.parse import urlparse
-
-        final_path = urlparse(r.url).path.rstrip("/")
-        orig_path = urlparse(url).path.rstrip("/")
-        if final_path != orig_path and final_path == "":
-            logger.warning(f"  {url} 302→homepage (delisted)")
+        # Delisted-listing guard: some agent sites bounce removed listings to
+        # the homepage or a search/landing page instead of 404ing.
+        # Without this check, the probe would report the property as live
+        # forever.
+        if redirected_off_page(url, r):
+            logger.warning(f"  {url} redirected off-page → {r.url} (delisted)")
             return None
         return r
     return None

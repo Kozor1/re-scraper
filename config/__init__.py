@@ -24,3 +24,27 @@ from config.supabase_utils import (
     upsert_batch,
     delete_batch,
 )
+
+
+# ── Delisting redirect helper ────────────────────────────────────────────────
+
+
+def redirected_off_page(orig_url: str, resp) -> bool:
+    """True if a GET of *orig_url* was redirected to a shallow landing/index
+    page — the usual signal that a listing was removed.
+
+    Examples caught: root redirects (michael-chandler, ee) and index-page
+    redirects (nest → /search-results). Detail URLs are always deep
+    (/property/… or /<slug>/<id>), so a path that *drops depth* to ≤1 segment
+    means we were bounced off the listing entirely.
+    """
+    try:
+        if not getattr(resp, "history", None):
+            return False
+        from urllib.parse import urlparse
+
+        orig = [s for s in urlparse(orig_url).path.split("/") if s]
+        final = [s for s in urlparse(resp.url).path.split("/") if s]
+        return len(final) < len(orig) and len(final) <= 1
+    except Exception:
+        return False

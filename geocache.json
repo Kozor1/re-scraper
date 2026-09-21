@@ -86684,5 +86684,189 @@
   "39 Cherryhill Road, Ballynahinch": {
     "lat": 54.3645062,
     "lng": -5.8792586
+  },
+  "54 Bates Park, Greenisland, Carrickfergus": {
+    "lat": 54.7002866,
+    "lng": -5.8728529
+  },
+  "45 Seahill Road, Holywood": {
+    "lat": 54.657843,
+    "lng": -5.7749105
+  },
+  "61 Castle Street, Bangor": {
+    "lat": 54.658945,
+    "lng": -5.6647366
+  },
+  "3 Rocklyn Way, Donaghadee": {
+    "lat": 54.6425446,
+    "lng": -5.5375794
+  },
+  "34a Knockvale Park, Belfast": {
+    "lat": 54.5889662,
+    "lng": -5.8608684
+  },
+  "2 Rannoche Close, Crossgar, Downpatrick": {
+    "lat": 54.3279335,
+    "lng": -5.71649
+  },
+  "29 Elaine Street, Belfast": {
+    "lat": 54.5809841,
+    "lng": -5.9339575
+  },
+  "15 Elaine Street, Belfast": {
+    "lat": 54.5808514,
+    "lng": -5.9343817
+  },
+  "11 Roughal Park, Downpatrick": {
+    "lat": 54.3352322,
+    "lng": -5.7202973
+  },
+  "Apt 7, Castle Lodge 6 Lansdowne Road, Belfast": {
+    "lat": 54.715139,
+    "lng": -6.2192038
+  },
+  "Oak Lodge, 6 Begny Road, Dromara": {
+    "lat": 54.379847,
+    "lng": -6.0179819
+  },
+  "40 Lady Wallace Gardens, Lisburn": {
+    "lat": 54.5289079,
+    "lng": -6.0763872
+  },
+  "162 Ballygomartin Road, Belfast": {
+    "lat": 54.6097054,
+    "lng": -5.9692045
+  },
+  "143 Lagmore Meadows, Stewartstown Road, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "1 Woodrow Gardens, Saintfield": {
+    "lat": 54.4595774,
+    "lng": -5.8291633
+  },
+  "7 Barnfield Road, Off Huntingdon Hill": {
+    "lat": 54.5813856,
+    "lng": -6.0295519
+  },
+  "65 Whiterock Road, Off Falls Road": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "36 Springfield Parade, Belfast": {
+    "lat": 54.6015804,
+    "lng": -5.9720885
+  },
+  "95 Merrion Park, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "36 Florida Road, Killinchy, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "14a Dixon Road, Bangor": {
+    "lat": 54.6631048,
+    "lng": -5.6263824
+  },
+  "78 Kings Road, Doagh Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "105 Church Crescent, Glengormley, Newtownabbey": {
+    "lat": 54.6704074,
+    "lng": -5.9502753
+  },
+  "34b Carnbrae Park, Newton Park, Belfast": {
+    "lat": 54.5523087,
+    "lng": -5.8937787
+  },
+  "Honeyford, 457 Oldpark Road, Belfast": {
+    "lat": 54.6210469,
+    "lng": -5.954714
+  },
+  "35 Meadow Hill, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "67 Pinewood Avenue, Carrickfergus": {
+    "lat": 54.723716,
+    "lng": -5.8178417
+  },
+  "7 Lord Wardens Glade, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "25 The Hill, Groomsport, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "4 Lomond Street, Belfast": {
+    "lat": 54.5986422,
+    "lng": -5.883127
+  },
+  "Apt 7 Ashbourne Court 225-227 Belmont Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "509 Margarita Plaza, 81 Adelaide Street, Belfast": {
+    "lat": 54.5760638,
+    "lng": -5.9535463
+  },
+  "14 Malone Hill Park, Belfast": {
+    "lat": 54.5614191,
+    "lng": -5.9569467
+  },
+  "7 Ashburn, Ballynahinch": {
+    "lat": 54.4122521,
+    "lng": -5.9054197
+  },
+  "39A Mount Eagles Drive, Stewartstown Road, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "1 Stewartstown Avenue, Stewartstown Road": {
+    "lat": 54.5768423,
+    "lng": -6.6765557
+  },
+  "38 Wynchurch Road, Rosetta, Belfast": {
+    "lat": 54.5667714,
+    "lng": -5.899824
+  },
+  "44 Forest Street, Belfast": {
+    "lat": 54.5981224,
+    "lng": -5.9622122
+  },
+  "20 Clowney Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "15 Prince Regent Avenue, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "11 Belfast Road, Carrickfergus": {
+    "lat": 54.7128782,
+    "lng": -5.8145176
+  },
+  "17 Finsbury Avenue, Cairnshill Road, Belfast": {
+    "lat": 54.5523087,
+    "lng": -5.8937787
+  },
+  "22 Ballywalter Road, Millisle": {
+    "lat": 54.603338,
+    "lng": -5.5255642
+  },
+  "9 Glebe Road East, Church Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "35 Colinmill, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "Ard Nua, 108 Killinchy Road, Comber, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
   }
 }
