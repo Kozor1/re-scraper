@@ -13,6 +13,7 @@ from scrapers.base import (
 from bs4 import BeautifulSoup
 from typing import Any
 from urllib.parse import urljoin
+import re
 
 
 class BtScraper(BaseScraper):
@@ -23,11 +24,17 @@ class BtScraper(BaseScraper):
         self, soup: BeautifulSoup, page_url: str
     ) -> list[str]:
         links: list[str] = []
+        seen: set[str] = set()
         for a in soup.find_all("a", href=True):
             href = a["href"]
             if self.config["link_pattern"] in href:
                 full = urljoin(page_url, href)
-                if full not in links:
+                # BT's search pages link detail views with a \"/PageN\" suffix
+                # (carousel page). Strip it so the same listing never becomes
+                # two rows.
+                full = re.sub(r"/Page\d+$", "", full)
+                if full not in seen:
+                    seen.add(full)
                     links.append(full)
         return links
 
