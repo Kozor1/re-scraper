@@ -76,11 +76,22 @@ def fetch(url: str, retries: int = 3) -> requests.Response | None:
         try:
             r = requests.get(url, headers=HEADERS, timeout=30)
             r.raise_for_status()
-            return r
         except requests.exceptions.RequestException as e:
             logger.warning(f"  [attempt {attempt + 1}] {url}: {e}")
             if attempt < retries - 1:
                 time.sleep((2 ** attempt) * random.uniform(1, 2.5))
+            continue
+        # Delisted-listing guard: some agent sites 302 a removed listing to the
+        # homepage instead of 404ing. Without this check, the probe would report
+        # the property as live forever.
+        from urllib.parse import urlparse
+
+        final_path = urlparse(r.url).path.rstrip("/")
+        orig_path = urlparse(url).path.rstrip("/")
+        if final_path != orig_path and final_path == "":
+            logger.warning(f"  {url} 302→homepage (delisted)")
+            return None
+        return r
     return None
 
 
