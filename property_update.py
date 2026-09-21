@@ -40,7 +40,7 @@ import traceback
 import subprocess
 from datetime import datetime
 from typing import Any
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -56,6 +56,7 @@ from config import (
     load_geocache,
     upsert_batch,
     delete_batch,
+    get_supabase,
     HEADERS,
 )
 
@@ -99,12 +100,22 @@ def fetch(url: str, retries: int = 3) -> requests.Response | None:
 
 
 def extract_links(
-    soup: BeautifulSoup, page_url: str, link_pattern: str
+    soup: BeautifulSoup,
+    page_url: str,
+    link_pattern: str,
+    link_pattern_is_regex: bool = False,
 ) -> set[str]:
     links: set[str] = set()
+    rx = re.compile(link_pattern) if link_pattern_is_regex else None
     for a in soup.find_all("a", href=True):
         href = a["href"]
-        if link_pattern in href:
+        full_for_match = urljoin(page_url, href)
+        matched = (
+            bool(rx.search(urlparse(full_for_match).path))
+            if rx
+            else link_pattern in href
+        )
+        if matched:
             full = (
                 urljoin(page_url, href).split("?")[0].split("#")[0].rstrip("/")
             )
@@ -142,7 +153,12 @@ def get_all_live_urls(source_key: str, max_pages: int = 200) -> set[str]:
             break
 
         soup = BeautifulSoup(r.content, "html.parser")
-        links = extract_links(soup, page_url, link_pattern)
+        links = extract_links(
+            soup,
+            page_url,
+            link_pattern,
+            link_pattern_is_regex=cfg.get("link_pattern_is_regex", False),
+        )
 
         if not links:
             logger.info(
@@ -270,6 +286,30 @@ def get_known_url_map(index: dict[str, Any]) -> dict[str, str]:
         for e in index.get("properties", [])
         if e.get("url")
     }
+
+
+def fetch_db_sale_urls(source_key: str) -> set[str]:
+    """All sale-listing URLs currently in Supabase for this source (paged)."""
+    sb = get_supabase()
+    urls: set[str] = set()
+    off = 0
+    while True:
+        r = (
+            sb.table("properties")
+            .select("url,listing_type")
+            .eq("source", source_key)
+            .order("id")
+            .range(off, off + 999)
+            .execute()
+        )
+        for x in r.data:
+            if (x.get("listing_type") or "sale") == "sale":
+                urls.add((x.get("url") or "").rstrip("/"))
+        if len(r.data) < 1000:
+            break
+        off += 1000
+    urls.discard("")
+    return urls
 
 
 def get_next_id(source_key: str) -> int:
@@ -751,6 +791,47 @@ def sync_source(
                         if os.path.isdir(src) and not os.path.exists(dst):
                             shutil.move(src, dst)
                             logger.info(f"  Archived {source_id} → delisted/")
+
+    # ── 4b. Orphan reconciliation ─────────────────────────────────────
+    # DB rows that are in *neither* the live walk nor the local index are
+    # invisible to the comparisons above and would linger forever if the
+    # index ever loses track of an entry (observed in production: rows stuck
+    # since delisting because the cached index no longer named them).
+    # Probe each orphan once and delete only the truly-gone ones — the probe
+    # requirement makes this safe even if the listing walk mis-fires.
+    # Sale rows only: rentals aren't part of the walk.
+    try:
+        db_urls = fetch_db_sale_urls(source_key)
+    except Exception as e:
+        logger.warning(f"  Step 4b skipped — could not read DB URLs: {e}")
+        db_urls = set()
+    if db_urls:
+        orphan_urls = db_urls - live_urls_norm - set(known_url_map.keys())
+        if orphan_urls:
+            if args.dry_run:
+                logger.info(
+                    f"  [dry-run] Step 4b: {len(orphan_urls)} orphan DB rows "
+                    f"(in neither walk nor index) would be probed"
+                )
+            else:
+                logger.info(
+                    f"  Step 4b: {len(orphan_urls)} orphaned DB rows "
+                    f"(in neither walk nor index) — probing…"
+                )
+                salvage_orphans, gone_orphans = _classify_dead_urls(
+                    source_key, orphan_urls
+                )
+                if gone_orphans:
+                    # delete_batch expects a set of (normalised) URLs
+                    delete_batch(source_key, set(gone_orphans))
+                    logger.info(
+                        f"  deleted {len(gone_orphans)} orphaned rows from Supabase"
+                    )
+                for u in salvage_orphans:
+                    logger.warning(
+                        f"  orphan still live on site — left as-is until the "
+                        f"next full scrape re-tracks it: {u}"
+                    )
 
     # ── 5. Text update for existing + still-live "delisted" listings ──────
     refresh_urls = set(extant_urls) | set(salvageable)

@@ -82663,5 +82663,82 @@
   "83 Halfway Road, Banbridge, BT32 4HB": {
     "lat": 54.3650372,
     "lng": -6.2224359
+  },
+  "1 Castleburn,": {
+    "lat": 54.7330887,
+    "lng": -6.2590411
+  },
+  "16 Long Meadow,": null,
+  "72 Carndale Meadows,": {
+    "lat": 54.8696196,
+    "lng": -6.2881495
+  },
+  "36 Ashlea Drive,   Ballymoney,  BT54 7BY": {
+    "lat": 55.0741429,
+    "lng": -6.4957861
+  },
+  "70 Atlantic Road,   Coleraine,  BT52 2PY": {
+    "lat": 55.1509976,
+    "lng": -6.6655351
+  },
+  "5 Apollo Walk,   Portrush,  BT56 8HQ": {
+    "lat": 55.1954128,
+    "lng": -6.6480138
+  },
+  "42, 43 & 44 The Promenade,   Portstewart,  BT55 7AE": {
+    "lat": 55.1858431,
+    "lng": -6.7191705
+  },
+  "1 Woodvale Road,   Portstewart,  BT55 7HY": {
+    "lat": 55.1728529,
+    "lng": -6.7104346
+  },
+  "80 Station Road,   Portstewart,  BT55 7HQ": {
+    "lat": 55.1836684,
+    "lng": -6.6984211
+  },
+  "102 Station Road,   Portstewart,  BT55 7PU": {
+    "lat": 55.1836684,
+    "lng": -6.6984211
+  },
+  "11 Ashdene Drive, Belfast, BT15 3FS": {
+    "lat": 54.6230484,
+    "lng": -5.9338294
+  },
+  "112 Station Road, Carrickfergus, BT38 8UW": {
+    "lat": 54.7280189,
+    "lng": -5.7656268
+  },
+  "14 Elmfield Park, Newtownabbey, BT36 6EA": {
+    "lat": 54.667753,
+    "lng": -5.9484892
+  },
+  "27 Lower Rogan Manor, Newtownabbey, BT36 4BE": {
+    "lat": 54.680511,
+    "lng": -5.9913971
+  },
+  "3 Tudor Avenue, Newtownabbey, BT37 0RS": {
+    "lat": 54.6852342,
+    "lng": -5.8956724
+  },
+  "483 Antrim Road, Newtownabbey, BT36 5EF": {
+    "lat": 54.663864,
+    "lng": -5.9478556
+  },
+  "54 Loughshore Manor, Newtownabbey, BT37 9FD": {
+    "lat": 54.6621614,
+    "lng": -5.9050583
+  },
+  "55 Victoria Rise, Carrickfergus, BT38 7UR": {
+    "lat": 54.7320337,
+    "lng": -5.7940295
+  },
+  "59 Farm Lodge Drive, Carrickfergus, BT38 8XN": {
+    "lat": 54.5950468,
+    "lng": -5.9342418
+  },
+  "90 Arthur Avenue, Newtownabbey, BT36 7EJ": {
+    "lat": 54.6522124,
+    "lng": -5.9252718
   }
 }
