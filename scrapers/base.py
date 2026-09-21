@@ -1313,6 +1313,17 @@ def parse_pp_modern_detail(html: str, url: str) -> dict[str, Any]:
     if status_el:
         data["status"] = normalise_status(status_el.get_text(strip=True))
 
+    # McMillan McClure shows status only as a banner overlay on the photo
+    # scroller (e.g. <span class="ImageSliderBanner"><span>Sale Agreed</span></span>)
+    if not data.get("status"):
+        banner = soup.select_one(".ImageSliderBanner span") or soup.select_one(
+            ".ImageSliderBanner"
+        )
+        if banner:
+            txt = banner.get_text(separator=" ", strip=True)
+            if txt:
+                data["status"] = normalise_status(txt) or txt
+
     # Key features
     bullets = soup.select(".ListingPage-bullets li")
     if not bullets:
