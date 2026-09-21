@@ -1001,10 +1001,17 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
     and h1/title for address.
     """
     soup = BeautifulSoup(html, "html.parser")
+
+    # UPS serves a soft-404: HTTP 200 with <h1>Page No Longer Exists</h1>
+    # for removed listings. Treat as a failed parse so nothing gets written.
+    _h1 = soup.find("h1") or soup.find("h2")
+    if _h1 and "page no longer exists" in _h1.get_text(" ", strip=True).lower():
+        return None
+
     data: dict[str, Any] = {"url": url}
 
     # Address
-    h1 = soup.find("h1") or soup.find("h2")
+    h1 = _h1
     if h1:
         data["address"] = h1.get_text(strip=True)
         data["title"] = h1.get_text(strip=True)
@@ -1016,6 +1023,23 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
             if sep in t:
                 t = t[:t.rfind(sep)]
         data["address"] = t.strip()
+        data["title"] = data["address"]
+
+    # UPS's h1 stops after the street with a dangling comma
+    # ("12 Orpen Road,"); og:title carries the town as well
+    # ("12 Orpen Road, Belfast for sale with UPS"). Take the richer
+    # variant, and never publish a trailing comma.
+    og_title = soup.find("meta", property="og:title")
+    if og_title and og_title.get("content"):
+        og_addr = re.split(
+            r"\s+(?:for sale|for rent|to let|to rent)\b",
+            og_title["content"], flags=re.I,
+        )[0].strip().rstrip(",")
+        if og_addr and len(og_addr) > len((data.get("address") or "").rstrip(",")):
+            data["address"] = og_addr
+            data["title"] = og_addr
+    if data.get("address"):
+        data["address"] = data["address"].rstrip(",")
         data["title"] = data["address"]
 
     # Metadata rows (div.prop-det-info-row)

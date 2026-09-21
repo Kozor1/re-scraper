@@ -206,6 +206,10 @@ def _classify_dead_urls(
         r = fetch(url)  # cheap GET with retry & homepage-redirect guard
         # Standing-in for "page still exists" — if we got HTML at all we can
         # text-update it; 4xx/redirect-to-home returns None.
+        # Some sites (UPS) serve a soft-404: HTTP 200 with an error page.
+        if r is not None and "page no longer exists" in r.text.lower():
+            logger.warning(f"  {url} — soft-404 (page says it no longer exists)")
+            r = None
         return url, r is not None
 
     url_list = sorted(urls)
