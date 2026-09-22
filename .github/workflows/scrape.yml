@@ -43,7 +43,10 @@ jobs:
     # Manual triggers always run; scheduled backups skip when a sibling just ran.
     if: github.event_name == 'workflow_dispatch' || needs.check-recent.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 120  # 2 hour timeout for long scrapes
+    # Generous ceiling: if the updater gets heavy (backlog after dormancy, big
+    # orphan sweeps) it must FINISH — hitting the timeout meant the cache save
+    # never ran, so the next run redid the same work and died the same way.
+    timeout-minutes: 300
     # Prevent overlapping/concurrent updater processes; a queued duplicate
     # simply waits for the first to finish and then re-checks the state.
     concurrency:
@@ -90,6 +93,7 @@ jobs:
           python3 property_update.py
 
       - name: Save scraped data cache
+        if: always()  # persist progress even when the scrape step fails/times out
         uses: actions/cache/save@v4
         with:
           path: |
