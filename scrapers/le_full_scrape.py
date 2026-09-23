@@ -122,6 +122,21 @@ class LeScraper(BaseScraper):
     def extract_image_urls(
         self, soup: BeautifulSoup, page_url: str
     ) -> list[str]:
+        # le's theme keeps the property gallery as lazy-loaded slides:
+        # <div data-fancybox data-src="https://lennon-estates.com/wp-content/uploads/…">
+        # The shared PropertyPal selectors find nothing on these pages.
+        urls: list[str] = []
+        seen: set[str] = set()
+        for el in soup.select("[data-src]"):
+            src = el.get("data-src") or ""
+            if not re.search(r"\.(jpe?g|png|webp)$", src.split("?")[0], re.I):
+                continue
+            full = urljoin(page_url, src)
+            if "wp-content/uploads" in full and full not in seen:
+                seen.add(full)
+                urls.append(full)
+        if urls:
+            return urls
         return extract_pp_gallery_images(soup, page_url)
 
 

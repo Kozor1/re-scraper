@@ -808,7 +808,10 @@ def parse_pp_classic_detail(html: str, url: str) -> dict[str, Any]:
         if not dt1 or not dt2:
             continue
         key = dt1.get_text(strip=True).lower()
-        val = dt2.get_text(strip=True)
+        # separator=" " matters: some agents wrap qualifier and amount in
+        # separate spans ("Offers Around" + "£135,000") — without it they
+        # concatenate. The regex belt-and-braces any other slip-throughs.
+        val = re.sub(r"([A-Za-z])(£)", r"\1 \2", dt2.get_text(separator=" ", strip=True))
         if "price" in key:
             data["price_str"] = val
         elif "style" in key or "type" in key:

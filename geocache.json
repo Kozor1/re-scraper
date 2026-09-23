@@ -86868,5 +86868,2592 @@
   "Ard Nua, 108 Killinchy Road, Comber, Newtownards": {
     "lat": 54.5933779,
     "lng": -5.6960935
+  },
+  "16 O'rorkes Row, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "53 Woodlawn Avenue, Carrickfergus": {
+    "lat": 54.7219259,
+    "lng": -5.8215029
+  },
+  "1 Altnagarron Close, Belfast": {
+    "lat": 54.6102317,
+    "lng": -5.9736508
+  },
+  "6 Drummond Park, Ballynahinch": {
+    "lat": 54.4055701,
+    "lng": -5.8923596
+  },
+  "44 Oakland Grove, Ballynahinch": {
+    "lat": 54.4115246,
+    "lng": -5.905232
+  },
+  "78 Parsonage Road, Kircubbin": {
+    "lat": 54.4902549,
+    "lng": -5.5162679
+  },
+  "Aspen, Site 200 High Trees (Including Sunroom), Donaghadee": {
+    "lat": 54.6425446,
+    "lng": -5.5375794
+  },
+  "16 The Beeches, Spa, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "12 Groomsport House Road, Groomsport, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "20 Shrewsbury Dale, Saintfield": {
+    "lat": 54.4525162,
+    "lng": -5.8355019
+  },
+  "29 Stonebridge Green, Conlig, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "6 Lesley Plateau, Bangor": {
+    "lat": 54.6620342,
+    "lng": -5.6659021
+  },
+  "6 Downview Road, Greenisland": {
+    "lat": 54.704071,
+    "lng": -5.8688736
+  },
+  "11 Mayfield Square, Blacks Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "90 Hazelwood Avenue, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "'Robin Cottage' 196 Middle Road, Islandmagee": {
+    "lat": 54.7783413,
+    "lng": -5.7084204
+  },
+  "39 Lagmore Meadows, Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "7 Chestnut Glen, Glenavy": {
+    "lat": 54.5916974,
+    "lng": -6.2156493
+  },
+  "49 Laurelvale, Crumlin": {
+    "lat": 54.6206382,
+    "lng": -6.2258684
+  },
+  "15 Monea Way, Bangor": {
+    "lat": 54.6485433,
+    "lng": -5.6908948
+  },
+  "25 Lyndhurst Gardens, Belfast": {
+    "lat": 54.6086599,
+    "lng": -5.9768583
+  },
+  "27 Hillview Avenue, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "559 Oldpark Road, Belfast": {
+    "lat": 54.6216136,
+    "lng": -5.9550739
+  },
+  "7 Comber Road,, Ballygowan, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "12 Bashford Park Hill, Carrickfergus": {
+    "lat": 54.7361873,
+    "lng": -5.7966877
+  },
+  "27 Cleaver Avenue, Belfast": {
+    "lat": 54.574157,
+    "lng": -5.9416615
+  },
+  "117 Finaghy Road South, Belfast": {
+    "lat": 54.5535136,
+    "lng": -5.9780763
+  },
+  "10 Beverley Park, Carnmoney, Newtownabbey": {
+    "lat": 54.6863069,
+    "lng": -5.9499709
+  },
+  "124 Deramore Avenue, Off Sunnyside Street, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "37 Dermott Hill Road, Belfast": {
+    "lat": 54.5951823,
+    "lng": -5.9899159
+  },
+  "Apt 29 4 West Circular Close, Belfast": {
+    "lat": 54.6074774,
+    "lng": -5.9728674
+  },
+  "Apt 8, The Hazelton Building 11 Clonard Street, Falls Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "The Ward, Site 38 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "The Tennyson, Site 39 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "The Sinclair, Site 37 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "TR13, Site 47 Teal Rocks (Integral Garage), Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "58 Killaloe, Carrickfergus": {
+    "lat": 54.7180292,
+    "lng": -5.8235146
+  },
+  "16 Ashburn, Ballynahinch": {
+    "lat": 54.4122521,
+    "lng": -5.9054197
+  },
+  "57 Whiterock Road, Killinchy, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "2 Donegall Gardens, Belfast": {
+    "lat": 54.5855574,
+    "lng": -5.9549266
+  },
+  "14 Dun Eden Grove, Glenavy": {
+    "lat": 54.5952744,
+    "lng": -6.2164429
+  },
+  "5 Fairfield Glen, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "25 Joanmount Drive, Belfast": {
+    "lat": 54.6258622,
+    "lng": -5.9614985
+  },
+  "85 Buttermilk Loney, Belfast": {
+    "lat": 54.6303812,
+    "lng": -5.9715982
+  },
+  "14 Chesham Grove, Ravenhill, Belfast": {
+    "lat": 54.5846626,
+    "lng": -5.9052202
+  },
+  "31 Upper Courtyard, Annadale Avenue, Belfast": {
+    "lat": 54.5760638,
+    "lng": -5.9535463
+  },
+  "116 Colinvale, Poleglass, Belfast": {
+    "lat": 54.5712124,
+    "lng": -6.025971
+  },
+  "28 Millers Lane, Glenavy": {
+    "lat": 54.5916242,
+    "lng": -6.2131694
+  },
+  "6 Millicent Park, Bangor": {
+    "lat": 54.664975,
+    "lng": -5.6236694
+  },
+  "43 Norglen Road, Belfast": {
+    "lat": 54.5878505,
+    "lng": -5.9907084
+  },
+  "Detached House and Annex \"Vendale\"  211 Stockmans Lane": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "6 Chestnut Grange, Glenavy": {
+    "lat": 54.5916242,
+    "lng": -6.2131694
+  },
+  "16 Old Forge Manor, Belfast": {
+    "lat": 54.5493906,
+    "lng": -5.9777128
+  },
+  "21 Baird Close, Carrickfergus": {
+    "lat": 54.7261001,
+    "lng": -5.7980114
+  },
+  "54 Blackthorn Park, Carrickfergus": {
+    "lat": 54.7243557,
+    "lng": -5.8196898
+  },
+  "79 Kirkliston Park, Belfast": {
+    "lat": 54.5923679,
+    "lng": -5.8732349
+  },
+  "19 The Grange, Saintfield": {
+    "lat": 54.4554276,
+    "lng": -5.836836
+  },
+  "16 Church Hill Gardens, Dromara, Dromore": {
+    "lat": 54.5128552,
+    "lng": -7.4576175
+  },
+  "42 Corrina Park, Upper Dunmurry Lane, Belfast": {
+    "lat": 54.5605106,
+    "lng": -6.0158852
+  },
+  "8 Harmin Drive, Hightown Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "28 Stockmans Drive, Andersonstown, Belfast": {
+    "lat": 54.5759843,
+    "lng": -5.9794133
+  },
+  "149 Lagmore Meadows, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "33 Lake Glen Drive, Andersonstown": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "109 Lagmore Meadows, Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "2 Portmore Hall Ballydonaghy Road, Crumlin": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "48 Drumhoy Drive, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "70 Coronation Road, Carrickfergus": {
+    "lat": 54.7244413,
+    "lng": -5.7958719
+  },
+  "158 Malfin Drive, Belfast": {
+    "lat": 54.5570755,
+    "lng": -5.9712081
+  },
+  "71 Riverdale Park North, Belfast": {
+    "lat": 54.5723173,
+    "lng": -5.9907885
+  },
+  "7 Creeve Walk, Andersonstown, Belfast": {
+    "lat": 54.5759224,
+    "lng": -5.9861872
+  },
+  "19 Dunmore Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "27 Hillhead Park, Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "6 Henderson Park, Bangor": {
+    "lat": 54.6544962,
+    "lng": -5.7066557
+  },
+  "5 Dunmurry Close, Belfast": {
+    "lat": 54.5623783,
+    "lng": -6.0176873
+  },
+  "126 Salia Avenue, Carrickfergus": {
+    "lat": 54.7235481,
+    "lng": -5.810332
+  },
+  "22 Iveagh Parade, Falls Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "\"Clontarf\",  28 Westland Road, Cavehill": {
+    "lat": 54.616838,
+    "lng": -5.9456317
+  },
+  "64 Milebush Park, Carrickfergus": {
+    "lat": 54.7338224,
+    "lng": -5.8163183
+  },
+  "8 Hampton Court, Ballygowan": {
+    "lat": 54.5018813,
+    "lng": -5.7918013
+  },
+  "56 Danesfort, Malone, Belfast": {
+    "lat": 54.5714554,
+    "lng": -5.945706
+  },
+  "38 Andersonstown Park West, Belfast": {
+    "lat": 54.5801385,
+    "lng": -5.9844121
+  },
+  "1 Rodney Drive, Donegall Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "The Tennyson, Site 35 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "The Sinclair, Site 36 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "75 Castlemara Drive, Carrickfergus": {
+    "lat": 54.7286806,
+    "lng": -5.8077554
+  },
+  "Mill Cottage, 75 Millbay Road, Islandmagee": {
+    "lat": 54.7783413,
+    "lng": -5.7084204
+  },
+  "33 Old Mill Park, Dundonald, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "34 Croob Park, Ballynahinch": {
+    "lat": 54.3994431,
+    "lng": -5.9062355
+  },
+  "2 Fruithill Court, Andersonstown, Belfast": {
+    "lat": 54.5786972,
+    "lng": -5.984357
+  },
+  "41 Lynda Farm, Jordanstown, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "20 Edengrove Park North, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "21 Hugo Street, Falls Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "37 Sir Richard Wallace Gardens, Lisburn": {
+    "lat": 54.5301134,
+    "lng": -6.0853065
+  },
+  "Apt 2 Castlewood Manor, Finaghy Road North, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "67 Springfield Park, Springfield Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "65 Riverdale Park Drive, Belfast": {
+    "lat": 54.5706739,
+    "lng": -5.9922621
+  },
+  "50 Mount Eagles Crescent, Dunmurry": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "The Driftwood, Site 155 St Andrews Point, Ballyhalbert": {
+    "lat": 54.4948453,
+    "lng": -5.4605996
+  },
+  "The Seagrass, Site 157 St Andrews Point, Ballyhalbert": {
+    "lat": 54.4948453,
+    "lng": -5.4605996
+  },
+  "The Croft, Site 156 St Andrews Point, Ballyhalbert": {
+    "lat": 54.4948453,
+    "lng": -5.4605996
+  },
+  "The Croft, Site 158 St Andrews Point, Ballyhalbert": {
+    "lat": 54.4948453,
+    "lng": -5.4605996
+  },
+  "The Bramble, Site 159 St Andrews Point, Ballyhalbert": {
+    "lat": 54.4948453,
+    "lng": -5.4605996
+  },
+  "The Sinclair, Site 33 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "The Ward, Site 34 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "The Oliver, Site 32 Bailey Lea, Conlig, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "Apt, 74f Glen Road, Off Glen Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "38 Glengoland Avenue, Stewartstown Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "17 Mountforde Drive, Belfast": {
+    "lat": 54.598465,
+    "lng": -5.9084206
+  },
+  "49 Kansas Avenue Flats, Antrim Road, Belfast": {
+    "lat": 54.715139,
+    "lng": -6.2192038
+  },
+  "Development Site @, 51 Glenside Road, Upper Springfield Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "48 Mica Drive, Falls Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "138 Stewartstown Park, Off Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "48 Iris Drive, Belfast": {
+    "lat": 54.5966039,
+    "lng": -5.9610194
+  },
+  "5 Shore Street, Donaghadee": {
+    "lat": 54.6431723,
+    "lng": -5.5374864
+  },
+  "3 Grange Avenue, Ballynahinch Road, Saintfield": {
+    "lat": 54.4603955,
+    "lng": -5.8325813
+  },
+  "4D Newforge Lane, Belfast": {
+    "lat": 54.5582889,
+    "lng": -5.9440486
+  },
+  "6 Norglen Crescent, Belfast": {
+    "lat": 54.5874375,
+    "lng": -5.9894538
+  },
+  "2i Knocksallagh Green, Greenisland, Carrickfergus": {
+    "lat": 54.7002769,
+    "lng": -5.8729098
+  },
+  "14 Boneybefore, Carrickfergus": {
+    "lat": 54.7234137,
+    "lng": -5.7840008
+  },
+  "73 Skegoneill Avenue, Belfast": {
+    "lat": 54.6241689,
+    "lng": -5.9339161
+  },
+  "Apt 31 The Ross Building, Falls Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "29 Riverview Heights, Ballyanhinch": null,
+  "18 Old Brewery Lane, Glen Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "16 Credenhill Park, Upper Dunmurry Lane": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "70 Lynn Hall Place, Bangor": {
+    "lat": 54.6379975,
+    "lng": -5.6788297
+  },
+  "12 Hillhead Road, Ballycarry, Carrickfergus": {
+    "lat": 54.7772454,
+    "lng": -5.7257065
+  },
+  "115 Monagh Road, Belfast": {
+    "lat": 54.5905066,
+    "lng": -5.992311
+  },
+  "21 Lagmore Grove, Stewartstown Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "Apt 11 La Salle Court, 372 Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "41 Glenveagh Park, Lenadoon, Belfast": {
+    "lat": 54.5757364,
+    "lng": -6.0207888
+  },
+  "56 Thornhill Crescent, Twinbrook, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "4 Donaghadee Road, Millisle": {
+    "lat": 54.6099518,
+    "lng": -5.5283958
+  },
+  "33 Killaloe, Carrickfergus": {
+    "lat": 54.7178588,
+    "lng": -5.8242295
+  },
+  "9 & 9a New Street, Donaghadee": {
+    "lat": 54.6417566,
+    "lng": -5.5359357
+  },
+  "1 Aylesbury Avenue, Mallusk Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "28 Woodside Walk, Dunmurry": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "22 Colinward Street, Springfield Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "3 Eden Court, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "9 Lisburn Road, Ballynahinch": {
+    "lat": 54.4161392,
+    "lng": -5.929175
+  },
+  "113 Deerpark Road, Belfast": {
+    "lat": 54.6205395,
+    "lng": -5.9585989
+  },
+  "97 Ardmeen Green, Downpatrick": {
+    "lat": 54.325999,
+    "lng": -5.7021269
+  },
+  "41 Lagmore View Way, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "36 Riverdale Gardens, Andersonstown, Belfast": {
+    "lat": 54.5709065,
+    "lng": -5.9892335
+  },
+  "43 Prospect Link, Carrickfergus": {
+    "lat": 54.7267067,
+    "lng": -5.8235058
+  },
+  "2 Russell Park, Downpatrick": {
+    "lat": 54.3231516,
+    "lng": -5.7162443
+  },
+  "58 Oakdale, Ballygowan": {
+    "lat": 54.5030816,
+    "lng": -5.7966151
+  },
+  "19 York Crescent, Belfast": {
+    "lat": 54.6267095,
+    "lng": -5.9225895
+  },
+  "54 Mayfield Square, Blacks Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "The Merchant House, Apt 4 High Street, Donaghadee": {
+    "lat": 54.6425446,
+    "lng": -5.5375794
+  },
+  "53 Riverdale Gardens, Belfast": {
+    "lat": 54.5709065,
+    "lng": -5.9892335
+  },
+  "6 Bessfield Close, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "1 Ardkeen Avenue, Bangor": {
+    "lat": 54.6644223,
+    "lng": -5.7082008
+  },
+  "65 Milebush Park, Carrickfergus": {
+    "lat": 54.7323449,
+    "lng": -5.8162724
+  },
+  "4 Ardcaoin Green, Poleglass, Belfast": {
+    "lat": 54.5607791,
+    "lng": -6.0364838
+  },
+  "10 Glengoland Park, Dunmurry, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "19 Kerrykeel Gardens, Lenadoon": {
+    "lat": 54.571944,
+    "lng": -6.0142039
+  },
+  "29 Deerpark Drive, Belfast": {
+    "lat": 54.6227061,
+    "lng": -5.9617278
+  },
+  "89 Stewartstown Park, Belfast": {
+    "lat": 54.5702715,
+    "lng": -6.0065264
+  },
+  "14a Cavendish Square, Falls Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "40 Iveagh Street, Falls Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "10 Gilnahirk Road West, Belfast": {
+    "lat": 54.5839687,
+    "lng": -5.8427049
+  },
+  "51 Fortwilliam Parade, Belfast": {
+    "lat": 54.6247069,
+    "lng": -5.9315674
+  },
+  "21 William Street, Donaghadee": {
+    "lat": 54.6399282,
+    "lng": -5.530367
+  },
+  "The Haven, Site 161 St Andrews Point, Ballyhalbert": {
+    "lat": 54.4948453,
+    "lng": -5.4605996
+  },
+  "77 Millbank Grove, Ballynahinch": {
+    "lat": 54.3988012,
+    "lng": -5.8817521
+  },
+  "12 Suffolk Court, Suffolk Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "16 Gransha Way, Glen Road": {
+    "lat": 54.6008842,
+    "lng": -5.6987112
+  },
+  "23 Rockmount Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "28 Whiterock Gardens, Belfast": {
+    "lat": 54.592232,
+    "lng": -5.9760145
+  },
+  "49 Fallswater Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "8 Helen Street, Crumlin": {
+    "lat": 54.6224927,
+    "lng": -6.213076
+  },
+  "18 Lynwood Mews, Glenavy": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "23 Amcomri Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "45 Farnham Street, Ormeau Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "14 Model Avenue, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "45 Rosebrook Avenue, Carrickfergus": {
+    "lat": 54.7203644,
+    "lng": -5.8105789
+  },
+  "Apt 3, The Old School House Lancasterian Street, Lancasterian Street, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "3 Northland Street, Belfast": {
+    "lat": 54.6030282,
+    "lng": -5.9525415
+  },
+  "11 Ladybrook Drive, Finaghy Road North": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "6 Mooreland Park, Andersonstown, Belfast": {
+    "lat": 54.5738364,
+    "lng": -5.9818507
+  },
+  "116 Monagh Road, Belfast": {
+    "lat": 54.5887277,
+    "lng": -5.9934095
+  },
+  "18 Rosgoill Gardens, Shaws Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "1 Navan Green, Andersonstown": {
+    "lat": 54.5768975,
+    "lng": -5.9947805
+  },
+  "81 Springfield Park, Off Springfield Road": null,
+  "17 Altan Drive, Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "1 Shanvis Court, Off Percy Street, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "55 Peartree Road, Saintfield": {
+    "lat": 54.4298582,
+    "lng": -5.8454826
+  },
+  "21 Grasmere Park, Carrickfergus": {
+    "lat": 54.7278688,
+    "lng": -5.7778141
+  },
+  "22 Glengoland Avenue, Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "20 Marlborough Park Cross Avenue, Belfast": {
+    "lat": 54.573924,
+    "lng": -5.9490469
+  },
+  "1 Mooretown Terrace, Belfast Road, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "170 Ballyhill Road, Belfast": {
+    "lat": 54.6342546,
+    "lng": -6.0258655
+  },
+  "10 Thorndale Avenue, Belfast": {
+    "lat": 54.6114853,
+    "lng": -5.9368684
+  },
+  "Apt 12 Queensfort Court, Saintfield Road, Carryduff": {
+    "lat": 54.5184788,
+    "lng": -5.8874586
+  },
+  "35 The Green, Dunmurry, Belfast": {
+    "lat": 54.5553635,
+    "lng": -6.0040772
+  },
+  "12 Hawthorn Hill, Dromara": {
+    "lat": 54.379847,
+    "lng": -6.0179819
+  },
+  "28 Shaneen Park, Belfast": {
+    "lat": 54.6358046,
+    "lng": -5.9510579
+  },
+  "10 West Street, Ballycarry, Carrickfergus": {
+    "lat": 54.7772454,
+    "lng": -5.7257065
+  },
+  "1 Mayfield Square, Blacks Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "21B Glastry Road, Kircubbin": {
+    "lat": 54.4931272,
+    "lng": -5.5054162
+  },
+  "41 Helens Wood, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "16 Meadowbank, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "15 Gransha Drive, Glen Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "19 Canning Grove, Crumlin": {
+    "lat": 54.6211743,
+    "lng": -6.2218771
+  },
+  "5 Kinallen Cottages, Kinallen, Dromara": {
+    "lat": 54.379847,
+    "lng": -6.0179819
+  },
+  "6 Chichester Square, Carrickfergus": {
+    "lat": 54.7240889,
+    "lng": -5.8140742
+  },
+  "12 Finaghy Park Central, Belfast": {
+    "lat": 54.5616046,
+    "lng": -5.988871
+  },
+  "40 Riverdale Park Drive, Belfast": {
+    "lat": 54.5706739,
+    "lng": -5.9922621
+  },
+  "10 Oakland Grove, Ballynahinch": {
+    "lat": 54.4115246,
+    "lng": -5.905232
+  },
+  "14 Station Road, Belfast": {
+    "lat": 54.6076474,
+    "lng": -5.874338
+  },
+  "68 Abbey Road, Millisle": {
+    "lat": 54.6063719,
+    "lng": -5.5353502
+  },
+  "26 Millbank Grove, Ballynahinch": {
+    "lat": 54.3988012,
+    "lng": -5.8817521
+  },
+  "37 Thornhill Malone, Belfast": {
+    "lat": 54.5714816,
+    "lng": -5.9483435
+  },
+  "7 Rusheyhill Road, Hannahstown": {
+    "lat": 54.5813856,
+    "lng": -6.0295519
+  },
+  "5 Greyabbey Road, Ballywalter": {
+    "lat": 54.5412432,
+    "lng": -5.4896711
+  },
+  "3 Brooke Close, Blacks Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "23 Millmount Village Square, Dundonald, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "23 Ainsworth Drive, Belfast": {
+    "lat": 54.6045108,
+    "lng": -5.9616599
+  },
+  "10D Ollardale Park, Ballyclare": {
+    "lat": 54.7499312,
+    "lng": -6.009167
+  },
+  "4 Fallswater Street, Falls Road": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "8 Edphil Court, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "9 Norglen Parade, Belfast": {
+    "lat": 54.5902078,
+    "lng": -5.9893427
+  },
+  "19 Coronation Road, Carrickfergus": {
+    "lat": 54.7223247,
+    "lng": -5.7932925
+  },
+  "5 Lismore Avenue, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "53 Moss Road, Millisle, Millisle Newtownards": {
+    "lat": 54.6068811,
+    "lng": -5.5304415
+  },
+  "210 Stockmans Lane, Belfast": {
+    "lat": 54.5699102,
+    "lng": -5.9696252
+  },
+  "31 Sunnyhill Park, Dunmurry, Belfast": {
+    "lat": 54.5524785,
+    "lng": -6.0084123
+  },
+  "22 Brooke Crescent, Blacks Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Apartment 4, 32 St. Annes Road, Blacks Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "73 Hillview Avenue, Doagh Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "Apt 7 Berkeley Court, 21 Derryvolgie Avenue, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "9 Siulnamona Court, Off Monagh By Pass, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Apt 15 Casement Manor 91 -93 Andersonstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "2 O'Neill Street, Clonard, Belfast": {
+    "lat": 54.5977794,
+    "lng": -5.9555215
+  },
+  "4 Regency Drive, Newtownards": {
+    "lat": 54.6027498,
+    "lng": -5.6705729
+  },
+  "8 Lake Glen Park, Andersonstown, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "36 St. Annes Road, Blacks Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "18 Merrion Park, Belfast": {
+    "lat": 54.5694605,
+    "lng": -6.0211759
+  },
+  "20 Juniper Way, Twinbrook, Belfast": {
+    "lat": 54.5521525,
+    "lng": -6.0264687
+  },
+  "13 Taylors Avenue, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "12 The Ross Building, Odessa Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "6 Lancasterian Court, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "55 The Demesne, Hillsborough Road, Carryduff": {
+    "lat": 54.5184788,
+    "lng": -5.8874586
+  },
+  "28 Rodgers Quay, Carrickfergus": {
+    "lat": 54.7126477,
+    "lng": -5.8142453
+  },
+  "29a Main Street, Greyabbey": {
+    "lat": 54.5368587,
+    "lng": -5.5578262
+  },
+  "3 Weavers Meadow, Crumlin": {
+    "lat": 54.6204717,
+    "lng": -6.2095876
+  },
+  "Apt 1, 3 Lewis Mews, Belfast": {
+    "lat": 54.6001662,
+    "lng": -5.8881967
+  },
+  "11 St Annes Road, Blacks Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "33 Old Brewery Lane, Glen Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "35B Parkmount Road, Belfast": {
+    "lat": 54.6357946,
+    "lng": -5.9315405
+  },
+  "103 Lenadoon Avenue, Off Shaws Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "13 Broadway, Belfast": {
+    "lat": 54.5870863,
+    "lng": -5.9545626
+  },
+  "5 Oakwood Grove, Malone, Belfast": {
+    "lat": 54.5760638,
+    "lng": -5.9535463
+  },
+  "17 Oakman Street, Off Falls Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "15 Seaholm Parade, Belfast": {
+    "lat": 54.6263457,
+    "lng": -5.9275201
+  },
+  "3 Lagmore View Gardens, Stewartstown": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "30 Old Cavehill Road, Belfast": {
+    "lat": 54.6345754,
+    "lng": -5.9452447
+  },
+  "15 Hollybrook Grove, Hightown Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "113 Ballymurphy Road, Whiterock Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "36 Rodney Parade, Off Donegall road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "22 Riverdale Park West, Finaghy Road North, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "29 The Birches, Carrickfergus": {
+    "lat": 54.7223401,
+    "lng": -5.8195265
+  },
+  "34 Dromore Road, Carrickfergus": {
+    "lat": 54.7295766,
+    "lng": -5.7808892
+  },
+  "19 Aghery Walk, Dunmurry": {
+    "lat": 54.5513982,
+    "lng": -6.01097
+  },
+  "6 Fernagh Drive, Station Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "67 Rochester Avenue, Cregagh Road, Belfast": {
+    "lat": 54.5749228,
+    "lng": -5.8985633
+  },
+  "79 Lagmore Glen, Stewarstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "17 Lancedean Road, Upper Knockbreda Road, Belfast": {
+    "lat": 54.5649908,
+    "lng": -5.9087894
+  },
+  "3 Lagmore Meadows, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "2-6 Castle Street / 1-5 Greenwell Street, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "Apt 6 Oceanview 31 Marine Parade, Whitehead": {
+    "lat": 54.7525197,
+    "lng": -5.7095385
+  },
+  "Apt, 30 Slieveban Drive, Andersonstown": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "39 Willowvale Gardens, Off Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "1 Willow Bank, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "101 Weavers Meadow, Crumlin": {
+    "lat": 54.6204717,
+    "lng": -6.2095876
+  },
+  "6 Woodlawn, Carrickfergus": {
+    "lat": 54.7186445,
+    "lng": -5.8237243
+  },
+  "12 Edenvale Park, The Green, Dunmurry": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "2 Sandes Court, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "4 Forest Lane, Off Forest Park, Upper Dunmurry Lane, Belfast": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "Apt 6 Trench Park, Finaghy Road North": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "4 Valleyside Close, Springfield Road": {
+    "lat": 54.6000045,
+    "lng": -5.9666746
+  },
+  "31 Eaton Park, Dunmurry": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "65 New Bridge Street, Downpatrick": {
+    "lat": 54.3355114,
+    "lng": -5.7165994
+  },
+  "32 Glenariff Drive, Comber, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "1 St. James's Place, Belfast": {
+    "lat": 54.5883177,
+    "lng": -5.9666198
+  },
+  "12 South Green, Andersonstown": {
+    "lat": 54.5764568,
+    "lng": -5.9914022
+  },
+  "47 Orchardville Gardens, Finaghy Road North": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "73 Upper Dunmurry Lane, Belfast": {
+    "lat": 54.5636088,
+    "lng": -6.019112
+  },
+  "54 Sunnylands Drive, Carrickfergus": {
+    "lat": 54.7187994,
+    "lng": -5.8143153
+  },
+  "Apt 10, Pinetree Court 157 Glen Road, Andersonstown": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "3 Whinfield Lane, Greenisland, Carrickfergus": {
+    "lat": 54.7002769,
+    "lng": -5.8729098
+  },
+  "423a Ballysillan Road, Belfast": {
+    "lat": 54.6326246,
+    "lng": -5.9524176
+  },
+  "Apt 6 The Ross Building, 15 Odessa Street": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Apt 11 Woodberry Lane, Off Upper Dunmurry lane / Forest Pk": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Site South East of 9 Lisleen Road East, Comber, Newtownards": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "16 Manse Road, Kircubbin, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "53 Old Shore Road, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "30 Thorndale Square, Carrickfergus": {
+    "lat": 54.7250936,
+    "lng": -5.8145293
+  },
+  "Apartment 8, 2 Eaton Park, Dunmurry, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "4 Lagmore View Gardens, Belfast": {
+    "lat": 54.5520805,
+    "lng": -6.0373352
+  },
+  "17 Huntingdon Hill, Lisburn": {
+    "lat": 54.5438172,
+    "lng": -6.0420915
+  },
+  "14 Faunoran Park, Greenisland, Carrickfergus": {
+    "lat": 54.7002769,
+    "lng": -5.8729098
+  },
+  "88 Andersonstown Park West, Belfast": {
+    "lat": 54.5801385,
+    "lng": -5.9844121
+  },
+  "8 Hillhead Heights, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "1 Lyndhurst View Close, Belfast": {
+    "lat": 54.609799,
+    "lng": -5.9845755
+  },
+  "12 Ardmore Avenue, Belfast": {
+    "lat": 54.5639929,
+    "lng": -5.9898305
+  },
+  "60 Budore Road, Dundrod": {
+    "lat": 54.616667,
+    "lng": -6.116667
+  },
+  "Apt 7, 1 Pickie Terrace, Bangor": {
+    "lat": 54.6648247,
+    "lng": -5.6760591
+  },
+  "23 Kings Road, Station Road / Doagh Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "71 Glencairn Street, Belfast": {
+    "lat": 54.611129,
+    "lng": -5.9694769
+  },
+  "45 Ainsworth Street, Belfast": {
+    "lat": 54.6056056,
+    "lng": -5.9616316
+  },
+  "5 Ainsworth Street, Belfast": {
+    "lat": 54.6056056,
+    "lng": -5.9616316
+  },
+  "11 Ainsworth Drive, Belfast": {
+    "lat": 54.6045108,
+    "lng": -5.9616599
+  },
+  "19 Ainsworth Drive, Belfast": {
+    "lat": 54.6045108,
+    "lng": -5.9616599
+  },
+  "21 Acton Street, Belfast": {
+    "lat": 54.6061819,
+    "lng": -5.9559672
+  },
+  "Adj to 75 Carryduff Road, Lisburn": {
+    "lat": 54.5112856,
+    "lng": -6.046717
+  },
+  "39 Fairfields Manor, Lisburn": {
+    "lat": 54.5112856,
+    "lng": -6.046717
+  },
+  "Apt 2 Doire Beag, 159 Andersonstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "11 Beechmount Drive, Falls Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "10 Carnroe Drive, Greenisland, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "Apt 26 Kenard Avenue, Andersonstown, Belfast": {
+    "lat": 54.5763853,
+    "lng": -6.0012763
+  },
+  "33 Boneybefore, Carrickfergus": {
+    "lat": 54.7234137,
+    "lng": -5.7840008
+  },
+  "56 Lagmore Grove, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "3 Windslow Grove, Carrickfergus": {
+    "lat": 54.7317819,
+    "lng": -5.8258696
+  },
+  "Apt 25 San Antone, Old Suffolk Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "28 Queensfort Court, Saintfield Road, Carryduff": {
+    "lat": 54.5760638,
+    "lng": -5.9535463
+  },
+  "15 Altnacreeve Park, O'Neill Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "17 Main Street, Ballywalter": {
+    "lat": 54.5429474,
+    "lng": -5.4844452
+  },
+  "5 Lagmore View Crescent, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "10 Lagmore View Way, Stewartstown Road, Dunmurry": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Apt 11, 15 St. Annes Road, Blacks Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "11 Moyra Crescent, Ballynahinch Road, Saintfield": {
+    "lat": 54.4603955,
+    "lng": -5.8325813
+  },
+  "39 Norglen Drive, Belfast": {
+    "lat": 54.5887675,
+    "lng": -5.9887119
+  },
+  "219 Upper Springfield Road, Hannahstown": {
+    "lat": 54.5821605,
+    "lng": -6.0116613
+  },
+  "71 Stewartstown Park, Belfast": {
+    "lat": 54.5702715,
+    "lng": -6.0065264
+  },
+  "25 Bashford Park Hill, Carrickfergus": {
+    "lat": 54.7363044,
+    "lng": -5.7957964
+  },
+  "29 Castleburn Road, Carrickfergus": {
+    "lat": 54.7278527,
+    "lng": -5.7805944
+  },
+  "26 Thorndale Square, Carrickfergus": {
+    "lat": 54.7250936,
+    "lng": -5.8145293
+  },
+  "6 Killultagh Avenue, Glenavy": {
+    "lat": 54.5883238,
+    "lng": -6.2161325
+  },
+  "47 Swifts Quay, Carrickfergus": {
+    "lat": 54.7096814,
+    "lng": -5.8164221
+  },
+  "226 Queen Street, Ballymena": {
+    "lat": 54.8560284,
+    "lng": -6.2762118
+  },
+  "92 Ramoan Gardens, Glen Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "112 Aughnaskeagh Road, Dromara": {
+    "lat": 54.379847,
+    "lng": -6.0179819
+  },
+  "22, 24 Dromore Street, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "17 Broom Park Heights, Twinbrook, Belfast": {
+    "lat": 54.5487301,
+    "lng": -6.0249992
+  },
+  "20 Woodburn Avenue, Carrickfergus": {
+    "lat": 54.7231207,
+    "lng": -5.8216676
+  },
+  "38 Oakwood Road, Carrickfergus": {
+    "lat": 54.7247049,
+    "lng": -5.8214176
+  },
+  "4 Springhill Avenue, Bangor": {
+    "lat": 54.6574416,
+    "lng": -5.6931883
+  },
+  "66 Northland, Carrickfergus": {
+    "lat": 54.7257778,
+    "lng": -5.8131148
+  },
+  "29 St. Aubyn Street, Shore Road, Belfast": {
+    "lat": 54.61767,
+    "lng": -5.9054669
+  },
+  "9 Edengrove Park, Ballynahinch": {
+    "lat": 54.4083588,
+    "lng": -5.9104142
+  },
+  "30 Rosebrook Grove, Carrickfergus": {
+    "lat": 54.720741,
+    "lng": -5.8114699
+  },
+  "2 Victoria Close, Belfast": {
+    "lat": 54.6076498,
+    "lng": -5.877836
+  },
+  "62 Albany Drive, Carrickfergus": {
+    "lat": 54.718337,
+    "lng": -5.8253692
+  },
+  "107 Castlemara Drive, Carrickfergus": {
+    "lat": 54.7286806,
+    "lng": -5.8077554
+  },
+  "102 Belfast Road, Carrickfergus": {
+    "lat": 54.709899,
+    "lng": -5.827427
+  },
+  "5 Portaferry Road, Newtownards": {
+    "lat": 54.5720006,
+    "lng": -5.6581994
+  },
+  "6 Graymount Road, Shore Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "73 Lenadoon Avenue, Belfast": {
+    "lat": 54.5732044,
+    "lng": -6.0126317
+  },
+  "148 Stewartstown Park, Belfast": {
+    "lat": 54.5721133,
+    "lng": -6.0093989
+  },
+  "37 Mount Eagles Lodge, Belfast": {
+    "lat": 54.5556626,
+    "lng": -6.0522856
+  },
+  "4 Killeen Park, Andersonstown": {
+    "lat": 54.5739833,
+    "lng": -5.9966012
+  },
+  "5 Seavaghan Road, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "14 Lagmore Meadows, Belfast": {
+    "lat": 54.5524874,
+    "lng": -6.0316731
+  },
+  "4 Bashford Drive, Carrickfergus": {
+    "lat": 54.7369235,
+    "lng": -5.7984573
+  },
+  "37 Hillview Crescent, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "1 Prospect Street, Carrickfergus": {
+    "lat": 54.7168711,
+    "lng": -5.8096417
+  },
+  "22 Bashford Park Hill, Carrickfergus": {
+    "lat": 54.7361873,
+    "lng": -5.7966877
+  },
+  "45 Rockdale Street, Belfast": {
+    "lat": 54.5903152,
+    "lng": -5.9697954
+  },
+  "9 Copperwood Drive, Carrickfergus": {
+    "lat": 54.7407811,
+    "lng": -5.7948841
+  },
+  "28 Salia Avenue, Carrickfergus": {
+    "lat": 54.7235481,
+    "lng": -5.810332
+  },
+  "Apt 7, 109 Shankill Road, Belfast": {
+    "lat": 54.6041592,
+    "lng": -5.9507606
+  },
+  "APT1, 1d Fruithill Pk, Andersonstown Road": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "49 The Hollies, Carrickfergus": {
+    "lat": 54.7243364,
+    "lng": -5.8206479
+  },
+  "81 Magherahamlet Road, Ballynahinch": {
+    "lat": 54.3689112,
+    "lng": -5.945541
+  },
+  "44 Rockville Street, Falls Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "23 Erinvale Park, Belfast": {
+    "lat": 54.555275,
+    "lng": -5.9825149
+  },
+  "83 Stewartstown Park, Stewarststown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "19 Summerhill Park, Twinbrook, Belfast": {
+    "lat": 54.5491454,
+    "lng": -6.0206405
+  },
+  "Apt 29 678 Shore Road, Horizon Building, Belfast": {
+    "lat": 54.6512666,
+    "lng": -5.9189026
+  },
+  "9 Adelaide Avenue, Belfast": {
+    "lat": 54.5780834,
+    "lng": -5.9535724
+  },
+  "3 Quoile Terrace, Ballynahinch": {
+    "lat": 54.4071565,
+    "lng": -5.9017512
+  },
+  "96 Wallace Avenue, Lisburn": {
+    "lat": 54.5139829,
+    "lng": -6.0404569
+  },
+  "Right Hand Site, Adj 39 Downpatrick Road, Clough": {
+    "lat": 54.2909095,
+    "lng": -5.8376381
+  },
+  "15 Westland Drive, Belfast": {
+    "lat": 54.624188,
+    "lng": -5.9476882
+  },
+  "5 Pim Street, Belfast": {
+    "lat": 54.6088763,
+    "lng": -5.9356438
+  },
+  "89 Cliftonville Road, Belfast": {
+    "lat": 54.6169356,
+    "lng": -5.945293
+  },
+  "36 Cliftonville Road, Belfast": {
+    "lat": 54.6169356,
+    "lng": -5.945293
+  },
+  "19 Hampton Court, Ballygowan, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "20 Ballymaconaghy Road, Four Winds, Belfast": {
+    "lat": 54.5523087,
+    "lng": -5.8937787
+  },
+  "6 Thorndale Road North, Ballynahinch Road, Carryduff": {
+    "lat": 54.5184788,
+    "lng": -5.8874586
+  },
+  "27 Castlerocklands, Carrickfergus": {
+    "lat": 54.7113107,
+    "lng": -5.8183497
+  },
+  "75 Crossgar Road, Saintfield": {
+    "lat": 54.4476345,
+    "lng": -5.8181572
+  },
+  "33 Highgrove Crescent, Carrickfergus": {
+    "lat": 54.739194,
+    "lng": -5.7920499
+  },
+  "Shantallagh, 9 Old Belfast Road, Downpatrick": {
+    "lat": 54.3279335,
+    "lng": -5.71649
+  },
+  "60 Loughview Village, Carrickfergus": {
+    "lat": 54.7244712,
+    "lng": -5.7753521
+  },
+  "26 Whinfield Walk, Carrickfergus": {
+    "lat": 54.7215544,
+    "lng": -5.8236781
+  },
+  "18 Collingwood Avenue, Belfast": {
+    "lat": 54.5833206,
+    "lng": -5.9244653
+  },
+  "Site with FPP, 98 Portaferry Road, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "80 Bingnian Drive, Andersonstown": {
+    "lat": 54.5795898,
+    "lng": -5.9919973
+  },
+  "7 Craigs Close, Carrickfergus": {
+    "lat": 54.7407149,
+    "lng": -5.7854126
+  },
+  "3 Stockmans Court, Andersonstown, Belfast": {
+    "lat": 54.5749063,
+    "lng": -5.9816132
+  },
+  "177 Main Road, Portavogie": {
+    "lat": 54.438743,
+    "lng": -5.469959
+  },
+  "6 Bearnagh Drive, Andersonstown": {
+    "lat": 54.5797578,
+    "lng": -5.9910961
+  },
+  "21 Victoria Street, Carrickfergus": {
+    "lat": 54.7170052,
+    "lng": -5.8090213
+  },
+  "15 Riverdale Gardens, Andersonstown, Belfast": {
+    "lat": 54.5709065,
+    "lng": -5.9892335
+  },
+  "43 Greenburn Park, Belsize Road": {
+    "lat": 54.5268855,
+    "lng": -6.0418318
+  },
+  "Apt 7 Mount Eagles Court, Stewartstown Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "73 Glenveagh Drive, Lenadoon, Belfast": {
+    "lat": 54.5752805,
+    "lng": -6.0134204
+  },
+  "2J Knocksallagh Green, Greenisland, Carrickfergus": {
+    "lat": 54.7002866,
+    "lng": -5.8728529
+  },
+  "Land for sale,  @ Junction of Glenside Road / Upper Springfield Road": {
+    "lat": 54.5813856,
+    "lng": -6.0295519
+  },
+  "26 Fountain Crescent, Lisburn": {
+    "lat": 54.5301168,
+    "lng": -6.0778529
+  },
+  "8 Nansen Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "Glencroft, 2 Nutts Corner Road, Crumlin": {
+    "lat": 54.6206167,
+    "lng": -6.2149351
+  },
+  "52 Colinvale, Poleglass, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "24 St James Place, Belfast": {
+    "lat": 54.6102236,
+    "lng": -5.9366106
+  },
+  "3 Chichester Square, Carrickfergus": {
+    "lat": 54.7240889,
+    "lng": -5.8140742
+  },
+  "15 Lisburn Road, Glenavy": {
+    "lat": 54.5844759,
+    "lng": -6.1938274
+  },
+  "71 Lough Road, Lisburn": {
+    "lat": 54.4514019,
+    "lng": -5.913613
+  },
+  "14 Somerton Gardens, Belfast": {
+    "lat": 54.625252,
+    "lng": -5.9322215
+  },
+  "17 Burnpipe Lane, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "Apt 9 Bayview 228 Shore Road, Greenisland, Carrickfergus": {
+    "lat": 54.7002866,
+    "lng": -5.8728529
+  },
+  "16 Carnglave Manor, Spa, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "493 Antrim Road, Glengormley, Newtownabbey": {
+    "lat": 54.6698486,
+    "lng": -5.9567531
+  },
+  "15 Moor Park Gardens, Blacks Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "6 Glenwood Crescent, Dunmurry": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "3 Rose Court, Carrickfergus": {
+    "lat": 54.7211566,
+    "lng": -5.80965
+  },
+  "1 Orchard Grove, Hillsborough": {
+    "lat": 54.462813,
+    "lng": -6.0830844
+  },
+  "77 Victoria Road, Carrickfergus": {
+    "lat": 54.7287357,
+    "lng": -5.795072
+  },
+  "101 Monagh Drive, Belfast": {
+    "lat": 54.5907343,
+    "lng": -5.9915816
+  },
+  "6 Hartley Hall Close, Greenisland, Carrickfergus": {
+    "lat": 54.7002866,
+    "lng": -5.8728529
+  },
+  "42 Mount Eagles Glen, Belfast": {
+    "lat": 54.5574723,
+    "lng": -6.0529465
+  },
+  "29 Brooklands Park, Whitehead, Carrickfergus": {
+    "lat": 54.7525197,
+    "lng": -5.7095385
+  },
+  "37 Glenkeen, Poleglass, Belfast": {
+    "lat": 54.5610592,
+    "lng": -6.0339211
+  },
+  "11 Brookborough Avenue, Carrickfergus": {
+    "lat": 54.7136165,
+    "lng": -5.8073112
+  },
+  "Apt, 6 Riverside Mews, Suffolk Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "12 Whiterock Gardens, Belfast": {
+    "lat": 54.592232,
+    "lng": -5.9760145
+  },
+  "1 Old Brewery Lane, Glen Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "17 Victoria Street, Carrickfergus": {
+    "lat": 54.7170052,
+    "lng": -5.8090213
+  },
+  "Apt 4 The Grant Building, 27 Odessa Street, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "91 Warren Road, Donaghadee": {
+    "lat": 54.6656704,
+    "lng": -5.5704164
+  },
+  "21 Brooke Park, Blacks Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "118 Monlough Road, Saintfield": {
+    "lat": 54.4757299,
+    "lng": -5.8314506
+  },
+  "40 Killultagh Avenue, Glenavy": {
+    "lat": 54.5883238,
+    "lng": -6.2161325
+  },
+  "47 Westrock Gardens, Off Whiterock Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "63 Etna Drive, Belfast": {
+    "lat": 54.6169654,
+    "lng": -5.9587934
+  },
+  "24 Quayside, Carrickfergus": {
+    "lat": 54.710824,
+    "lng": -5.815463
+  },
+  "4 Laburnum Way, Twinbrook, Belfast": {
+    "lat": 54.5543756,
+    "lng": -6.0222086
+  },
+  "Building site between, 68 & 72 The Craig Road, Downpatrick": {
+    "lat": 54.3279335,
+    "lng": -5.71649
+  },
+  "12 Ardcaoin Avenue, Dunmurry": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "14 Ballycolin Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "34 Woodburn Road, Carrickfergus": {
+    "lat": 54.7200856,
+    "lng": -5.8245787
+  },
+  "8 Glantrasna Drive, Belfast": {
+    "lat": 54.6240694,
+    "lng": -5.934366
+  },
+  "7 Dalebrook Park, Finaghy Road North": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "98 Mount Eagles Glen, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "33 Mount Eagles Glen, Belfast": {
+    "lat": 54.5574723,
+    "lng": -6.0529465
+  },
+  "21 Monagh Drive, Belfast": {
+    "lat": 54.5907343,
+    "lng": -5.9915816
+  },
+  "9 Ellis Street, Carrickfergus": {
+    "lat": 54.7164073,
+    "lng": -5.8170579
+  },
+  "Building site, Adj 13 Carrickmannon Road, Ballygowan, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "38 Glenhill Park, Off Fruithill Park, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "8 Ladybrook Parade, Finaghy Road North, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "9 Glenview Terrace, Belfast": {
+    "lat": 54.5688671,
+    "lng": -6.0135784
+  },
+  "105 Central Promenade, Newcastle": {
+    "lat": 54.2053783,
+    "lng": -5.8929432
+  },
+  "Apt 8 Casement Manor, Andersonstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "11 Coolnasilla Park East, Glen Road": {
+    "lat": 54.6008842,
+    "lng": -5.6987112
+  },
+  "138 Alliance Avenue, Belfast": {
+    "lat": 54.6184938,
+    "lng": -5.9606058
+  },
+  "6 Mount Eagles Link, Stewartstown Road, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "114 Appleton Park, Belfast": {
+    "lat": 54.5688957,
+    "lng": -5.9898889
+  },
+  "7 Culmore Gardens, Andersonstown": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "10 Monagh Road, Belfast": {
+    "lat": 54.5905066,
+    "lng": -5.992311
+  },
+  "Flat 2 Rockdene,  6 Springvale Road, Ballywalter": {
+    "lat": 54.5405698,
+    "lng": -5.4836875
+  },
+  "34 Old Brewery Lane, Glen Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "2 Glasvey Rise, Twinbrook, Belfast": {
+    "lat": 54.5578131,
+    "lng": -6.019373
+  },
+  "16 Londonderry Gardens, Comber, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "65 Leeson Street, Falls Road": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "36 Juniper Park, Twinbrook": {
+    "lat": 54.5538162,
+    "lng": -6.0246841
+  },
+  "7 Riverdale Park Avenue, Finaghy Road North": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Detached Residence and Annex @, 73 Colinglen Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "4 Glantane Drive, Belfast": {
+    "lat": 54.6248187,
+    "lng": -5.9371743
+  },
+  "Apt 25 Mount Eagles Lodge, Belfast": {
+    "lat": 54.5556626,
+    "lng": -6.0522856
+  },
+  "16 Berkeley Hall, Lisburn": {
+    "lat": 54.5016444,
+    "lng": -6.0233649
+  },
+  "Apt, 24 Riverview Meadows, Suffolk Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "Apt 13 Rath Mor, 45 Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Building Site, 129a Drumnaconagher Road, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "4 Ringford Crescent, Blacks Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "4 Knockcairn Lodge, Dundrod, Crumlin": {
+    "lat": 54.6206167,
+    "lng": -6.2149351
+  },
+  "Development Site, 126-130 Moss Road, Millisle": {
+    "lat": 54.60782,
+    "lng": -5.5284632
+  },
+  "3 Ashbrooke, Donaghadee": {
+    "lat": 54.6425446,
+    "lng": -5.5375794
+  },
+  "60 Church Road, Ballynahinch": {
+    "lat": 54.3944487,
+    "lng": -5.8858685
+  },
+  "Site To North-east of 8 Frederick Place, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "57 Rosebrook Grove, Carrickfergus": {
+    "lat": 54.7192792,
+    "lng": -5.8088372
+  },
+  "4 Riverdale Park South, Belfast": {
+    "lat": 54.5704215,
+    "lng": -5.9896335
+  },
+  "73 Moyard Gardens, Greenisland, Carrickfergus": {
+    "lat": 54.7002866,
+    "lng": -5.8728529
+  },
+  "Lands to the East of, 35 Woburn Road, Millisle, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "6d Glassillan Grove, Greenisland": {
+    "lat": 54.6966415,
+    "lng": -5.8712795
+  },
+  "29 Colinview Street, Belfast": {
+    "lat": 54.6004094,
+    "lng": -5.9625021
+  },
+  "APT, 31b Slievegallion Drive, Andersonstown, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "6 The Hill, Dunmurry, Belfast": {
+    "lat": 54.5505541,
+    "lng": -6.0031313
+  },
+  "10 Beechmount Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "12 Norfolk Road, Off Gransha Green / Glen Rd, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "42 Bearnagh Drive, Andersonstown, Belfast": {
+    "lat": 54.5797578,
+    "lng": -5.9910961
+  },
+  "22 Doon Road, Stewartstown Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "65 Killultagh Avenue, Glen Road, Glenavy": {
+    "lat": 54.5916242,
+    "lng": -6.2131694
+  },
+  "42 St Annes Road, Blacks Road, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "72 Glen River Park, Glenavy": {
+    "lat": 54.5955587,
+    "lng": -6.2115438
+  },
+  "86 Iris Drive, Belfast": {
+    "lat": 54.5966039,
+    "lng": -5.9610194
+  },
+  "75 Wellesley Avenue (Converted into two apartments), Belfast": {
+    "lat": 54.5760638,
+    "lng": -5.9535463
+  },
+  "Apt 5 Park Mews, Dunmurry, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "Development Land Cairn Grove, Kilcoo, Newry": {
+    "lat": 54.1775283,
+    "lng": -6.337506
+  },
+  "28 Comber Road, Saintfield, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "Thirty Shore Road Shore Road, Greenisland, Carrickfergus": {
+    "lat": 54.7002769,
+    "lng": -5.8729098
+  },
+  "185 Cliftonville Road, Belfast": {
+    "lat": 54.6169356,
+    "lng": -5.945293
+  },
+  "3 Navan Green, Andersonstown, Belfast": {
+    "lat": 54.5768975,
+    "lng": -5.9947805
+  },
+  "55 Cahard Road, Saintfield": {
+    "lat": 54.4312988,
+    "lng": -5.8339342
+  },
+  "New Build, Opposite 27 Oughley Road, Saintfield, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "27 North Road, Carrickfergus": {
+    "lat": 54.7264442,
+    "lng": -5.8100476
+  },
+  "49 Wallasey Park, Belfast": {
+    "lat": 54.6273002,
+    "lng": -5.9621449
+  },
+  "Land adj to, 75 Moss Road, Ballygowan, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "58 Deramore Avenue, Belfast": {
+    "lat": 54.5774107,
+    "lng": -5.9205798
+  },
+  "7 Ashvale Park, Islandmagee": {
+    "lat": 54.7783413,
+    "lng": -5.7084204
+  },
+  "58 Kinedale Park, Ballynahinch": {
+    "lat": 54.4070627,
+    "lng": -5.9087803
+  },
+  "26 Willow Crescent, Ballynahinch": {
+    "lat": 54.4083194,
+    "lng": -5.9018317
+  },
+  "13 Drinnahilly Park, Newcastle": {
+    "lat": 54.2068099,
+    "lng": -5.9038974
+  },
+  "38 Mount Eagles Park, Belfast": {
+    "lat": 54.5537802,
+    "lng": -6.0500433
+  },
+  "3 Glen Manor, Glen Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "1 Ballymurphy Road, Belfast": {
+    "lat": 54.5942155,
+    "lng": -5.979766
+  },
+  "9 Drumhill Heights, Castlewellan": {
+    "lat": 54.2574364,
+    "lng": -5.9435178
+  },
+  "27 Drumaness Road, Ballynahinch": {
+    "lat": 54.3940153,
+    "lng": -5.8851907
+  },
+  "50 Anahilt Gate, Anahilt": {
+    "lat": 54.462813,
+    "lng": -6.0830844
+  },
+  "FPP For 2 Dwellings, 48 North Road, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "92 Cable Road, Whitehead": {
+    "lat": 54.7544104,
+    "lng": -5.7160018
+  },
+  "Two Building Sites, between 132 & 134 Thornyhill Road, Raffery, Crossgar": {
+    "lat": 54.3971136,
+    "lng": -5.7623951
+  },
+  "Site Adj to 46a Ballyblack Road, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "22 Rosetta Drive, Upper Ormeau, Belfast": {
+    "lat": 54.5667714,
+    "lng": -5.899824
+  },
+  "56 Grey Castle Manor, Church Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "Development Land Belfast Road, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "39 Glen Crescent, Andersonstown, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "4 The Drumlins, Ballynahinch": {
+    "lat": 54.4008894,
+    "lng": -5.9104603
+  },
+  "2 Hillcrest Drive, Ballynahinch": {
+    "lat": 54.4011552,
+    "lng": -5.8954575
+  },
+  "Building Site @, 6 - 6A Mullaghglass Road, Colinglen Road, Lisburn": {
+    "lat": 54.5112856,
+    "lng": -6.046717
+  },
+  "18 Mount Eagles Drive, Dunmurry, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "12 Glenoak Grange Close, Crumlin": {
+    "lat": 54.6243359,
+    "lng": -6.2086891
+  },
+  "35 Rodney Drive, Belfast": {
+    "lat": 54.5874994,
+    "lng": -5.9636846
+  },
+  "28 Windmill Lane, Ballynahinch": {
+    "lat": 54.4030976,
+    "lng": -5.8911497
+  },
+  "42 Locan Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "29 Dromore Road, Ballynahinch": {
+    "lat": 54.4033539,
+    "lng": -5.9418002
+  },
+  "Apt 1 Earls Court, Bethany Street, Belfast": {
+    "lat": 54.5955941,
+    "lng": -5.8687932
+  },
+  "30 Hill Street, Ballymena": {
+    "lat": 54.8686008,
+    "lng": -6.2769112
+  },
+  "8 Drumhill Park, Ballynahinch": {
+    "lat": 54.4103388,
+    "lng": -5.8929579
+  },
+  "The Danesfort, Site 1 Church Gate, Church Road, Dromore": {
+    "lat": 54.5128552,
+    "lng": -7.4576175
+  },
+  "73 Killyleagh Street, Crossgar": {
+    "lat": 54.3976598,
+    "lng": -5.7562229
+  },
+  "Land at Corner Of Dromore Road And Cargygray Road, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "79a Woodburn Road, Carrickfergus": {
+    "lat": 54.7200856,
+    "lng": -5.8245787
+  },
+  "83 Woodburn Road, Carrickfergus": {
+    "lat": 54.7200856,
+    "lng": -5.8245787
+  },
+  "30m south of, 13 Sheepland Road, Ardglass, Downpatrick": {
+    "lat": 54.3279335,
+    "lng": -5.71649
+  },
+  "Site Adjacent To 178 Upper Malone Road, Belfast": {
+    "lat": 54.5760638,
+    "lng": -5.9535463
+  },
+  "95 Drumlough Road, Annahilt, Hillsborough": {
+    "lat": 54.462813,
+    "lng": -6.0830844
+  },
+  "184 Seacliff Road, Bangor": {
+    "lat": 54.6690026,
+    "lng": -5.6591588
+  },
+  "12 Jordanstown, Clough, Downpatrick": {
+    "lat": 54.3279335,
+    "lng": -5.71649
+  },
+  "25 Cavendish Street, Falls Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "The Adelaide, Site 17 Edengrove, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "15 Brackenberg Road, Ballycarry": {
+    "lat": 54.7717158,
+    "lng": -5.7555311
+  },
+  "7 Antrim Road, Ballynahinch": {
+    "lat": 54.4018014,
+    "lng": -5.9010396
+  },
+  "35 Meadowvale, Saintfield": {
+    "lat": 54.4577318,
+    "lng": -5.8374766
+  },
+  "The Paddock, 62 Cahard Road, Saintfield": {
+    "lat": 54.4603955,
+    "lng": -5.8325813
+  },
+  "Land Adjacent to 36 Brookvale Street, Belfast": {
+    "lat": 54.61767,
+    "lng": -5.9054669
+  },
+  "4 Sunningdale Green, Belfast": {
+    "lat": 54.6312901,
+    "lng": -5.9590833
+  },
+  "10 Gweedore Crescent, Lenadoon, Belfast": {
+    "lat": 54.5746205,
+    "lng": -6.0211682
+  },
+  "Building site, adj 8 Dunmore Road, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "77 Woodburn Road, Carrickfergus": {
+    "lat": 54.7200856,
+    "lng": -5.8245787
+  },
+  "28 Edengrove Park North, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "31 Church Street, Ballynahinch": {
+    "lat": 54.399881,
+    "lng": -5.8971157
+  },
+  "Islandhill, 66a Moss Road, Waringstown, Craigavon": {
+    "lat": 54.4507201,
+    "lng": -6.3921622
+  },
+  "site, opp 1 Hillsborough Road, Dromara, Dromore": {
+    "lat": 54.5128552,
+    "lng": -7.4576175
+  },
+  "46 Duncoole Park, Belfast": {
+    "lat": 54.636097,
+    "lng": -5.9562262
+  },
+  "7 Alexander Gardens, Carrickfergus": {
+    "lat": 54.7272375,
+    "lng": -5.7883379
+  },
+  "43 Millbank Grove, Ballynahinch": {
+    "lat": 54.3988012,
+    "lng": -5.8817521
+  },
+  "The Apsley, Site 59 Edengrove, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "The Bushmead, Site 58 Edengrove, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "37 Langley Road, Ballynahinch": {
+    "lat": 54.4089765,
+    "lng": -5.9005121
+  },
+  "Apt 184 Bingnian Drive, Glen Road": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "Building Site, BTW 10 & 12 Glassdrumman Road, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "91B Belvoir Drive, Belvoir Park, Belvoir Park, Belfast": {
+    "lat": 54.5517094,
+    "lng": -5.9319553
+  },
+  "2 Dunmore Court, Antrim Road, Belfast": {
+    "lat": 54.61767,
+    "lng": -5.9054669
+  },
+  "73 Killough Road, Coney Island, Ardglass": {
+    "lat": 54.2633035,
+    "lng": -5.6098711
+  },
+  "Development Opportunity, 6-10 Fairview Green, Saintfield": {
+    "lat": 54.4603955,
+    "lng": -5.8325813
+  },
+  "Building Site, 140m Southwest 47 Crossgar Road, Dromara": {
+    "lat": 54.379847,
+    "lng": -6.0179819
+  },
+  "5 Lancaster Street, Antrim Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "Land Saintfield Town Hill Grange View, Saintfield": {
+    "lat": 54.4603955,
+    "lng": -5.8325813
+  },
+  "Land, 101 Crawfordstown Road, Annagh Lane, Drumaness": {
+    "lat": 54.3695125,
+    "lng": -5.852217
+  },
+  "Building Site, 200m east of 7 Hillside Road, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "166 Lagmore Meadows, Stewartstown Road": {
+    "lat": 54.5768423,
+    "lng": -6.6765557
+  },
+  "20 Drumroe Road, Ballyculter, Strangford": {
+    "lat": 54.3705992,
+    "lng": -5.5561416
+  },
+  "103 Wynchurch Road, Rosetta, Belfast": {
+    "lat": 54.5667714,
+    "lng": -5.899824
+  },
+  "40 Ballyroney Road, Katesbridge, Banbridge": {
+    "lat": 54.2867594,
+    "lng": -6.1248507
+  },
+  "263 Antrim Road, Belfast": {
+    "lat": 54.6164609,
+    "lng": -5.9379103
+  },
+  "7 Upton Cottages, Glen Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "47 Mearne Road, Downpatrick": {
+    "lat": 54.3424994,
+    "lng": -5.6728396
+  },
+  "21 Cairnshill Green, Cairnshill Road, Belfast": {
+    "lat": 54.5523087,
+    "lng": -5.8937787
+  },
+  "14 The Oaks, Rush Park, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "106 Erinvale Avenue, Belfast": {
+    "lat": 54.5542266,
+    "lng": -5.9834637
+  },
+  "5 Glandore Parade, Belfast": {
+    "lat": 54.715139,
+    "lng": -6.2192038
+  },
+  "The Foundry, Site 15 Hinchfields, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "The Sawyer, Site 1 Hinchfields, Ballynahinch": {
+    "lat": 54.4026038,
+    "lng": -5.8960151
+  },
+  "4 Sunningdale Grove, Belfast": {
+    "lat": 54.6309369,
+    "lng": -5.9576346
+  },
+  "24 Glenside Parade, Belfast": {
+    "lat": 54.6216573,
+    "lng": -5.9750639
+  },
+  "72 Main Street, Ballywalter, Ballywalter Newtownards": {
+    "lat": 54.541546,
+    "lng": -5.4832894
+  },
+  "8 Craigboy Park, Bangor": {
+    "lat": 54.6469748,
+    "lng": -5.697199
+  },
+  "14 Ballyvarnet Lane, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "52 Linen Crescent, Bangor": {
+    "lat": 54.662595,
+    "lng": -5.6679127
+  },
+  "5 Onslow Gardens, Bangor": {
+    "lat": 54.6450184,
+    "lng": -5.6444668
+  },
+  "14 Brandon Grove, Bangor": {
+    "lat": 54.6445684,
+    "lng": -5.6516108
+  },
+  "Flat 3, 663 Springfield Road, Belfast": {
+    "lat": 54.5981322,
+    "lng": -5.9587478
+  },
+  "15 Almond Drive, Dunmurry, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "60 Mount Michael Park, Saintfield Road, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "48 Bloomfield Gardens, Belfast": {
+    "lat": 54.5911134,
+    "lng": -5.8830693
+  },
+  "218 Lower Braniel Road, Belfast": {
+    "lat": 54.5771292,
+    "lng": -5.8616175
+  },
+  "81 Castlemara Drive, Carrickfergus": {
+    "lat": 54.7286806,
+    "lng": -5.8077554
+  },
+  "9 Shaftesbury Place, Carrickfergus": {
+    "lat": 54.722406,
+    "lng": -5.8127337
+  },
+  "22 Muskett Gardens, Ballynahinch Road, Carryduff": {
+    "lat": 54.5184788,
+    "lng": -5.8874586
+  },
+  "27 Corry Wood Park, Castlewellan": {
+    "lat": 54.2616677,
+    "lng": -5.9258077
+  },
+  "10 Weavers Meadow, Crumlin": {
+    "lat": 54.6205193,
+    "lng": -6.2099677
+  },
+  "2 Croob Close, Downpatrick": {
+    "lat": 54.3185251,
+    "lng": -5.719449
+  },
+  "26 Campsie Park, Dundonald, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "Lands to the Rear of, 15-23 Ferndene Park, Dundonald, Belfast": {
+    "lat": 54.596391,
+    "lng": -5.9301829
+  },
+  "25 Lagmore Downs, Stewartstown Road, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "85 Lagmore Glen, Stewartstown Road, Dunmurry": {
+    "lat": 54.5531263,
+    "lng": -6.0032081
+  },
+  "109 Dunraven Park, Belfast": {
+    "lat": 54.5890827,
+    "lng": -5.8819208
+  },
+  "Apt 2, 2 Burghley Mews, Belfast": {
+    "lat": 54.5892536,
+    "lng": -5.8497872
+  },
+  "5 Breton View, Lisburn": {
+    "lat": 54.5112856,
+    "lng": -6.046717
+  },
+  "6 Windermere Avenue, Lisburn": {
+    "lat": 54.5210057,
+    "lng": -6.0812151
+  },
+  "21 Ravelston Drive, Carnmoney, Newtownabbey": {
+    "lat": 54.6861108,
+    "lng": -5.9422744
+  },
+  "347 Merville Garden Village, Shore Road, Newtownabbey": {
+    "lat": 54.6557574,
+    "lng": -5.9108322
+  },
+  "103 Rogan Manor, Antrim Road, Newtownabbey": {
+    "lat": 54.6778816,
+    "lng": -5.9249199
+  },
+  "5 Old Forge Drive, Newtownards": {
+    "lat": 54.5986849,
+    "lng": -5.6578968
+  },
+  "74 Ardvanagh Road, Conlig, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "1 Ringhaddy Drive, Newtownards": {
+    "lat": 54.5923231,
+    "lng": -5.6723258
+  },
+  "11 Stanfield Drive, Newtownards": {
+    "lat": 54.5896059,
+    "lng": -5.6829575
+  },
+  "18 Forest Hill, Conlig, Newtownards": {
+    "lat": 54.5933779,
+    "lng": -5.6960935
+  },
+  "53 Beechview Park, Off Whiterock Road": null,
+  "8 Torrens Drive, Belfast": {
+    "lat": 54.6182785,
+    "lng": -5.952575
+  },
+  "37 Adelaide Avenue, Belfast": {
+    "lat": 54.5780834,
+    "lng": -5.9535724
+  },
+  "25 Malton Rise, Belfast": {
+    "lat": 54.5559173,
+    "lng": -5.9673893
+  },
+  "51 Lagmore Grove, Stewartstown Road": {
+    "lat": 54.5768423,
+    "lng": -6.6765557
+  },
+  "27 Willowvale Gardens, Stewartstown Road": {
+    "lat": 54.5768423,
+    "lng": -6.6765557
+  },
+  "161 Park Avenue, Belfast": {
+    "lat": 54.6032075,
+    "lng": -5.8870018
+  },
+  "43 Sunnyhill Park, Upper Dunmurry Lane": {
+    "lat": 54.560839,
+    "lng": -6.0161461
+  },
+  "27 Orchardville Gardens, Finaghy Road North, Belfast": {
+    "lat": 54.6125833,
+    "lng": -5.9285047
+  },
+  "57 Woodvale Road, Belfast": {
+    "lat": 54.6134449,
+    "lng": -5.9645372
   }
 }
