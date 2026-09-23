@@ -199,7 +199,13 @@ def build_property_row(
     geocache = geocache or {}
 
     address = (data.get("address") or data.get("title") or "").strip()
-    coords = geocache.get(address)
+    # Authoritative coords embedded in the agent's page win over the geocache —
+    # geocoders regularly pick a same-named street miles away.
+    coords = None
+    if data.get("lat") and data.get("lng"):
+        coords = {"lat": data["lat"], "lng": data["lng"]}
+    if coords is None:
+        coords = geocache.get(address)
 
     # Status from multiple possible locations
     raw_status = (

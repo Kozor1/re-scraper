@@ -207,10 +207,6 @@
     "lat": 54.581479,
     "lng": -5.7917977
   },
-  "Site 86 The Malvern  Carrow Hall": {
-    "lat": 52.1116462,
-    "lng": -2.32607
-  },
   "27 John Martin Street": {
     "lat": 54.1745819,
     "lng": -6.346233499999999
@@ -12607,29 +12603,9 @@
     "lat": 54.5879598,
     "lng": -5.7162253
   },
-  "Site 64, The Charlbury  Beaufort Green Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
-  "Site 65, The Charlbury  Beaufort Green Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
-  "Site 63, The Charlbury  Beaufort Green Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
-  "Site 2, The Leafield  Beaufort Green Comber Road, Carryduff, BT8": {
-    "lat": 51.8354846,
-    "lng": -1.5399958
-  },
   "Site 69, The Broadway  Beaufort Green Comber Road, BT8": {
     "lat": 54.51843299999999,
     "lng": -5.8738205
-  },
-  "Site 67,The Stroud  Beaufort Green Comber Road, Carryduff, BT8": {
-    "lat": 51.745734,
-    "lng": -2.217758
   },
   "Penthouse Apt 18 The Mansion House  Ardavon Estate Glen Road, Cultra, BT18": {
     "lat": 54.6549366,
@@ -21523,10 +21499,6 @@
     "lat": 54.94277150000001,
     "lng": -7.236264299999999
   },
-  "62 Ard Ban, Muff": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
   "51 Rossdale, L'Derry, BT47 5RD": {
     "lat": 54.9990198,
     "lng": -7.289872299999999
@@ -21851,10 +21823,6 @@
     "lat": 55.0008046,
     "lng": -7.269189399999999
   },
-  "134 Ardban, Muff, Donegal": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
   "8 Foxhill, Derry, BT47 2TN": {
     "lat": 54.9846163,
     "lng": -7.3197221
@@ -22047,14 +22015,6 @@
     "lat": 54.9757268,
     "lng": -7.2912693
   },
-  "77 Ard Ban, Muff": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
-  "102 Ashlea Grove, Killea, Donegal": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
   "47 Drumleck Gardens, Derry, BT48 8ES": {
     "lat": 55.0281919,
     "lng": -7.312918799999999
@@ -22143,10 +22103,6 @@
     "lat": 55.0479853,
     "lng": -7.2761643
   },
-  "90 Ard Ban, Muff": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
   "33 Elmvale, Derry / Londonderry, BT48 8SH": {
     "lat": 55.04408,
     "lng": -7.276865799999999
@@ -22214,10 +22170,6 @@
   "118a The Old Fort, Derry / Londonderry, BT47 6SS": {
     "lat": 55.0306888,
     "lng": -7.2635451
-  },
-  "66 Ard Ban, Muff": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
   },
   "6 Bonds Street, Derry / Londonderry, BT47 6EB": {
     "lat": 54.9965589,
@@ -29687,10 +29639,6 @@
     "lat": 54.4082478,
     "lng": -5.911488900000001
   },
-  "The Bushmead,  Site 58 Edengrove,  Ballynahinch,  BT24 8DP": {
-    "lat": 51.9110082,
-    "lng": -0.413711
-  },
   "37 Langley Road,  Ballynahinch,  BT24 8BZ": {
     "lat": 54.40802309999999,
     "lng": -5.9005793
@@ -32770,10 +32718,6 @@
   "'Croft View', 'Croft View'": {
     "lat": 54.7877149,
     "lng": -6.4923145
-  },
-  "5 Marino Villas, 5 Marino Villas": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
   },
   "Apt 4, 2 Clanbrassil Terrace, Apt 4, 2 Clanbrassil Terrace": {
     "lat": 54.6499618,
@@ -37355,10 +37299,6 @@
     "lat": 54.7877149,
     "lng": -6.4923145
   },
-  "41 Macartan View, Monaghan": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
   "40 Macartan View (SHOWHOUSE), Monaghan H18 K6N4": {
     "lat": 54.7877149,
     "lng": -6.4923145
@@ -37370,10 +37310,6 @@
   "37 Macartan View, Monaghan": {
     "lat": 54.7877149,
     "lng": -6.4923145
-  },
-  "36 Macartan View, Monaghan": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
   },
   "35 Macartan View, Monaghan": {
     "lat": 54.7877149,
@@ -37391,17 +37327,9 @@
     "lat": 54.7877149,
     "lng": -6.4923145
   },
-  "31 Macartan View, Monaghan": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
   "30 Macartan View, Monaghan": {
     "lat": 54.7877149,
     "lng": -6.4923145
-  },
-  "29 Macartan View, Monaghan": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
   },
   "28 Macartan View, Monaghan": {
     "lat": 54.7877149,
@@ -43123,10 +43051,6 @@
     "lat": 54.44403519999999,
     "lng": -6.4113674
   },
-  "French,\nLongridge at The Hollows,Gilford Road,Lurgan": {
-    "lat": 53.831915,
-    "lng": -2.598802
-  },
   "32 Corcrain Drive,Portadown,Craigavon,BT624AW": {
     "lat": 54.4252562,
     "lng": -6.461424
@@ -43182,10 +43106,6 @@
   "The Dawson\nBellfield ParkPortadown": {
     "lat": 54.4253349,
     "lng": -6.4605035
-  },
-  "The Bellamont (a)\nBellfield ParkPortadown": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
   },
   "35 Bracken Meadows,Portadown,Craigavon,BT635PJ": {
     "lat": 54.4385942,
@@ -43278,14 +43198,6 @@
   "Russell,\nLongridge at The Hollows,Gilford Road,Lurgan": {
     "lat": 54.4463979,
     "lng": -6.3276935
-  },
-  "Madden,\nLongridge at The Hollows,Gilford Road,Lurgan": {
-    "lat": 53.831915,
-    "lng": -2.598802
-  },
-  "The Bellamont (b)\nBellfield ParkPortadown": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
   },
   "The Ainesley\nBellfield ParkPortadown": {
     "lat": 54.4281011,
@@ -43478,10 +43390,6 @@
   "Joyce,\nLongridge at The Hollows,Gilford Road,Lurgan": {
     "lat": 54.4463979,
     "lng": -6.3276935
-  },
-  "Beaumont,\nLongridge at The Hollows,Gilford Road,Lurgan": {
-    "lat": 53.831915,
-    "lng": -2.598802
   },
   "35 & 35a - 35c Upper English StreetArmagh,BT617BA": {
     "lat": 54.3493523,
@@ -49007,10 +48915,6 @@
     "lat": 54.4074757,
     "lng": -6.6117212
   },
-  "The Charleville (b)\nBellfield ParkPortadown": {
-    "lat": 53.77975540000001,
-    "lng": -7.3055309
-  },
   "The Charleville (a)\nBellfield ParkPortadown": {
     "lat": 54.7877149,
     "lng": -6.4923145
@@ -51747,18 +51651,6 @@
     "lat": 54.3410823,
     "lng": -6.2743151
   },
-  "Site 64, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
-  "Site 65, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
-  "Site 63, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
   "Site 69, The Broadway  Beaufort Green, Comber Road, BT8": {
     "lat": 54.51843299999999,
     "lng": -5.8738205
@@ -53455,10 +53347,6 @@
     "lat": 54.434097,
     "lng": -6.4058996
   },
-  "Swift,\nLongridge at The Hollows, Gilford Road, Lurgan": {
-    "lat": 53.831915,
-    "lng": -2.598802
-  },
   "11 Cedar Lodge, Portadown, Craigavon, BT63 5FR": {
     "lat": 54.42158190000001,
     "lng": -6.3476257
@@ -53574,10 +53462,6 @@
   "16 Drumford MeadowPortadown, BT63 5GD": {
     "lat": 54.44403519999999,
     "lng": -6.4113674
-  },
-  "French,\nLongridge at The Hollows, Gilford Road, Lurgan": {
-    "lat": 53.831915,
-    "lng": -2.598802
   },
   "8 Mahon AvenuePortadown, BT62 3JE": {
     "lat": 54.4111897,
@@ -53710,10 +53594,6 @@
   "Russell,\nLongridge at The Hollows, Gilford Road, Lurgan": {
     "lat": 54.4463979,
     "lng": -6.3276935
-  },
-  "Madden,\nLongridge at The Hollows, Gilford Road, Lurgan": {
-    "lat": 53.831915,
-    "lng": -2.598802
   },
   "14 Carrickblacker Road, Portadown, Craigavon, BT63 5AU": {
     "lat": 54.4265579,
@@ -53862,10 +53742,6 @@
   "Joyce,\nLongridge at The Hollows, Gilford Road, Lurgan": {
     "lat": 54.4463979,
     "lng": -6.3276935
-  },
-  "Beaumont,\nLongridge at The Hollows, Gilford Road, Lurgan": {
-    "lat": 53.831915,
-    "lng": -2.598802
   },
   "35 & 35a - 35c Upper English StreetArmagh, BT61 7BA": {
     "lat": 54.3493523,
@@ -58435,10 +58311,6 @@
     "lat": 54.7429015,
     "lng": -6.0194211
   },
-  "Site 58, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
   "9 Lancefield Road, Lisburn Road, Belfast, BT9 6LL": {
     "lat": 54.5724534,
     "lng": -5.9588578
@@ -59342,10 +59214,6 @@
   "The Butler (b2),\nCastlegate, Ballyclare": {
     "lat": 54.75291439999999,
     "lng": -6.001522100000001
-  },
-  "The Cambourne\nRobson Park, Ballyclare, BT39": {
-    "lat": 52.2181849,
-    "lng": -0.0683322
   },
   "The Dawson\nRobson Park, Ballyclare, BT39": {
     "lat": 54.7583384,
@@ -60355,21 +60223,9 @@
     "lat": 54.7429015,
     "lng": -6.0194211
   },
-  "Site 60, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
-  "Site 61, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
-  },
   "Site 72, The Kingham  Beaufort Green, Comber Road, BT8": {
     "lat": 54.51843299999999,
     "lng": -5.8738205
-  },
-  "Site 59, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
-    "lat": 51.8745,
-    "lng": -1.479752
   },
   "141 Parkgate Avenue,  Belfast,  BT4 1JD": {
     "lat": 54.601071,
@@ -70677,8 +70533,14 @@
     "lat": 54.5828216,
     "lng": -5.9249003
   },
-  "22 Lesley Chase, Knockagh Chase": null,
-  "18 Lesley Chase, Knockagh Chase": null,
+  "22 Lesley Chase, Knockagh Chase": {
+    "lat": 54.7017429,
+    "lng": -5.8778028
+  },
+  "18 Lesley Chase, Knockagh Chase": {
+    "lat": 54.7017429,
+    "lng": -5.8778028
+  },
   "30 Firmount Crescent": {
     "lat": 54.6265995,
     "lng": -5.8382905
@@ -70695,7 +70557,10 @@
     "lat": 54.58052,
     "lng": -5.8257219
   },
-  "'Ailsa Lodge'": null,
+  "'Ailsa Lodge'": {
+    "lat": 54.6651328,
+    "lng": -5.707716599999999
+  },
   "1 Glen Park": {
     "lat": 54.6605825,
     "lng": -5.6880606
@@ -70724,7 +70589,10 @@
     "lat": 54.710524,
     "lng": -6.1834448
   },
-  "Apartment 5 Altona Manor": null,
+  "Apartment 5 Altona Manor": {
+    "lat": 54.6403508,
+    "lng": -5.8302602
+  },
   "Brambles": {
     "lat": 54.7616876,
     "lng": -6.6068613
@@ -70733,9 +70601,18 @@
     "lat": 54.596391,
     "lng": -5.9301829
   },
-  "Glen Cottage": null,
-  "2B Pine Crest": null,
-  "'Glentogher'": null,
+  "Glen Cottage": {
+    "lat": 54.6122551,
+    "lng": -5.849482
+  },
+  "2B Pine Crest": {
+    "lat": 54.6337494,
+    "lng": -5.8294278
+  },
+  "'Glentogher'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "Apt 14 Church Court": {
     "lat": 54.9532955,
     "lng": -6.478824
@@ -70756,8 +70633,14 @@
     "lat": 54.5501681,
     "lng": -5.9164965
   },
-  "7 Crawfords Farm Lane": null,
-  "Redevelopment Opportunity @ 52 Church Road": null,
+  "7 Crawfords Farm Lane": {
+    "lat": 54.6593916,
+    "lng": -5.7114047
+  },
+  "Redevelopment Opportunity @ 52 Church Road": {
+    "lat": 54.97834779999999,
+    "lng": -7.2920232
+  },
   "135 Whiterock Bay": {
     "lat": 54.482051,
     "lng": -5.6487454
@@ -70766,28 +70649,55 @@
     "lat": 54.6450486,
     "lng": -5.8055969
   },
-  "Building Site 2 @ 209 Church Road": null,
+  "Building Site 2 @ 209 Church Road": {
+    "lat": 54.6186057,
+    "lng": -5.8072719
+  },
   "'Winlough'": null,
-  "Apt 10 Crawford House": null,
-  "LOT 2  Prime Agricultural Land @ 42 Moss Road": null,
-  "LOT 1 Prime Agricultural Land @ 42 Moss Road": null,
-  "Moor Park, 42 Moss Road": null,
+  "Apt 10 Crawford House": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "LOT 2  Prime Agricultural Land @ 42 Moss Road": {
+    "lat": 54.4442044,
+    "lng": -6.300754599999999
+  },
+  "LOT 1 Prime Agricultural Land @ 42 Moss Road": {
+    "lat": 54.4442044,
+    "lng": -6.300754599999999
+  },
+  "Moor Park, 42 Moss Road": {
+    "lat": 54.280205,
+    "lng": -6.2883964
+  },
   "47 Croft Road": {
     "lat": 54.6414603,
     "lng": -5.8210069
   },
-  "2 Crawford House": null,
+  "2 Crawford House": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "7 Craigtara": {
     "lat": 54.637138,
     "lng": -5.8376267
   },
-  "Building Site @84cNewtownards Road": null,
+  "Building Site @84cNewtownards Road": {
+    "lat": 54.64711029999999,
+    "lng": -5.676151400000001
+  },
   "39 Victoria Road": {
     "lat": 54.8527823,
     "lng": -5.8182612
   },
-  "'Lurach Lodge'": null,
-  "Perceval House": null,
+  "'Lurach Lodge'": {
+    "lat": 54.8431586,
+    "lng": -6.669125999999999
+  },
+  "Perceval House": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "58 Ballymiscaw Road": {
     "lat": 54.6191942,
     "lng": -5.8027064
@@ -70840,7 +70750,10 @@
     "lat": 54.6035341,
     "lng": -5.8532853
   },
-  "'Crabtree Barn'": null,
+  "'Crabtree Barn'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "85 Demesne Road": {
     "lat": 54.6325979,
     "lng": -5.8328689
@@ -70853,7 +70766,10 @@
     "lat": 54.4634179,
     "lng": -5.8336516
   },
-  "12 Lesley Chase": null,
+  "12 Lesley Chase": {
+    "lat": 54.7017429,
+    "lng": -5.8778028
+  },
   "The Courtyard": {
     "lat": 54.5870547,
     "lng": -5.8916406
@@ -70874,7 +70790,10 @@
     "lat": 54.6457229,
     "lng": -5.8267505
   },
-  "24 Forge Walk": null,
+  "24 Forge Walk": {
+    "lat": 54.4986902,
+    "lng": -5.7861825
+  },
   "14 St Anne's Crescent": {
     "lat": 54.6838182,
     "lng": -5.9639275
@@ -70887,7 +70806,10 @@
     "lat": 54.664311,
     "lng": -5.7093842
   },
-  "Barn House": null,
+  "Barn House": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "104 Church Road": {
     "lat": 54.6366683,
     "lng": -5.8216511
@@ -70900,7 +70822,10 @@
     "lat": 54.4931374,
     "lng": -5.6754198
   },
-  "28 My Ladys Mile": null,
+  "28 My Ladys Mile": {
+    "lat": 54.6365957,
+    "lng": -5.8337694
+  },
   "9 Lesley Mews": {
     "lat": 54.5974945,
     "lng": -5.9321378
@@ -70937,8 +70862,14 @@
     "lat": 54.6403263,
     "lng": -5.8422766
   },
-  "'Tre Cubi'": null,
-  "'Lismoir'": null,
+  "'Tre Cubi'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "'Lismoir'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "13 East Link": {
     "lat": 54.6330949,
     "lng": -5.8386965
@@ -70952,20 +70883,47 @@
     "lat": 54.5496194,
     "lng": -5.8003644
   },
-  "'Cooldara'": null,
-  "'White Cottage'": null,
-  "7 Roddens Manor": null,
-  "1 Milford Manor": null,
-  "3 Lesley Meadows": null,
-  "Salt & Bark": null,
+  "'Cooldara'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "'White Cottage'": {
+    "lat": 54.7618342,
+    "lng": -5.8652371
+  },
+  "7 Roddens Manor": {
+    "lat": 54.85252269999999,
+    "lng": -5.8219308
+  },
+  "1 Milford Manor": {
+    "lat": 54.33472,
+    "lng": -6.681159999999999
+  },
+  "3 Lesley Meadows": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "Salt & Bark": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "Apt 1, 7 Broomhill Lane": {
     "lat": 54.5668015,
     "lng": -5.9401727
   },
   "'Killops Rose'": null,
-  "Apartment 1a": null,
-  "'Aozora'": null,
-  "'Woodcote'": null,
+  "Apartment 1a": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "'Aozora'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "'Woodcote'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "21 Knockburn Park": {
     "lat": 54.515247,
     "lng": -6.080922
@@ -70987,8 +70945,14 @@
     "lat": 54.6349682,
     "lng": -5.8278453
   },
-  "'Croft View'": null,
-  "5 Marino Villas": null,
+  "'Croft View'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "5 Marino Villas": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "31a Chimera Wood": {
     "lat": 54.6686094,
     "lng": -5.7345909
@@ -70997,8 +70961,14 @@
     "lat": 54.5957176,
     "lng": -5.7082207
   },
-  "Apt 4, 2 Clanbrassil Terrace": null,
-  "'Brooksmere'": null,
+  "Apt 4, 2 Clanbrassil Terrace": {
+    "lat": 54.6499618,
+    "lng": -5.822346599999999
+  },
+  "'Brooksmere'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "1A Garranard Park": {
     "lat": 54.6055041,
     "lng": -5.8616025
@@ -71015,7 +70985,10 @@
     "lat": 54.6450486,
     "lng": -5.8055969
   },
-  "5 Alexandra Gate": null,
+  "5 Alexandra Gate": {
+    "lat": 54.63554269999999,
+    "lng": -5.8352691
+  },
   "Apt 6 Fairways": {
     "lat": 54.4398871,
     "lng": -5.4670452
@@ -71106,7 +71079,10 @@
     "lng": -6.2925106
   },
   "12 The Old Mart,": null,
-  "139 Shelling Hill Road,": null,
+  "139 Shelling Hill Road,": {
+    "lat": 54.9160943,
+    "lng": -6.344770899999999
+  },
   "The Skerry,  Site 2 Carncormick Meadow,": null,
   "12 Old Galgorm Manor,": {
     "lat": 54.8611564,
@@ -71128,7 +71104,10 @@
     "lat": 54.8561172,
     "lng": -6.2899852
   },
-  "New Build,  3a Carnearney Road,": null,
+  "New Build,  3a Carnearney Road,": {
+    "lat": 54.8443738,
+    "lng": -6.3735982
+  },
   "22 Glebe Cottages,": {
     "lat": 54.8487245,
     "lng": -6.3687224
@@ -72281,7 +72260,10 @@
     "lat": 54.8647255,
     "lng": -6.1436379
   },
-  "Paddock Gardens, Carrowdore, County Down, BT22": null,
+  "Paddock Gardens, Carrowdore, County Down, BT22": {
+    "lat": 54.5748701,
+    "lng": -5.556649999999999
+  },
   "Millars Forge, Dundonald, County Down, BT16": null,
   "Glenview Park, Newtownabbey, County Antrim, BT37": {
     "lat": 54.6774052,
@@ -73190,7 +73172,10 @@
     "lat": 54.554042,
     "lng": -5.7346896
   },
-  "Paddock Walk, Carrowdore, County Down, BT22": null,
+  "Paddock Walk, Carrowdore, County Down, BT22": {
+    "lat": 54.5748701,
+    "lng": -5.556649999999999
+  },
   "Castlemore Avenue, Upper Knockbreda Road, Belfast, BT6": {
     "lat": 54.596391,
     "lng": -5.9301829
@@ -73224,8 +73209,14 @@
     "lat": 54.8540305,
     "lng": -6.2988033
   },
-  "5 Paradise Mews,": null,
-  "4 Paradise Mews,": null,
+  "5 Paradise Mews,": {
+    "lat": 54.8584207,
+    "lng": -6.2759794
+  },
+  "4 Paradise Mews,": {
+    "lat": 54.8584207,
+    "lng": -6.2759794
+  },
   "61 Old Galgorm Road,": {
     "lat": 54.8593043,
     "lng": -6.3080601
@@ -73434,7 +73425,10 @@
     "lat": 54.590208,
     "lng": -5.9893427
   },
-  "8 Roddens Manor": null,
+  "8 Roddens Manor": {
+    "lat": 54.85303949999999,
+    "lng": -5.8214562
+  },
   "The Hollies Apartment 5, 109 North Road, Ballyhackamore,   BELFAST,  BT5 5NF": {
     "lat": 54.5936197,
     "lng": -5.8756601
@@ -73451,7 +73445,10 @@
     "lat": 54.5800005,
     "lng": -5.8998161
   },
-  "An unexpected issue has been encountered.": null,
+  "An unexpected issue has been encountered.": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "13 Glenholm Crescent,   Belfast,  BT8 6LT": {
     "lat": 54.5950468,
     "lng": -5.9342418
@@ -74437,7 +74434,10 @@
     "lat": 55.2061517,
     "lng": -6.2405969
   },
-  "9 Roddens Manor": null,
+  "9 Roddens Manor": {
+    "lat": 54.85226979999999,
+    "lng": -5.8219103
+  },
   "43 Princess Park": {
     "lat": 54.7517294,
     "lng": -5.7168913
@@ -74630,7 +74630,10 @@
     "lat": 54.5970209,
     "lng": -7.3041547
   },
-  "Site 13 Horsefair Meadows,   Moy,  BT71": null,
+  "Site 13 Horsefair Meadows,   Moy,  BT71": {
+    "lat": 54.4453572,
+    "lng": -6.6948996
+  },
   "87 Iris Drive,   Belfast,  BT12 7BL": {
     "lat": 54.5965999,
     "lng": -5.9610163
@@ -75251,7 +75254,10 @@
     "lat": 54.5807908,
     "lng": -5.9432265
   },
-  "4 Harbour View,   Mullaghmore,  F91 H3C3": null,
+  "4 Harbour View,   Mullaghmore,  F91 H3C3": {
+    "lat": 54.9840333,
+    "lng": -7.319201999999999
+  },
   "109 Beech Hill View,   Derry,  BT47 3FY": {
     "lat": 54.9797794,
     "lng": -7.2625216
@@ -75728,23 +75734,74 @@
     "lat": 54.5836328,
     "lng": -5.9239318
   },
-  "40 Macartan View (SHOWHOUSE),   Monaghan,  H18 K6N4": null,
-  "36 Macartan View,   Monaghan,": null,
-  "35 Macartan View,   Monaghan,": null,
-  "34 Macartan View,   Monaghan,": null,
-  "33 Macartan View,   Monaghan,": null,
-  "32 Macartan View,   Monaghan,": null,
-  "31 Macartan View,   Monaghan,": null,
-  "30 Macartan View,   Monaghan,": null,
-  "29 Macartan View,   Monaghan,": null,
-  "28 Macartan View,   Monaghan,": null,
-  "5 Foxwood,   Monaghan,": null,
-  "6 Foxwood,   Monaghan,": null,
-  "7 Foxwood,   Monaghan,": null,
-  "4 Foxwood,   Monaghan,": null,
-  "1 Foxwood,   Monaghan,": null,
-  "3 Foxwood,   Monaghan,": null,
-  "2 Foxwood,   Monaghan,": null,
+  "40 Macartan View (SHOWHOUSE),   Monaghan,  H18 K6N4": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "36 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "35 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "34 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "33 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "32 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "31 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "30 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "29 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "28 Macartan View,   Monaghan,": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "5 Foxwood,   Monaghan,": {
+    "lat": 54.3136857,
+    "lng": -6.7382483
+  },
+  "6 Foxwood,   Monaghan,": {
+    "lat": 54.3136857,
+    "lng": -6.7382483
+  },
+  "7 Foxwood,   Monaghan,": {
+    "lat": 54.3136857,
+    "lng": -6.7382483
+  },
+  "4 Foxwood,   Monaghan,": {
+    "lat": 54.3136857,
+    "lng": -6.7382483
+  },
+  "1 Foxwood,   Monaghan,": {
+    "lat": 54.3136857,
+    "lng": -6.7382483
+  },
+  "3 Foxwood,   Monaghan,": {
+    "lat": 54.3136857,
+    "lng": -6.7382483
+  },
+  "2 Foxwood,   Monaghan,": {
+    "lat": 54.3136857,
+    "lng": -6.7382483
+  },
   "290 Loughmuck Road, Fintona,   Omagh,  BT78 2FF": {
     "lat": 54.5950468,
     "lng": -5.9342418
@@ -76093,7 +76150,10 @@
     "lat": 54.6126368,
     "lng": -7.293561
   },
-  "Site 4 Horsefair Meadows,   Moy,  BT71": null,
+  "Site 4 Horsefair Meadows,   Moy,  BT71": {
+    "lat": 54.4453572,
+    "lng": -6.6948996
+  },
   "11 Abbey Street x 5 Apartments,   Armagh,  BT61 7DX": {
     "lat": 54.3496312,
     "lng": -6.6549679
@@ -76566,8 +76626,14 @@
     "lat": 54.8514732,
     "lng": -5.8369509
   },
-  "Aldergrange Park, Newtownards, County Down, BT23": null,
-  "Royal Hill, Maze, Lisburn, County Down, BT27": null,
+  "Aldergrange Park, Newtownards, County Down, BT23": {
+    "lat": 54.5941168,
+    "lng": -5.718954
+  },
+  "Royal Hill, Maze, Lisburn, County Down, BT27": {
+    "lat": 54.4920467,
+    "lng": -6.1170382
+  },
   "Princess Park, Whitehead, County Antrim, BT38": {
     "lat": 54.7527291,
     "lng": -5.717221
@@ -76669,7 +76735,10 @@
     "lat": 54.4071171,
     "lng": -6.1420337
   },
-  "9 Carncormick Meadow,": null,
+  "9 Carncormick Meadow,": {
+    "lat": 54.99261,
+    "lng": -6.179783
+  },
   "79 Princes Street,": {
     "lat": 54.8656789,
     "lng": -6.2847158
@@ -77286,8 +77355,14 @@
     "lat": 54.4507265,
     "lng": -6.7921711
   },
-  "'Glenshee'": null,
-  "Apt 5 The Fairways 40 Church Road": null,
+  "'Glenshee'": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "Apt 5 The Fairways 40 Church Road": {
+    "lat": 54.9523709,
+    "lng": -6.5475726
+  },
   "Apartment 4.07 Obel": {
     "lat": 54.6021644,
     "lng": -5.9217093
@@ -77509,7 +77584,10 @@
     "lat": 54.6453621,
     "lng": -5.6396066
   },
-  "Abbington Manor, Bangor, County Down, BT19": null,
+  "Abbington Manor, Bangor, County Down, BT19": {
+    "lat": 54.6531072,
+    "lng": -5.6999641
+  },
   "Falls Road, Belfast, County Antrim, BT12": {
     "lat": 54.5920325,
     "lng": -5.9623567
@@ -80157,12 +80235,18 @@
     "lat": 54.571491,
     "lng": -5.9125566
   },
-  "17 Lesley Chase": null,
+  "17 Lesley Chase": {
+    "lat": 54.7017429,
+    "lng": -5.8778028
+  },
   "100 Downshire Road": {
     "lat": 54.7282787,
     "lng": -5.7912168
   },
-  "5 Porter Green Road": null,
+  "5 Porter Green Road": {
+    "lat": 54.8453616,
+    "lng": -5.851344699999999
+  },
   "20 Wellington Park": {
     "lat": 54.5819116,
     "lng": -5.9403404
@@ -80867,8 +80951,14 @@
     "lat": 54.7200856,
     "lng": -5.8245787
   },
-  "Dunkeld Close, Bangor, County Down, BT19": null,
-  "Kesh Road, Maze, Lisburn, County Down, BT27": null,
+  "Dunkeld Close, Bangor, County Down, BT19": {
+    "lat": 54.6417126,
+    "lng": -5.6354936
+  },
+  "Kesh Road, Maze, Lisburn, County Down, BT27": {
+    "lat": 54.4830801,
+    "lng": -6.119207
+  },
   "North Sperrin, Belfast, County Antrim, BT5": {
     "lat": 54.8647255,
     "lng": -6.1436379
@@ -80925,7 +81015,10 @@
     "lat": 54.596391,
     "lng": -5.9301829
   },
-  "Ringhaddy Gardens, Newtownards, County Down, BT23": null,
+  "Ringhaddy Gardens, Newtownards, County Down, BT23": {
+    "lat": 54.5919204,
+    "lng": -5.6694983
+  },
   "Millmount Village Square, Dundonald, County Down, BT16": {
     "lat": 54.5806726,
     "lng": -5.7863026
@@ -80983,7 +81076,10 @@
     "lat": 54.6704119,
     "lng": -5.9515044
   },
-  "Ballywalter Gardens, Bangor, County Down, BT19": null,
+  "Ballywalter Gardens, Bangor, County Down, BT19": {
+    "lat": 54.64651,
+    "lng": -5.69165
+  },
   "101 Gracefield,": {
     "lat": 54.7447045,
     "lng": -6.5476202
@@ -80996,12 +81092,18 @@
     "lat": 54.2949354,
     "lng": -7.4577575
   },
-  "2,  Old School Gate Woodtown Road,": null,
+  "2,  Old School Gate Woodtown Road,": {
+    "lat": 54.8766408,
+    "lng": -6.3082594
+  },
   "41 Duneoin Road,": {
     "lat": 54.9271404,
     "lng": -6.3893168
   },
-  "The Dwight,  Site 13 Buick Gate, Tobar Park,": null,
+  "The Dwight,  Site 13 Buick Gate, Tobar Park,": {
+    "lat": 54.8908808,
+    "lng": -6.3487163
+  },
   "1 Liscoom Road,": {
     "lat": 54.8592244,
     "lng": -6.3007815
@@ -81890,7 +81992,10 @@
     "lat": 54.6037391,
     "lng": -5.9633562
   },
-  "1 Lesley Meadows": null,
+  "1 Lesley Meadows": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
   "220 Bangor Road, Craigavad,   HOLYWOOD,  BT18 0JF": {
     "lat": 54.5950468,
     "lng": -5.9342418
@@ -82039,7 +82144,10 @@
     "lat": 54.689842,
     "lng": -5.9401275
   },
-  "22 Prieststown Road,": null,
+  "22 Prieststown Road,": {
+    "lat": 54.8395959,
+    "lng": -6.4040237
+  },
   "19 Mill Gardens,   Portstewart,  BT55 7LW": {
     "lat": 55.1772168,
     "lng": -6.7123207
@@ -82216,7 +82324,10 @@
     "lat": 54.5950468,
     "lng": -5.9342418
   },
-  "Balmoral Road, Bangor, County Down, BT19": null,
+  "Balmoral Road, Bangor, County Down, BT19": {
+    "lat": 54.6380237,
+    "lng": -5.6498842
+  },
   "Fairfields Mews, Lisburn, County Antrim, BT28": {
     "lat": 54.8647255,
     "lng": -6.1436379
@@ -82603,7 +82714,10 @@
     "lat": 54.352586,
     "lng": -6.2768399
   },
-  "New Build 5 Bedroom Detached, Lisnagade Road": null,
+  "New Build 5 Bedroom Detached, Lisnagade Road": {
+    "lat": 54.3324265,
+    "lng": -6.3256483
+  },
   "49 Huntly Bungalows, Banbridge, BT32 3BL": {
     "lat": 54.3544807,
     "lng": -6.2759655
@@ -82668,7 +82782,10 @@
     "lat": 54.7330887,
     "lng": -6.2590411
   },
-  "16 Long Meadow,": null,
+  "16 Long Meadow,": {
+    "lat": 54.8753372,
+    "lng": -6.4787751
+  },
   "72 Carndale Meadows,": {
     "lat": 54.8696196,
     "lng": -6.2881495
@@ -82981,7 +83098,10 @@
     "lat": 54.5655841,
     "lng": -5.9760181
   },
-  "53 Divismore Crescent, Off Springfield Road": null,
+  "53 Divismore Crescent, Off Springfield Road": {
+    "lat": 54.59475699999999,
+    "lng": -5.986969999999999
+  },
   "Maple, Site 214 High Trees Including Sunroom, Donaghadee": {
     "lat": 54.6425446,
     "lng": -5.5375794
@@ -85210,7 +85330,10 @@
     "lat": 54.3279335,
     "lng": -5.71649
   },
-  "124 Stewartstown Park, Off Stewartstown Road": null,
+  "124 Stewartstown Park, Off Stewartstown Road": {
+    "lat": 54.5736989,
+    "lng": -6.0120574
+  },
   "7 Upper Castle Park, Belfast": {
     "lat": 54.6354654,
     "lng": -5.9472173
@@ -86359,7 +86482,10 @@
     "lat": 54.3944487,
     "lng": -5.8858685
   },
-  "20 Ballymurphy Road, Off Whiterock Road": null,
+  "20 Ballymurphy Road, Off Whiterock Road": {
+    "lat": 54.5921262,
+    "lng": -5.9809033
+  },
   "Apt 24 San Antone, Old Suffolk Road, Belfast": {
     "lat": 54.596391,
     "lng": -5.9301829
@@ -86672,7 +86798,10 @@
     "lat": 54.6289192,
     "lng": -5.9920124
   },
-  "9 Ladymar Court, Off Grosvenor Road": null,
+  "9 Ladymar Court, Off Grosvenor Road": {
+    "lat": 54.5963372,
+    "lng": -5.9453967
+  },
   "5 Riverdale Park West, Andersonstown": {
     "lat": 54.5713251,
     "lng": -5.9912914
@@ -87353,7 +87482,10 @@
     "lat": 54.6125833,
     "lng": -5.9285047
   },
-  "29 Riverview Heights, Ballyanhinch": null,
+  "29 Riverview Heights, Ballyanhinch": {
+    "lat": 54.4067583,
+    "lng": -5.9027543
+  },
   "18 Old Brewery Lane, Glen Road, Belfast": {
     "lat": 54.596391,
     "lng": -5.9301829
@@ -87598,7 +87730,10 @@
     "lat": 54.5768975,
     "lng": -5.9947805
   },
-  "81 Springfield Park, Off Springfield Road": null,
+  "81 Springfield Park, Off Springfield Road": {
+    "lat": 54.5976198,
+    "lng": -5.9763707
+  },
   "17 Altan Drive, Stewartstown Road": {
     "lat": 54.6125833,
     "lng": -5.9285047
@@ -89419,7 +89554,10 @@
     "lat": 54.5933779,
     "lng": -5.6960935
   },
-  "53 Beechview Park, Off Whiterock Road": null,
+  "53 Beechview Park, Off Whiterock Road": {
+    "lat": 54.5931176,
+    "lng": -5.9851165
+  },
   "8 Torrens Drive, Belfast": {
     "lat": 54.6182785,
     "lng": -5.952575
@@ -89455,5 +89593,117 @@
   "57 Woodvale Road, Belfast": {
     "lat": 54.6134449,
     "lng": -5.9645372
+  },
+  "36 Ashlea Drive,   Ballymoney,  BT53 7BY": {
+    "lat": 55.0734145,
+    "lng": -6.4945578
+  },
+  "8 Sandelford Court, Mountsandel Road, Mountsandel Road,   Coleraine,  BT52 1NZ": {
+    "lat": 55.126695,
+    "lng": -6.6692789
+  },
+  "10 Ballaghmore Road,   Portballintrae,  BT57 8RH": {
+    "lat": 55.2103921,
+    "lng": -6.534386599999999
+  },
+  "21 Seahaven Court,   Portstewart,  BT55 7DS": {
+    "lat": 55.1772939,
+    "lng": -6.713487199999999
+  },
+  "71 Drumaran View, Gilford, BT63 6BF": {
+    "lat": 54.3779017,
+    "lng": -6.3569195
+  },
+  "Site 64, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
+    "lat": 54.5145825,
+    "lng": -5.889557
+  },
+  "Site 63, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
+    "lat": 54.5145825,
+    "lng": -5.889557
+  },
+  "Site 61, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
+    "lat": 54.5145825,
+    "lng": -5.889557
+  },
+  "Site 58, The Charlbury  Beaufort Green, Comber Road, Carryduff, BT8": {
+    "lat": 54.5145825,
+    "lng": -5.889557
+  },
+  "23 Rathmore Drive, Newtownabbey, BT37 9BN": {
+    "lat": 54.6620527,
+    "lng": -5.9191182
+  },
+  "Laragh Lodge 76 Maydown Road,   Armagh,  BT71 7LN": {
+    "lat": 54.3890474,
+    "lng": -6.739509099999999
+  },
+  "49 Kenilworth Square South,   Rathgar,  D06CH68": {
+    "lat": 54.7877149,
+    "lng": -6.4923145
+  },
+  "6 Collingwood Avenue,   Belfast,  BT7 1QT": {
+    "lat": 54.58339179999999,
+    "lng": -5.9243267
+  },
+  "110 Bluestone Hall,   Portadown,  BT64 2AP": {
+    "lat": 54.4415168,
+    "lng": -6.3893111
+  },
+  "15 Montgomery Close,   Derry,  BT47 5NW": {
+    "lat": 54.9943215,
+    "lng": -7.3013318
+  },
+  "1 Seven Oaks,   Armagh,  BT60 1EG": {
+    "lat": 54.3459966,
+    "lng": -6.6418873
+  },
+  "17 Bonds Hill,   Derry,  BT47 6DW": {
+    "lat": 54.9941641,
+    "lng": -7.3116792
+  },
+  "137 Ballyhanedin Road,   Claudy,  BT47 4EW": {
+    "lat": 54.9367212,
+    "lng": -7.1002033
+  },
+  "Site 490 Beech Hill View,   Drumahoe,  BT47 3JQ": {
+    "lat": 54.9763348,
+    "lng": -7.2613995
+  },
+  "Apartment 17, 29 College Square North,   Belfast,  BT1 6AS": {
+    "lat": 54.5979342,
+    "lng": -5.9380447
+  },
+  "Site 476 Beech Hill View,   Drumahoe,": {
+    "lat": 54.9763348,
+    "lng": -7.2613995
+  },
+  "Site 475 Beech Hill View,   Drumahoe,": {
+    "lat": 54.9763348,
+    "lng": -7.2613995
+  },
+  "Site 470 Beech Hill View,   Drumahoe,  BT47 3BU": {
+    "lat": 54.9763348,
+    "lng": -7.2613995
+  },
+  "Site 356 Beech Hill View,   Drumahoe,  BT47 3HG": {
+    "lat": 54.9763348,
+    "lng": -7.2613995
+  },
+  "Site 468 Beech Hill View,   Drumahoe,  BT47 3HG": {
+    "lat": 54.9763348,
+    "lng": -7.2613995
+  },
+  "5 Parkmore Drive,   Strathfoyle,  BT47 6XA": {
+    "lat": 55.0319499,
+    "lng": -7.267858599999999
+  },
+  "34 Church View, Ballygawley,   Omagh,  BT70 2BU": {
+    "lat": 54.4628227,
+    "lng": -7.037235
+  },
+  "11 Canvy Manor,   Portadown,  BT63 5LP": {
+    "lat": 54.4109938,
+    "lng": -6.4042036
   }
 }

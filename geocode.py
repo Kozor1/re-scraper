@@ -421,13 +421,18 @@ def geocode_with_fallbacks(address, url, use_nominatim=True):
     """
     candidates = build_candidates(address, url)
 
+    def _in_ni(c):
+        # NI bounding box; town-only fallbacks like "Combe" happily geocode to
+        # England without this sanity check.
+        return c and 54.0 <= c['lat'] <= 55.4 and -8.3 <= c['lng'] <= -5.3
+
     # ── Google pass ────────────────────────────────────────────────────────────
     if GOOGLE_API_KEY:
         for i, query in enumerate(candidates):
             if i > 0:
                 time.sleep(GOOGLE_DELAY)
             coords = _google_query(query)
-            if coords:
+            if coords and _in_ni(coords):
                 return coords, query, 'google'
 
     # ── Nominatim fallback ─────────────────────────────────────────────────────
@@ -440,7 +445,7 @@ def geocode_with_fallbacks(address, url, use_nominatim=True):
                 # (we may have just been hammering Google, not Nominatim)
                 time.sleep(NOMINATIM_DELAY)
             coords = _nominatim_query(query)
-            if coords:
+            if coords and _in_ni(coords):
                 return coords, query, 'nominatim'
 
     return None, None, None

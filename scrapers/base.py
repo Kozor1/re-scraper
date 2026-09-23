@@ -23,7 +23,7 @@ import argparse
 from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Any
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -67,6 +67,37 @@ def sort_and_dedup_image_urls(urls: list[str]) -> list[str]:
 def is_image_href(href: str) -> bool:
     """Return True if href points to an image file."""
     return bool(re.search(r"\.(jpg|jpeg|png|webp|gif)(\?.*)?$", href, re.IGNORECASE))
+
+
+# ── Embedded coordinates ──────────────────────────────────────────────────────
+# Many PropertyPal-family detail pages embed the true coordinates in a JSON
+# blob ("latitude": 54.6, "longitude": -5.9). These are authoritative — the
+# geocoder regularly picks a same-named street miles away, which is what put
+# several mm pins in the wrong part of town.
+
+_EMBEDDED_LAT = re.compile(r'"latitude"\s*:\s*"?(-?\d+\.?\d*)"?')
+_EMBEDDED_LNG = re.compile(r'"longitude"\s*:\s*"?(-?\d+\.?\d*)"?')
+
+
+def extract_embedded_latlng(html: str) -> tuple[float | None, float | None]:
+    lat_m = _EMBEDDED_LAT.search(html)
+    lng_m = _EMBEDDED_LNG.search(html)
+    if not lat_m or not lng_m:
+        return None, None
+    try:
+        lat, lng = float(lat_m.group(1)), float(lng_m.group(1))
+    except ValueError:
+        return None, None
+    if not (-90 <= lat <= 90 and -180 <= lng <= 180):
+        return None, None
+    return lat, lng
+
+
+def set_embedded_coords(data: dict[str, Any], html: str) -> None:
+    """Populate data['lat']/['lng'] when the page carries them."""
+    lat, lng = extract_embedded_latlng(html)
+    if lat is not None:
+        data["lat"], data["lng"] = lat, lng
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -947,6 +978,7 @@ def parse_pp_classic_detail(html: str, url: str) -> dict[str, Any]:
             rooms.append(room_data)
     data["rooms"] = rooms
 
+    set_embedded_coords(data, html)
     return data
 
 
@@ -1213,6 +1245,8 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
                 rooms.append(room_data)
     data["rooms"] = rooms
 
+    set_embedded_coords(data, html)
+
     return data
 
 
@@ -1375,6 +1409,8 @@ def parse_pp_modern_detail(html: str, url: str) -> dict[str, Any]:
     data["description"] = full_desc
     data["rooms"] = []
 
+    set_embedded_coords(data, html)
+
     return data
 
 
@@ -1384,11 +1420,24 @@ def extract_pp_modern_gallery(soup: BeautifulSoup, url: str) -> list[str]:
     image_urls: list[str] = []
 
     def _add(src: str) -> None:
-        if src:
-            full = urljoin(url, src) if not src.startswith("http") else src
-            if full not in seen and full.startswith("http"):
-                seen.add(full)
-                image_urls.append(full)
+        if not src:
+            return
+        full = urljoin(url, src) if not src.startswith("http") else src
+        if not full.startswith("http") or full in seen:
+            return
+        pu = urlparse(full)
+        path = pu.path.lower()
+        # Junk that rides along in PropertyPal-modern pages: Pinterest share
+        # links (image URL wrapped in the pin's query string), EPC band images,
+        # and floor-plan PDFs — none of which are property photos.
+        if "pinterest." in pu.netloc:
+            return
+        if "/epc/" in path:
+            return
+        if not re.search(r"\.(jpe?g|png|webp)$", path):
+            return
+        seen.add(full)
+        image_urls.append(full)
 
     # ul#pphoto — all gallery image hrefs pre-rendered
     pphoto = soup.find("ul", id="pphoto")

@@ -982,6 +982,48 @@ def main() -> None:
     else:
         logger.info("\n--no-geocode: skipping geocoding step.")
 
+    # ── Coordinate backfill ──────────────────────────────────────────
+    # Rows only receive lat/lng when they're upserted *after* the geocoder
+    # cached them; rows that never changed text again stayed null forever.
+    # After geocoding, sweep any remaining null-coord sale rows whose address
+    # now has a cache hit and patch them in place.
+    if not args.no_geocode and not args.dry_run:
+        fresh_cache = load_geocache()
+        try:
+            sb = get_supabase()
+            off = 0
+            patched = 0
+            while True:
+                r = (
+                    sb.table("properties")
+                    .select("id,address")
+                    .is_("lat", "null")
+                    .or_("listing_type.eq.sale,listing_type.is.null")
+                    .order("id")
+                    .range(off, off + 999)
+                    .execute()
+                )
+                if not r.data:
+                    break
+                patch = [
+                    (x["id"], fresh_cache[a])
+                    for x in r.data
+                    for a in [x["address"].strip().rstrip(",")]
+                    if a in fresh_cache
+                ]
+                for pid, geo in patch:
+                    sb.table("properties").update(
+                        {"lat": geo["lat"], "lng": geo["lng"]}
+                    ).eq("id", pid).execute()
+                patched += len(patch)
+                if len(r.data) < 1000:
+                    break
+                off += 1000
+            if patched:
+                logger.info(f"Coordinate backfill: patched {patched} rows")
+        except Exception as e:
+            logger.warning(f"Coordinate backfill failed (non-fatal): {e}")
+
     # ── Summary ─────────────────────────────────────────────────────
     elapsed = time.time() - overall_start
     logger.info(f"{'=' * 60}")
