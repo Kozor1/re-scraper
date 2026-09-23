@@ -76,7 +76,10 @@ class LeScraper(BaseScraper):
             if amounts:
                 data["price_str"] = f"£{max(amounts):,}"
         if price_el is not None:
-            data["price_str"] = re.sub(r"\s+", " ", price_el.get_text()).strip()
+            # "£ 150,000" (space inside the figure) normalised to "£150,000"
+            data["price_str"] = re.sub(
+                r"£\s+", "£", re.sub(r"\s+", " ", price_el.get_text()).strip()
+            )
 
         # Facilities: small chips like <div class=\"text-black text-xs\">4
         # Beds</div>, <div ...>2 Baths</div>, <div ...>Detached</div>
