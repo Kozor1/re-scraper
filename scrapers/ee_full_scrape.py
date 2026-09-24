@@ -7,8 +7,8 @@ _sys.path.insert(0, _PKG_ROOT)
 
 from scrapers.base import (
     BaseScraper,
-    parse_pp_classic_detail,
-    extract_pp_gallery_images,
+    parse_pp_bluecubes_detail,
+    extract_pp_bluecubes_gallery,
 )
 from bs4 import BeautifulSoup
 from typing import Any
@@ -34,12 +34,14 @@ class EeScraper(BaseScraper):
     def scrape_detail_page(
         self, html: str, url: str
     ) -> dict[str, Any] | None:
-        return parse_pp_classic_detail(html, url)
+        # EE pages are Bluecubes markup (prop-det-info-row / prop-det-address-two),
+        # not PropertyPal Classic — the classic parser found no metadata rows.
+        return parse_pp_bluecubes_detail(html, url)
 
     def extract_image_urls(
         self, soup: BeautifulSoup, page_url: str
     ) -> list[str]:
-        return extract_pp_gallery_images(soup, page_url)
+        return extract_pp_bluecubes_gallery(soup, page_url)
 
 
 if __name__ == "__main__":

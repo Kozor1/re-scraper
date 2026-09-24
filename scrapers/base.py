@@ -76,21 +76,100 @@ def is_image_href(href: str) -> bool:
 # several mm pins in the wrong part of town.
 
 _EMBEDDED_LAT = re.compile(r'"latitude"\s*:\s*"?(-?\d+\.?\d*)"?')
-_EMBEDDED_LNG = re.compile(r'"longitude"\s*:\s*"?(-?\d+\.?\d*)"?')
+_EMBEDDED_LNG = re.compile(r'"longitude"\s*:\s*"?(-?\d+\.?\d*)"?"')
+
+# Every McMillan McClure detail page embeds a JSON-LD block typed
+# "RealEstateAgent" whose geo coordinates are the *agent's office*
+# (11 Portland Avenue, Glengormley — identical on all ~232 listings).
+# Treating those as authoritative put every mm pin at the office, so
+# coordinates found inside an agent/office JSON-LD block must be skipped.
+_AGENT_JSONLD_TYPE = re.compile(
+    r'"@type"\s*:\s*"\s*(?:RealEstateAgent|LocalBusiness|Organization|Corporation)\s*"',
+    re.IGNORECASE,
+)
 
 
 def extract_embedded_latlng(html: str) -> tuple[float | None, float | None]:
-    lat_m = _EMBEDDED_LAT.search(html)
-    lng_m = _EMBEDDED_LNG.search(html)
-    if not lat_m or not lng_m:
-        return None, None
-    try:
-        lat, lng = float(lat_m.group(1)), float(lng_m.group(1))
-    except ValueError:
-        return None, None
-    if not (-90 <= lat <= 90 and -180 <= lng <= 180):
-        return None, None
-    return lat, lng
+    for lat_m in _EMBEDDED_LAT.finditer(html):
+        lng_m = _EMBEDDED_LNG.search(html, lat_m.end(), lat_m.end() + 300)
+        if not lng_m:
+            continue
+        # Ignore coordinates belonging to the agent's office JSON-LD block.
+        script_start = html.rfind("<script", 0, lat_m.start())
+        script_end = html.find("</script>", lng_m.end())
+        if script_start != -1:
+            chunk = html[script_start : script_end if script_end != -1 else len(html)]
+            if _AGENT_JSONLD_TYPE.search(chunk):
+                continue
+        try:
+            lat, lng = float(lat_m.group(1)), float(lng_m.group(1))
+        except ValueError:
+            continue
+        if -90 <= lat <= 90 and -180 <= lng <= 180:
+            return lat, lng
+    return None, None
+
+
+_NI_POSTCODE_RE = re.compile(r"\bBT\s?\d{1,2}\s?\d[A-Z]{2}\b", re.IGNORECASE)
+_NI_POSTCODE_SPACING_RE = re.compile(r"\bBT\s?(\d{1,2})\s?(\d[A-Z]{2})\b", re.IGNORECASE)
+
+
+def _normalise_postcode_spacing(text: str) -> str:
+    return _NI_POSTCODE_SPACING_RE.sub(
+        lambda m: f"BT{m.group(1)} {m.group(2).upper()}", text
+    )
+
+
+def enrich_address_with_postcode(
+    data: dict[str, Any], soup: BeautifulSoup, html: str
+) -> None:
+    """Append the BT postcode (and town, if missing) to data["address"].
+
+    Some PropertyPal CMS templates keep the postcode outside the address the
+    parsers pick up: Bluecubes puts it in h2.prop-det-address-two (e.g.
+    "Antrim, BT41 4NQ" on Edmonton Estates) and several templates expose a
+    `var address = "…"` JS blob for the map widget. Without this, addresses
+    arrive with no town/postcode and can't be geocoded beyond street level.
+    No-op when the address already carries a BT postcode.
+    """
+    addr = (data.get("address") or "").strip().strip(",").strip()
+    if _NI_POSTCODE_RE.search(addr):
+        return
+
+    candidates: list[str] = []
+    heading = soup.find(class_="prop-det-address-two")
+    if heading:
+        candidates.append(heading.get_text(" ", strip=True))
+    candidates.extend(
+        m.group(1)
+        for m in re.finditer(r"var\s+address\s*=\s*[\"']([^\"']+)[\"']", html)
+    )
+
+    for candidate in candidates:
+        candidate = candidate.strip().strip(",").strip()
+        if not _NI_POSTCODE_RE.search(candidate):
+            continue
+        if addr and addr.lower() in candidate.lower():
+            new_addr = candidate
+        elif addr:
+            new_addr = f"{addr}, {candidate}"
+        else:
+            new_addr = candidate
+        # Normalise: collapse stray whitespace, dedupe adjacent segments the
+        # town appears in twice ("1 Castleburn, Antrim" + "Antrim, BT41 4NQ").
+        parts = [
+            re.sub(r"\s+", " ", p).strip()
+            for p in new_addr.split(",")
+            if p.strip()
+        ]
+        deduped: list[str] = []
+        for part in parts:
+            if not deduped or deduped[-1].lower() != part.lower():
+                deduped.append(part)
+        new_addr = _normalise_postcode_spacing(", ".join(deduped))
+        data["address"] = new_addr
+        data["title"] = new_addr
+        return
 
 
 def set_embedded_coords(data: dict[str, Any], html: str) -> None:
@@ -830,6 +909,9 @@ def parse_pp_classic_detail(html: str, url: str) -> dict[str, Any]:
                     t = t[:t.rfind(sep)]
             data["address"] = t.strip()
     data.setdefault("address", "")
+    # h1 text often splices nested spans ("154 Kensington Road,   BELFAST,…")
+    data["address"] = re.sub(r"\s+", " ", data["address"]).strip().strip(",").strip()
+    enrich_address_with_postcode(data, soup, html)
     data["title"] = data["address"]
 
     # Price (ul.dettbl)
@@ -1082,6 +1164,7 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
     if data.get("address"):
         data["address"] = data["address"].rstrip(",")
         data["title"] = data["address"]
+    enrich_address_with_postcode(data, soup, html)
 
     # Metadata rows (div.prop-det-info-row)
     property_info: dict[str, str] = {}
@@ -1112,6 +1195,16 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
                 data["heating"] = val
     if property_info:
         data["property_info"] = property_info
+
+    # EE renders the price row with an icon-only label (a private-use Unicode
+    # glyph that strips to ""), so the "price" in key test above never matches
+    # and the row lands in property_info keyed by "". An info-row value that
+    # carries a £ amount is the price by another name.
+    if not data.get("price_str"):
+        for val in property_info.values():
+            if re.search(r"£[\d,]+|POA", val):
+                data["price_str"] = val
+                break
 
     # Fallback price (UPS uses prop-det-price-outer/amount on Bluecubes pages)
     if not data.get("price_str"):
@@ -1395,6 +1488,11 @@ def parse_pp_modern_detail(html: str, url: str) -> dict[str, Any]:
     bullets = soup.select(".ListingPage-bullets li")
     if not bullets:
         bullets = soup.select(".ListingPage-bullets p")
+    # MM renders key features in a DescriptionBox instead of ListingPage-bullets
+    if not bullets:
+        bullets = soup.select(".DescriptionBox--bullets li")
+    if not bullets:
+        bullets = soup.select(".DescriptionBox--bullets p")
     data["key_features"] = [
         el.get_text(strip=True) for el in bullets if el.get_text(strip=True)
     ]

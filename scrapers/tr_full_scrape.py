@@ -7,8 +7,8 @@ _sys.path.insert(0, _PKG_ROOT)
 
 from scrapers.base import (
     SeleniumScraper,
-    parse_pp_bluecubes_detail,
-    extract_pp_bluecubes_gallery,
+    parse_pp_classic_detail,
+    extract_pp_gallery_images,
 )
 from bs4 import BeautifulSoup
 from typing import Any
@@ -34,12 +34,14 @@ class TempletonRobinsonScraper(SeleniumScraper):
     def scrape_detail_page(
         self, html: str, url: str
     ) -> dict[str, Any] | None:
-        return parse_pp_bluecubes_detail(html, url)
+        # TR detail pages are PropertyPal Classic markup (ul.dettbl / div.textbp),
+        # not Bluecubes — the Bluecubes parser left bedrooms/receptions NULL.
+        return parse_pp_classic_detail(html, url)
 
     def extract_image_urls(
         self, soup: BeautifulSoup, page_url: str
     ) -> list[str]:
-        return extract_pp_bluecubes_gallery(soup, page_url)
+        return extract_pp_gallery_images(soup, page_url)
 
 
 if __name__ == "__main__":

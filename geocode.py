@@ -417,9 +417,26 @@ def _nominatim_query(query_string, retries=2):
 def geocode_with_fallbacks(address, url, use_nominatim=True):
     """
     Try each candidate query string using Google (primary) then Nominatim (fallback).
-    Returns (coords_or_None, query_used, provider_name).
+    Returns (coords_or_None, query_used, provider_name, precise).
+
+    `precise` is False when the hit came from a town-only / Belfast last-resort
+    candidate — those resolve to the town centre, not the property, and the map
+    must never pin a property there. Callers should log them as diagnostics and
+    treat the address as ungeocoded.
     """
     candidates = build_candidates(address, url)
+
+    # Rebuild the loose (town-centre-level) last-resort queries — candidates 7 & 8.
+    ni = 'Northern Ireland, UK'
+    town = town_from_url(url) or town_from_address(address)
+    short_t = _short_town(town) if town else ''
+    loose = set()
+    if short_t:
+        loose.add(f"{short_t}, {ni}")
+    if town:
+        loose.add(f"{town}, {ni}")
+    if url and 'belfast' in url.lower():
+        loose.add(f"Belfast, {ni}")
 
     def _in_ni(c):
         # NI bounding box; town-only fallbacks like "Combe" happily geocode to
@@ -433,7 +450,7 @@ def geocode_with_fallbacks(address, url, use_nominatim=True):
                 time.sleep(GOOGLE_DELAY)
             coords = _google_query(query)
             if coords and _in_ni(coords):
-                return coords, query, 'google'
+                return coords, query, 'google', query not in loose
 
     # ── Nominatim fallback ─────────────────────────────────────────────────────
     if use_nominatim:
@@ -446,9 +463,9 @@ def geocode_with_fallbacks(address, url, use_nominatim=True):
                 time.sleep(NOMINATIM_DELAY)
             coords = _nominatim_query(query)
             if coords and _in_ni(coords):
-                return coords, query, 'nominatim'
+                return coords, query, 'nominatim', query not in loose
 
-    return None, None, None
+    return None, None, None, False
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────
@@ -532,9 +549,9 @@ def main():
         town_hint = f" [{town}]" if town else ""
         print(f"[{i}/{min(limit, len(to_geocode))}] {addr}{town_hint}")
 
-        coords, query_used, provider = geocode_with_fallbacks(addr, url, use_nominatim=use_nominatim)
+        coords, query_used, provider, precise = geocode_with_fallbacks(addr, url, use_nominatim=use_nominatim)
 
-        if coords:
+        if coords and precise:
             geocache[addr] = coords
             print(f"  ✓  lat={coords['lat']:.5f}  lng={coords['lng']:.5f}  [{provider}] {query_used!r}")
             found += 1
@@ -542,6 +559,13 @@ def main():
                 google_hits += 1
             else:
                 nominatim_hits += 1
+        elif coords:
+            # Town-centre approximation from a last-resort candidate — never
+            # pin the property there. Record not-found so --retry-failed can
+            # revisit it if scraping improves (better address/postcode).
+            geocache[addr] = None
+            print(f"  ✗  town-level match only ({query_used!r} via {provider}) — not saving town-centre coords")
+            not_found += 1
         else:
             geocache[addr] = None   # sentinel: don't retry next run (use --retry-failed)
             print(f"  ✗  not found after all fallbacks")
