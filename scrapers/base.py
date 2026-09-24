@@ -1177,8 +1177,12 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
                 if not ("\uf000" <= c <= "\uffff")
             ).strip()
             val = right.get_text(strip=True)
-            property_info[label] = val
             key = label.lower()
+            if "stamp duty" in key:
+                # aux panel, not a property fact — and its £ figures were
+                # creeping into price fallback heuristics below
+                continue
+            property_info[label] = val
             if key == "bedrooms":
                 data["bedrooms"] = val
             elif "price" in key:
@@ -1196,17 +1200,7 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
     if property_info:
         data["property_info"] = property_info
 
-    # EE renders the price row with an icon-only label (a private-use Unicode
-    # glyph that strips to ""), so the "price" in key test above never matches
-    # and the row lands in property_info keyed by "". An info-row value that
-    # carries a £ amount is the price by another name.
-    if not data.get("price_str"):
-        for val in property_info.values():
-            if re.search(r"£[\d,]+|POA", val):
-                data["price_str"] = val
-                break
-
-    # Fallback price (UPS uses prop-det-price-outer/amount on Bluecubes pages)
+    # Preferred price location on Bluecubes pages (UPS etc.)
     if not data.get("price_str"):
         price_el = (
             soup.select_one("span.prop-det-price-amount")
@@ -1217,6 +1211,19 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
             # HTML entity &pound; = £; html.unescape is idempotent on plain text
             import html as _html
             data["price_str"] = _html.unescape(price_el.get_text(strip=True))
+
+    # EE renders the price row with an icon-only label (a private-use Unicode
+    # glyph that strips to ""), so the "price" in key test above never matches
+    # and the row lands in property_info keyed by "". An info-row value that
+    # LOOKS like a plain price is the price by another name — strict shape so
+    # aux rows like Stamp Duty ("£7,250 / £24,500** ...") can't hijack it.
+    if not data.get("price_str"):
+        for val in property_info.values():
+            # optional words + exactly one £figure — "Offers Over £279,000" ok,
+            # stamp-duty strings ("£7,250 / £24,500** buy-to-let…") rejected
+            if re.fullmatch(r"[A-Za-z ]*£[\d,]+|POA", val.strip(), re.I):
+                data["price_str"] = val
+                break
 
     # Fallback price (Pinpoint): listing-card block with span.dpp amount and an
     # optional span.dpt qualifier (e.g. "Offers Over").
