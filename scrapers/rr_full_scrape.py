@@ -140,16 +140,46 @@ class ReedsRainsScraper(BaseScraper):
         if bedrooms:
             data["bedrooms"] = bedrooms
 
-        # Description
-        desc_parts = []
+        # Description — ONLY the marketing blurb in .property-description__truncated.
+        # The container also holds .property-features__description__more with
+        # per-room blocks; blanket find_all("p") previously picked each room's
+        # outer <p> (heading+body glued together) AND its inner title/dims/body
+        # <p>s, so every section appeared twice with mangled spacing, plus
+        # legal boilerplate sections (PERSONAL INTEREST, CUSTOMER DUE
+        # DILIGENCE) tacked on. Rooms go to the structured rooms field instead.
         desc_container = soup.select_one(".property-features__description")
         if desc_container:
-            for p in desc_container.find_all("p"):
-                t = p.get_text(strip=True)
-                if t:
-                    desc_parts.append(t)
-        if desc_parts:
-            data["description"] = "\n\n".join(desc_parts)
+            blurb = desc_container.select_one(".property-description__truncated")
+            if blurb:
+                desc_parts = [
+                    t
+                    for p in blurb.find_all("p")
+                    if (t := p.get_text(strip=True))
+                ]
+                if desc_parts:
+                    data["description"] = "\n\n".join(desc_parts)
+
+        # Rooms — even though the markup is invalid nesting (<p> inside <p>),
+        # html.parser tolerates it and the inner classes still resolve.
+        rooms: list[dict[str, str]] = []
+        for block in soup.select("p.property-rooms-description"):
+            title_el = block.select_one(".property-rooms-description__title")
+            dims_el = block.select_one(".property-rooms-description__dimensions")
+            body_el = block.select_one(".property-rooms-description__description")
+            if not title_el:
+                continue
+            name = title_el.get_text(strip=True)
+            if not name:
+                continue
+            rooms.append(
+                {
+                    "name": name,
+                    "dimensions": dims_el.get_text(strip=True) if dims_el else "",
+                    "description": body_el.get_text(strip=True) if body_el else "",
+                }
+            )
+        if rooms:
+            data["rooms"] = rooms
 
         return data
 

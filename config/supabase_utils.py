@@ -176,6 +176,49 @@ def clean_text_list(items: list[Any]) -> list[str]:
     return out
 
 
+# ── Description cleanup ──────────────────────────────────────────────────────
+
+# Legal/compliance boilerplate agents routinely append to property
+# descriptions (AML identity-check legalese, Estate Agency Act disclosures,
+# etc.). Once any of these phrases appears, everything from the start of that
+# sentence onward is boilerplate — marketing copy never follows it.
+_LEGAL_MARKERS = re.compile(
+    r"(?i)customer\s+due\s+diligence"
+    r"|money\s+laundering"
+    r"|anti[-\s]?money\s+laundering"
+    r"|estate\s+agency\s+act"
+    r"|personal\s+interest(?:[^\n]{0,60})?estate\s+agency"
+    r"|\baml\s+(check|notice|procedure|requirement)s?\b"
+    r"|proof\s+of\s+(?:id|identity)(?:\s+and\s+address)?\s+(?:will\s+be\s+)?required"
+)
+
+
+def clean_description(desc: Any) -> str:
+    """Strip legal boilerplate tails from a free-text description.
+
+    Agents concatenate compliance notices onto the end of the real blurb —
+    sometimes mid-paragraph ("…a superb home. As part of our obligations under
+    the Money Laundering …") and sometimes as their own block. Cut at the
+    start of the sentence that introduces the legal text, then trim trailing
+    whitespace/blank lines.
+    """
+    if not isinstance(desc, str) or not desc:
+        return ""
+    m = _LEGAL_MARKERS.search(desc)
+    if not m:
+        return desc.strip()
+    # Find where the containing sentence started: end of previous paragraph,
+    # else end of previous sentence, else start of text.
+    para_break = desc.rfind("\n\n", 0, m.start())
+    sent_break = desc.rfind(". ", 0, m.start())
+    cut = max(para_break, sent_break)
+    if cut < 0:
+        cut = 0  # description IS boilerplate only
+    elif sent_break > para_break:
+        cut = sent_break + 1  # keep terminating dot of the good sentence
+    return desc[:cut].strip()
+
+
 # ── Row builder ───────────────────────────────────────────────────────────────
 
 
@@ -257,7 +300,8 @@ def build_property_row(
         "bathrooms": data.get("bathrooms") or None,
         "receptions": data.get("receptions") or None,
         "epc_rating": decode_html_entities(data.get("epc_rating")) or None,
-        "description": decode_html_entities(data.get("description")) or None,
+        "description": clean_description(decode_html_entities(data.get("description")))
+        or None,
         "key_features": clean_text_list(data.get("key_features") or []),
         "rooms": data.get("rooms") or [],
         "image_urls": image_urls,
