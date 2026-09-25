@@ -69,6 +69,28 @@ def is_image_href(href: str) -> bool:
     return bool(re.search(r"\.(jpg|jpeg|png|webp|gif)(\?.*)?$", href, re.IGNORECASE))
 
 
+def text_with_paragraphs(el) -> str:
+    """Extract text from a soup element preserving paragraph structure.
+
+    Descriptions on agent sites consist of paragraphs marked up with <p>
+    or repeated <br>s; plain get_text(separator=" ") flattens them into
+    one run (seen on Michael Chandler). Rewrites those boundaries to
+    line breaks before extracting. Operates on the raw HTML so
+    whitespace-only text nodes cannot be eaten by get_text().
+    """
+    raw = str(el)
+    raw = re.sub(r"(?i)<p[^>]*>", "\n\n", raw)
+    raw = re.sub(r"(?i)</p>", "\n\n", raw)
+    raw = re.sub(r"(?i)(?:<br\s*/?>\s*){2,}", "\n\n", raw)
+    raw = re.sub(r"(?i)<br\s*/?>", "\n", raw)
+    inner = BeautifulSoup(raw, "html.parser")
+    t = inner.get_text(separator=" ", strip=False)
+    t = re.sub(r"[ \t]*\n[ \t]*", "\n", t)
+    t = re.sub(r" {2,}", " ", t)
+    t = re.sub(r"\n{3,}", "\n\n", t)
+    return t.strip()
+
+
 # ── Embedded coordinates ──────────────────────────────────────────────────────
 # Many PropertyPal-family detail pages embed the true coordinates in a JSON
 # blob ("latitude": 54.6, "longitude": -5.9). These are authoritative — the
@@ -1021,7 +1043,7 @@ def parse_pp_classic_detail(html: str, url: str) -> dict[str, Any]:
             break
     data["key_features"] = feats
 
-    # Description
+    # Description — preserve paragraph structure (<br>/<p> boundaries)
     desc = ""
     for sel in [
         "div.textbp", "div.prop-det-text .text", ".ListingDescr-text",
@@ -1029,7 +1051,7 @@ def parse_pp_classic_detail(html: str, url: str) -> dict[str, Any]:
     ]:
         el = soup.select_one(sel)
         if el:
-            t = el.get_text(separator=" ", strip=True)
+            t = text_with_paragraphs(el)
             if len(t) > len(desc):
                 desc = t
     data["description"] = desc
@@ -1303,18 +1325,18 @@ def parse_pp_bluecubes_detail(html: str, url: str) -> dict[str, Any]:
                 break
     data["key_features"] = feats
 
-    # Description (div.prop-det-text .text)
+    # Description (div.prop-det-text .text) — keep paragraph structure
     desc_div = soup.find("div", class_="prop-det-text")
     if desc_div:
         text_div = desc_div.find("div", class_="text") or desc_div
-        data["description"] = text_div.get_text(separator=" ", strip=True)
+        data["description"] = text_with_paragraphs(text_div)
     if not data.get("description"):
         for sel in [
             "div.textbp", ".ListingDescr-text", "div.description",
         ]:
             el = soup.select_one(sel)
             if el:
-                data["description"] = el.get_text(separator=" ", strip=True)
+                data["description"] = text_with_paragraphs(el)
                 break
 
     # Rooms (div.prop-det-rooms div.room-row)
@@ -1504,11 +1526,11 @@ def parse_pp_modern_detail(html: str, url: str) -> dict[str, Any]:
         el.get_text(strip=True) for el in bullets if el.get_text(strip=True)
     ]
 
-    # Description
+    # Description — keep paragraph structure
     desc_els = soup.select(".ListingDescr-text")
     full_desc = ""
     for el in desc_els:
-        t = el.get_text(separator=" ", strip=True)
+        t = text_with_paragraphs(el)
         if len(t) > len(full_desc):
             full_desc = t
     data["description"] = full_desc

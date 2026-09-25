@@ -190,6 +190,13 @@ _LEGAL_MARKERS = re.compile(
     r"|personal\s+interest(?:[^\n]{0,60})?estate\s+agency"
     r"|\baml\s+(check|notice|procedure|requirement)s?\b"
     r"|proof\s+of\s+(?:id|identity)(?:\s+and\s+address)?\s+(?:will\s+be\s+)?required"
+    # agent self-marketing pitches tacked onto property blurbs
+    # (e.g. Michael Chandler's "To arrange a viewing ... call ... / Thinking of
+    # selling ... FREE VALUATION / Mortgage advice is also available ...")
+    r"|to\s+arrange\s+(?:an?\s+|your\s+)?viewing[^.\n]{0,80}(?:call|contact|visit)"
+    r"|thinking\s+of\s+(?:selling|letting|moving)"
+    r"|free\s+(?:no[ -]obligation\s+)?valuation"
+    r"|mortgage\s+advice\s+is\s+(?:also\s+)?available"
 )
 
 
