@@ -285,6 +285,14 @@ def build_property_row(
     if isinstance(price_str, int):
         price_str = f"£{price_str:,}"
 
+    # Guard: unpriced "coming soon" listings sometimes carry a placeholder
+    # number (rr embeds <!--property-price:"1"-->). Nothing for sale in NI
+    # costs under £10k — treat as unpriced so the app renders POA instead of
+    # "£1".
+    price_val_tmp = parse_price_value(price_str)
+    if price_val_tmp is not None and price_val_tmp < 10_000 and not source.endswith("_rent"):
+        price_str = ""
+
     # Standardize image URLs: prefer image_urls, fall back to images
     image_urls = data.get("image_urls") or data.get("images") or []
 
